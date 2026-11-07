@@ -3,14 +3,16 @@ import { api } from '../../api/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 // Desenho: docs/telas/D13A (administração) e D13P (profissional). A recepção não tem esta tela:
-// a senha dela só o administrador redefine.
+// a senha dela só o administrador redefine. O "Sair" fica no menu lateral.
 export default function Conta() {
-  const { usuario, sair } = useAuth();
+  const { usuario } = useAuth();
   const [f, setF] = useState({ atual: '', nova: '', repetir: '' });
+  const [ver, setVer] = useState(false);
   const [erro, setErro] = useState('');
   const [ok, setOk] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const mudar = (campo) => (e) => setF({ ...f, [campo]: e.target.value });
+  const tipo = ver ? 'text' : 'password';
 
   async function salvar(e) {
     e.preventDefault();
@@ -39,21 +41,32 @@ export default function Conta() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {ok && <p className="aviso-info" role="status">Senha alterada. Use a nova na próxima vez que entrar.</p>}
 
-      <form className="caixa estreita compacta" onSubmit={salvar}>
-        <label className="campo">Senha atual
-          <input type="password" value={f.atual} onChange={mudar('atual')} required autoComplete="current-password" />
-        </label>
-        <label className="campo">Nova senha (mínimo 8 caracteres)
-          <input type="password" value={f.nova} onChange={mudar('nova')} minLength={8} required autoComplete="new-password" />
-        </label>
-        <label className="campo">Repetir nova senha
-          <input type="password" value={f.repetir} onChange={mudar('repetir')} minLength={8} required autoComplete="new-password" />
-        </label>
-        <div className="acoes-topo">
-          <button className="botao" disabled={enviando}>Salvar nova senha</button>
-          <button type="button" className="botao-sec" onClick={sair}>Sair</button>
+      <div className="pagina-duas" style={{ gridTemplateColumns: 'minmax(320px, 520px) minmax(280px, 1fr)' }}>
+        <form className="caixa" onSubmit={salvar}>
+          <h2>Trocar a senha</h2>
+          <label className="campo">Senha atual
+            <input type={tipo} value={f.atual} onChange={mudar('atual')} required autoComplete="current-password" />
+          </label>
+          <label className="campo">Nova senha (mínimo 8 caracteres)
+            <input type={tipo} value={f.nova} onChange={mudar('nova')} minLength={8} required autoComplete="new-password" />
+          </label>
+          <label className="campo">Repetir nova senha
+            <input type={tipo} value={f.repetir} onChange={mudar('repetir')} minLength={8} required autoComplete="new-password" />
+          </label>
+          <label className="marcar"><input type="checkbox" checked={ver} onChange={(e) => setVer(e.target.checked)} />Mostrar as senhas enquanto digito</label>
+          <button className="botao" disabled={enviando}>{enviando ? 'Salvando…' : 'Salvar nova senha'}</button>
+        </form>
+
+        <div className="caixa">
+          <h2>Dicas para uma senha segura</h2>
+          <ul className="lista-dicas">
+            <li>Use pelo menos 8 caracteres, misturando letras e números.</li>
+            <li>Não use o nome da criança, o seu nome ou datas de nascimento.</li>
+            <li>Não compartilhe a senha com ninguém da equipe: cada acesso fica registrado no seu nome.</li>
+            <li>Saiu do computador? Use o botão “Sair” no menu.</li>
+          </ul>
         </div>
-      </form>
+      </div>
     </>
   );
 }
