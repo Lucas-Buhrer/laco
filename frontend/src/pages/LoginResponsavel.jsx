@@ -46,15 +46,16 @@ export default function LoginResponsavel() {
         <button className="botao botao-grande" disabled={enviando}>{enviando ? 'Entrando…' : 'Entrar'}</button>
       </form>
 
-      <p className="login-links">
-        Recebi um código da clínica: <Link to="/familia/ativar">ativar minha conta</Link>
-        <br />
-        Recebi um convite de outro responsável: <Link to="/familia/convite">usar o convite</Link>
-        <br />
-        Sou da clínica: <Link to="/entrar">entrar pelo computador</Link>
-        <br />
-        <Link to="/politica">Política de privacidade</Link>
-      </p>
+      <div className="login-rodape-familia">
+        <p className="primeira-vez">Primeira vez aqui?</p>
+        <Link className="botao-sec botao-grande" to="/familia/ativar">Tenho um código da clínica</Link>
+        <Link className="botao-sec botao-grande" to="/familia/convite">Tenho um convite de outro responsável</Link>
+        <p className="links-pequenos">
+          <Link to="/entrar">Sou da clínica</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/politica">Privacidade</Link>
+        </p>
+      </div>
     </div>
   );
 }
