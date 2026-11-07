@@ -64,7 +64,7 @@ export default function AgendaFamilia() {
             <strong>{c.crianca_nome}</strong>
             <p className="detalhe">{c.tipo || nomeEspecialidade(c)} · {c.profissional_nome} · {c.clinica_nome}</p>
             {c.status !== 'AGENDADA' && <p className="detalhe">{SITUACAO[c.status]}</p>}
-            {c.aguardando_aprovacao && <p className="detalhe">Aguardando a sua aprovação do profissional.</p>}
+            {c.aguardando_aprovacao === 1 && <p className="detalhe">Aguardando a sua aprovação do acesso do profissional.</p>}
             {c.status === 'AGENDADA' && c.presenca_confirmada === 1 && <p className="detalhe">Presença confirmada.</p>}
             {c.status === 'AGENDADA' && !c.presenca_confirmada && !prazoAcabou && (
               <>

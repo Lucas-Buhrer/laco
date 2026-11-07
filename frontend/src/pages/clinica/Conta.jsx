@@ -33,7 +33,7 @@ export default function Conta() {
     <>
       <h1>Conta</h1>
       <p className="subtitulo">{usuario.nome} · alterar a sua senha de acesso.</p>
-      {usuario.senha_temporaria && !ok && (
+      {Boolean(usuario.senha_temporaria) && !ok && (
         <p className="aviso-info" role="note">Você entrou com uma senha temporária. Troque por uma só sua.</p>
       )}
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
