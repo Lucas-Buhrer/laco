@@ -22,7 +22,7 @@ Como Claude executa todas as áreas e o dono orquestra, as tarefas são organiza
 | Manhã 2 | T-13 | Auth: cadastro de clínica (ADM + código da clínica), logins do responsável e da equipe, JWT, middleware que confere usuário ativo | BE | P0 | RF-01 a RF-04, RN-13, RN-20 ✅ |
 | | T-14 | Middlewares de papel, erro e auditoria | BE/SEG | P0 | Log gravado em teste ✅ |
 | | T-15 | Casca do front: rotas, contexto de login, layout, CSS base | FE | P0 | Login funcional nos 2 perfis ✅ |
-| Tarde 1 | T-16 | Pré-cadastro da criança, código de ativação e ativação da conta do responsável (já com a tabela de responsáveis por criança) | BE | P0 | RF-02, RF-07, RF-20 a RF-25, RN-14 a RN-17 |
+| Tarde 1 | T-16 | Pré-cadastro da criança, código de ativação e ativação da conta do responsável (já com a tabela de responsáveis por criança) | BE | P0 | RF-02, RF-07, RF-20 a RF-25, RN-14 a RN-17 ✅ |
 | | T-17 | **Vínculos: solicitar, aprovar, recusar, revogar** + regra central de acesso | BE/SEG | P0 | RF-30 a RF-35, RF-39, RN-01 a RN-04, RN-18, RN-19 |
 | | T-18 | Telas do responsável: ativar conta, filhos, convidar outra clínica, solicitações, quem tem acesso | FE | P0 | Fluxo J2 e J5 completos |
 | Tarde 2 | T-19 | Telas do profissional e do ADM: painéis, pré-cadastros, convite de outra clínica, lista de crianças, login em duas entradas | FE | P0 | Fluxo J1 e J2 completos |

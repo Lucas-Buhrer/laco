@@ -1,17 +1,12 @@
 // Cadastro de clínica, logins, "quem sou eu" e troca de senha.
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const ambiente = require('../config/ambiente');
+const { gerarToken } = require('../utils/token');
 
 const SENHA_MINIMA = 8; // RN-13
 const MSG_LOGIN = 'Dados de acesso incorretos.'; // genérica de propósito: não diz o que errou
 
 // Hash de mentira, para o tempo de resposta ser parecido quando o usuário não existe
 const HASH_FALSO = bcrypt.hashSync('nao-importa', 10);
-
-function gerarToken(usuario) {
-  return jwt.sign({ id: usuario.id }, ambiente.segredoJwt, { expiresIn: '8h' });
-}
 
 function texto(valor) {
   return typeof valor === 'string' ? valor.trim() : '';
