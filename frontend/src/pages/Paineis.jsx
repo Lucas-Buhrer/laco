@@ -1,26 +1,4 @@
-import { useAuth } from '../context/AuthContext.jsx';
-
-// Telas provisórias: os painéis de verdade vêm nas tarefas T-19 e T-33.
-export function HojeFamilia() {
-  const { usuario, sair } = useAuth();
-  return (
-    <>
-      <h1>Olá, {usuario.nome.split(' ')[0]}</h1>
-      <p className="subtitulo">Tela "Hoje". Em construção.</p>
-      <button className="botao-sec" onClick={sair}>Sair</button>
-    </>
-  );
-}
-
-export function EmConstrucao() {
-  return (
-    <>
-      <h1>Em construção</h1>
-      <p className="subtitulo">Esta tela ainda será feita.</p>
-    </>
-  );
-}
-
+// Os painéis de verdade estão em pages/clinica/PainelClinica.jsx e pages/familia/Hoje.jsx.
 export function SemPermissao() {
   return (
     <main className="conteudo">

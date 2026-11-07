@@ -43,7 +43,12 @@ export default function AtividadesFamilia() {
         <button role="tab" aria-selected={aba === 'TODAS'} className={aba === 'TODAS' ? 'aba ativa' : 'aba'} onClick={() => setAba('TODAS')}>Todas</button>
       </div>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
-      {lista && mostrar.length === 0 && <p className="vazio">{aba === 'HOJE' ? 'Tudo feito por hoje. Parabéns!' : 'Nenhuma atividade por enquanto.'}</p>}
+      {lista && mostrar.length === 0 && (
+        <div className="vazio-grande">
+          <h2>{aba === 'HOJE' ? 'Tudo feito por hoje. Parabéns!' : 'Nenhuma atividade por enquanto'}</h2>
+          <p>{aba === 'HOJE' ? 'Quando houver uma atividade nova, ela aparece aqui.' : 'Quando o profissional criar uma atividade de casa, você recebe um aviso e ela aparece aqui.'}</p>
+        </div>
+      )}
 
       {mostrar.map((a) => (
         <div key={a.id} className="cartao">

@@ -24,6 +24,7 @@ export default function LayoutClinica() {
 
   return (
     <div className="layout-clinica">
+      <a className="pular" href="#conteudo">Ir para o conteúdo</a>
       <aside className="menu-lateral">
         <span className="logo">laço</span>
         <p className="menu-clinica">{usuario.clinica?.nome}</p>
@@ -41,7 +42,7 @@ export default function LayoutClinica() {
           <button className="botao-sec" onClick={sair}>Sair</button>
         </div>
       </aside>
-      <main className="conteudo">
+      <main className="conteudo" id="conteudo" tabIndex={-1}>
         <Outlet />
       </main>
     </div>

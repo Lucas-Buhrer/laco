@@ -49,7 +49,12 @@ export default function AgendaFamilia() {
       </div>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
-      {lista && mostrar.length === 0 && <p className="vazio">{aba === 'PROXIMAS' ? 'Nenhuma consulta marcada.' : 'Nada por aqui ainda.'}</p>}
+      {lista && mostrar.length === 0 && (
+        <div className="vazio-grande">
+          <h2>{aba === 'PROXIMAS' ? 'Nenhuma consulta marcada' : 'Nada por aqui ainda'}</h2>
+          <p>{aba === 'PROXIMAS' ? 'Quando a clínica marcar uma consulta, ela aparece aqui e você recebe um aviso no app.' : 'As consultas que já passaram aparecem aqui, com a situação de cada uma.'}</p>
+        </div>
+      )}
 
       {mostrar.map((c) => {
         const prazoAcabou = agora > c.prazo_confirmacao;

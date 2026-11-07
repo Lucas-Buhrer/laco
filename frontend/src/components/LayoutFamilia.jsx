@@ -8,7 +8,8 @@ const MENU = [
 export default function LayoutFamilia() {
   return (
     <div className="layout-familia">
-      <main className="conteudo-familia">
+      <a className="pular" href="#conteudo">Ir para o conteúdo</a>
+      <main className="conteudo-familia" id="conteudo" tabIndex={-1}>
         <Outlet />
       </main>
       <nav className="menu-inferior">

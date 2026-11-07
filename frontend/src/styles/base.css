@@ -60,3 +60,32 @@ form { display: flex; flex-direction: column; gap: 20px; }
 }
 .aviso-erro { background: var(--erro-fundo); border: 1px solid var(--erro-borda); color: var(--erro-texto); }
 .aviso-info { background: #e4f4e9; border: 1px solid #b6dcc3; color: var(--verde-escuro); }
+
+/* Pular direto para o conteúdo (teclado) */
+.pular { position: absolute; left: -9999px; top: 8px; z-index: 20; padding: 10px 16px; background: var(--branco); border: 2px solid var(--verde-forte); border-radius: var(--raio); color: var(--texto); font-weight: 700; }
+.pular:focus { left: 8px; }
+main:focus { outline: none; }
+
+/* Telas sem nada para mostrar: dizem o que fazer (doc 06, seção 5) */
+.vazio-grande { margin-top: 24px; padding: 24px; background: var(--branco); border: 1px dashed var(--borda); border-radius: var(--raio); }
+.vazio-grande h2 { font-size: 22px; }
+.vazio-grande p { margin: 8px 0 0; color: var(--texto-suave); line-height: 1.5; }
+.pagina-vazia { max-width: 520px; margin: 48px auto; text-align: center; }
+.pagina-vazia .subtitulo { margin-bottom: 24px; }
+.numero-grande { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 64px; font-weight: 700; color: var(--verde-forte); }
+
+/* Faixa "Sem conexão" no topo de qualquer tela */
+.faixa-sem-conexao { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--erro-fundo); border-bottom: 1px solid var(--erro-borda); color: var(--erro-texto); font-size: 15px; }
+.faixa-sem-conexao .botao-sec { min-height: 44px; }
+
+/* Botões e abas com área de toque confortável, e telas de 360px sem rolagem lateral */
+.acoes-linha .botao-sec { min-height: 44px !important; }
+html, body { overflow-x: hidden; }
+img, table { max-width: 100%; }
+@media (max-width: 420px) {
+  .lista-humor li { grid-template-columns: 1fr; gap: 2px; }
+  .abas { flex-wrap: wrap; }
+  .numero { min-width: 0; flex: 1 1 140px; }
+  .linha-acesso { flex-direction: column; gap: 4px; }
+  .tabela { display: block; overflow-x: auto; }
+}

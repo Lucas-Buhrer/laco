@@ -30,8 +30,10 @@ async function chamar(metodo, rota, corpo) {
       body: corpo ? JSON.stringify(corpo) : undefined,
     });
   } catch {
+    window.dispatchEvent(new Event('sem-conexao')); // mostra a faixa "Sem conexão" em qualquer tela
     throw new Error('Sem conexão. Confira a internet e tente de novo.');
   }
+  window.dispatchEvent(new Event('com-conexao'));
 
   const json = await resposta.json().catch(() => ({}));
   if (!resposta.ok) {

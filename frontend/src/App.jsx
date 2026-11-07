@@ -33,7 +33,9 @@ import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
 import Consulta from './pages/clinica/Consulta.jsx';
 import AgendaFamilia from './pages/familia/AgendaFamilia.jsx';
 import Hoje from './pages/familia/Hoje.jsx';
-import { EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
+import { SemPermissao } from './pages/Paineis.jsx';
+import NaoEncontrado from './components/NaoEncontrado.jsx';
+import SemConexao from './components/SemConexao.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
 function Inicio() {
@@ -47,6 +49,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <SemConexao />
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/entrar" element={<LoginClinica />} />
@@ -75,7 +78,7 @@ export default function App() {
               <Route path="equipe" element={<RotaProtegida papeis={['ADMIN_CLINICA']} entrarEm="/entrar" />}>
                 <Route index element={<Equipe />} />
               </Route>
-              <Route path="*" element={<EmConstrucao />} />
+              <Route path="*" element={<NaoEncontrado />} />
             </Route>
           </Route>
 
@@ -97,7 +100,7 @@ export default function App() {
               <Route path="acessos" element={<Acessos />} />
               <Route path="convidar" element={<ConvidarClinica />} />
               <Route path="mais" element={<Mais />} />
-              <Route path="*" element={<EmConstrucao />} />
+              <Route path="*" element={<NaoEncontrado />} />
             </Route>
           </Route>
 
