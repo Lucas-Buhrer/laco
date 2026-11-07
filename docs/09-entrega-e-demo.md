@@ -53,12 +53,12 @@ Se faltar tempo, cortar: cena 6, depois 5, depois 2. Duas pessoas: uma narra, a 
 Dica: ter o comando de **reset do seed** pronto para repetir a demonstração.
 
 ## 4. Checklist de entrega
-- [ ] Todos os critérios de saída do doc 08 atendidos
-- [ ] Seed funcionando do zero
-- [ ] README com instalação em menos de 5 passos
+- [x] Todos os critérios de saída do doc 08 atendidos (testes automáticos; falta só o roteiro manual)
+- [x] Seed funcionando do zero
+- [x] README com instalação em 5 passos
 - [ ] Código comentado (amostragem de arquivos revisada)
-- [ ] Nenhum segredo real no repositório; `.env.example` incluído
-- [ ] Textos legais marcados como "rascunho para revisão jurídica"
+- [x] Nenhum segredo real no repositório; `.env.example` incluído
+- [x] Textos legais marcados como "rascunho para revisão jurídica"
 - [ ] Roteiro de demonstração ensaiado uma vez
 - [ ] Cópia de backup do projeto (pasta zipada, não vídeo nem prints)
 

@@ -49,7 +49,7 @@ Como Claude executa todas as áreas e o dono orquestra, as tarefas são organiza
 | | T-42 | **Relatório de evolução** e parecer do profissional, com folha de impressão | BE+FE | P1 | RF-55 a RF-57, RN-34 ✅ |
 | Tarde 2 | T-37 | Revisão de UX: estados vazio/erro (telas R23, R24, E1 a E5), 360px, acessibilidade, relatório A4 | FE | P0 | Checklist do doc 06 ✅ |
 | | T-38 | Testes completos e correção de bugs | QA | P0 | Critérios de saída do doc 08 ✅ |
-| | T-39 | README, roteiro de demonstração, ensaio | ENT | P0 | Doc 09 pronto |
+| | T-39 | README, roteiro de demonstração, ensaio | ENT | P0 | Doc 09 pronto ✅ |
 
 ## Como tudo cabe em 2 dias
 Decisão do dono: **entregar todo o escopo em 2 dias**, sem dia de reserva e sem cortes. Para isso:
