@@ -16,6 +16,8 @@ import PreCadastros from './pages/clinica/PreCadastros.jsx';
 import CodigoDaFamilia from './pages/clinica/CodigoDaFamilia.jsx';
 import Criancas from './pages/clinica/Criancas.jsx';
 import Equipe from './pages/clinica/Equipe.jsx';
+import Conta from './pages/clinica/Conta.jsx';
+import DadosClinica from './pages/clinica/DadosClinica.jsx';
 import PerfilCrianca from './pages/clinica/PerfilCrianca.jsx';
 import RegistrarSessao from './pages/clinica/RegistrarSessao.jsx';
 import LinhaDoTempoFamilia from './pages/familia/LinhaDoTempoFamilia.jsx';
@@ -77,6 +79,13 @@ export default function App() {
               <Route path="agenda/:id" element={<Consulta />} />
               <Route path="equipe" element={<RotaProtegida papeis={['ADMIN_CLINICA']} entrarEm="/entrar" />}>
                 <Route index element={<Equipe />} />
+              </Route>
+              <Route path="clinica" element={<RotaProtegida papeis={['ADMIN_CLINICA']} entrarEm="/entrar" />}>
+                <Route index element={<DadosClinica />} />
+              </Route>
+              {/* A recepção não tem tela de conta: a senha dela só o administrador redefine */}
+              <Route path="conta" element={<RotaProtegida papeis={['ADMIN_CLINICA', 'PROFISSIONAL']} entrarEm="/entrar" />}>
+                <Route index element={<Conta />} />
               </Route>
               <Route path="*" element={<NaoEncontrado />} />
             </Route>

@@ -3,6 +3,7 @@ const criarAutenticacao = require('../middlewares/autenticacao');
 const exigirPapel = require('../middlewares/papel');
 const criarControladorEquipe = require('../controllers/equipe');
 const criarControladorConsultas = require('../controllers/consultas');
+const criarControladorClinica = require('../controllers/clinica');
 
 // Montado em /api/clinica. Equipe da própria clínica.
 function criarRotasEquipe(banco) {
@@ -10,8 +11,14 @@ function criarRotasEquipe(banco) {
   const c = criarControladorEquipe(banco);
   const soAdmin = exigirPapel('ADMIN_CLINICA');
   const consultas = criarControladorConsultas(banco);
+  const clinicaCtl = criarControladorClinica(banco);
 
   rotas.use(criarAutenticacao(banco), exigirPapel('PROFISSIONAL', 'ADMIN_CLINICA', 'RECEPCAO'));
+
+  // Dados da clínica e administradores (só o ADM)
+  rotas.get('/', soAdmin, clinicaCtl.obter);
+  rotas.put('/', soAdmin, clinicaCtl.atualizar);
+  rotas.post('/administradores', soAdmin, clinicaCtl.adicionarAdministrador);
 
   // Todos da clínica podem listar (para indicar profissionais); só o ADM muda
   rotas.get('/profissionais', c.listarProfissionais);
