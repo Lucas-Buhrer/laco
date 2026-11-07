@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../api/api.js';
-import { nomeEspecialidade } from '../familia/Solicitacoes.jsx';
+import { nomeEspecialidade } from '../../utils/especialidades.js';
 
 const VAZIO = { nome: '', data_nascimento: '', responsavel_nome: '', parentesco: 'MAE', parentesco_outro: '', email: '', telefone: '', profissionais: [] };
 const STATUS = {

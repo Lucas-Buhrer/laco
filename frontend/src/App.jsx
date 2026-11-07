@@ -15,6 +15,7 @@ import PainelClinica from './pages/clinica/PainelClinica.jsx';
 import PreCadastros from './pages/clinica/PreCadastros.jsx';
 import CodigoDaFamilia from './pages/clinica/CodigoDaFamilia.jsx';
 import Criancas from './pages/clinica/Criancas.jsx';
+import Equipe from './pages/clinica/Equipe.jsx';
 import { HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
@@ -43,6 +44,9 @@ export default function App() {
               <Route path="pre-cadastros" element={<PreCadastros />} />
               <Route path="codigo-da-familia" element={<CodigoDaFamilia />} />
               <Route path="criancas" element={<Criancas />} />
+              <Route path="equipe" element={<RotaProtegida papeis={['ADMIN_CLINICA']} entrarEm="/entrar" />}>
+                <Route index element={<Equipe />} />
+              </Route>
               <Route path="*" element={<EmConstrucao />} />
             </Route>
           </Route>

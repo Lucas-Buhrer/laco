@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../api/api.js';
-import { nomeEspecialidade } from './Solicitacoes.jsx';
+import { nomeEspecialidade } from '../../utils/especialidades.js';
 
 // Desenho: docs/telas/M4. Revogar e mudar o escopo valem na hora (RN-03).
 export default function Acessos() {

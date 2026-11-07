@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../api/api.js';
 
-const ESPECIALIDADES = { FONOAUDIOLOGIA: 'Fonoaudiologia', TERAPIA_OCUPACIONAL: 'Terapia ocupacional', PSICOLOGIA: 'Psicologia' };
-
-export function nomeEspecialidade(v) {
-  return v.especialidade === 'OUTRA' ? v.especialidade_outro : ESPECIALIDADES[v.especialidade] || v.especialidade || '';
-}
+import { nomeEspecialidade } from '../../utils/especialidades.js';
 
 // Desenho: docs/telas/M2. Cada pedido vale para UM profissional (RN-18).
 function Pedido({ pedido, aoResponder, aoErro }) {
