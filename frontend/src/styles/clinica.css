@@ -378,3 +378,26 @@ input[type='checkbox'], input[type='radio'] { accent-color: #1f6b4a; }
 
 /* Borda tracejada do "Cancelada" (a regra mais específica de a.ev não pode apagá-la) */
 a.ev.cor-cancelada, .amostra.cor-cancelada, .linha-consulta.cor-cancelada, .bloco-consulta.cor-cancelada { border-style: dashed; }
+
+/* ===== Pré-cadastros: formulário à esquerda, cadastros em andamento à direita ===== */
+.pre-grade { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 8px; }
+.pre-form > .caixa { margin-top: 24px; }
+.pre-form .barra-salvar { position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; margin-top: 8px; padding: 14px 0; background: #f3f6f4; border-top: 1px solid #dce5df; }
+.pre-lista { display: flex; flex-direction: column; gap: 0; }
+.pre-lista > .caixa { margin-top: 24px; }
+.pre-lista > .caixa h2 { margin: 0; }
+.pre-lista .abas { margin-top: 0; }
+.pre-lista .aba small { font-weight: 500; color: #5e7066; }
+.pre-lista .aba.ativa small { color: #0f2e21; }
+.busca { height: 44px; padding: 0 14px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-size: 15px; }
+.busca:focus { border-color: var(--verde-forte); box-shadow: 0 0 0 3px rgba(31, 107, 74, 0.15); outline: none; }
+.lista-pre { display: flex; flex-direction: column; }
+.linha-pre { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e6ece8; }
+.linha-pre:last-child { border-bottom: 0; }
+.avatar-mini { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--verde-claro); color: #123b2b; font-size: 14px; font-weight: 700; }
+.linha-pre .texto-linha strong { font-size: 15px; }
+.acoes-pre { display: flex; gap: 6px; flex-shrink: 0; }
+.acoes-pre .botao-sec.pequeno { white-space: nowrap; min-height: 40px; }
+.chip-opcao small { font-weight: 500; color: #5e7066; }
+.chip-opcao.on small { color: #0f2e21; }
+@media (max-width: 1100px) { .pre-grade { grid-template-columns: 1fr; } }
