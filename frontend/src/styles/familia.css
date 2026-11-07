@@ -34,3 +34,7 @@
 .abas { display: flex; gap: 8px; margin-top: 16px; }
 .aba { flex: 1; min-height: 44px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-weight: 600; cursor: pointer; }
 .aba.ativa { background: var(--verde-claro); border-color: var(--verde); }
+.linha-acesso { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.linha-acesso small { color: var(--texto-suave); }
+.pagina-publica { max-width: 640px; margin: 0 auto; padding: 32px 24px; line-height: 1.6; }
+.pagina-publica h2 { margin-top: 24px; font-size: 22px; }

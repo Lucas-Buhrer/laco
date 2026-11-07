@@ -62,6 +62,7 @@ export default function LoginClinica() {
         </form>
 
         <div className="login-rodape">
+          <Link to="/politica">Política de privacidade</Link>
           <span>É pai, mãe ou responsável?</span>
           <Link className="botao-sec" to="/familia/entrar">Abrir o app da família</Link>
         </div>

@@ -7,6 +7,7 @@ const criarControladorAtivacao = require('../controllers/ativacao');
 const criarControladorCriancas = require('../controllers/criancas');
 const criarControladorRegistros = require('../controllers/registros');
 const criarControladorAtividades = require('../controllers/atividades');
+const criarControladorLgpd = require('../controllers/lgpd');
 
 // Montado em /api/criancas
 function criarRotasCriancas(banco) {
@@ -15,6 +16,7 @@ function criarRotasCriancas(banco) {
   const c = criarControladorCriancas(banco);
   const reg = criarControladorRegistros(banco);
   const ativ = criarControladorAtividades(banco);
+  const lgpd = criarControladorLgpd(banco);
   const { exigirAcessoCrianca } = criarAcessoCrianca(banco);
 
   rotas.use(criarAutenticacao(banco));
@@ -35,6 +37,10 @@ function criarRotasCriancas(banco) {
   rotas.get('/:id/linha-do-tempo', exigirAcessoCrianca('VER_LINHA_DO_TEMPO'), reg.linhaDoTempo);
   rotas.get('/:id/atividades', exigirAcessoCrianca('VER_ATIVIDADES'), ativ.listar);
   rotas.post('/:id/atividades', exigirAcessoCrianca('CRIAR_ATIVIDADE'), ativ.criar);
+
+  // LGPD (T-34): quem acessou e exportação, só para a família (a regra central deixa a família passar)
+  rotas.get('/:id/acessos', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('VER_PAINEL_ACESSOS'), lgpd.acessos);
+  rotas.get('/:id/exportar', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('EXPORTAR_PRE'), lgpd.exportar);
 
   return rotas;
 }

@@ -79,6 +79,7 @@ export default function Acessos() {
       ))}
 
       <Link className="botao-sec bloco" to="/familia/convidar">Convidar outra clínica</Link>
+      <Link className="botao-sec bloco" to="/familia/quem-acessou">Quem acessou</Link>
     </>
   );
 }
