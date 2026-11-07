@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../api/api.js';
-import { useAuth } from '../../context/AuthContext.jsx';
-import { diaCurto, hora } from '../../utils/consultas.js';
+import { hora } from '../../utils/consultas.js';
+import { nomeEspecialidade } from '../../utils/especialidades.js';
+import Icone from '../../components/Icone.jsx';
 
-// Desenho: docs/telas/M1 (Hoje). Próxima consulta, atividades de hoje e pedidos esperando resposta.
+// Cada filho tem a sua cor no app (verde, roxo, azul, laranja), como no desenho M1
+const CORES = [
+  { fundo: '#cdebd6', texto: '#123b2b', bloco: '#e4f4e9', dia: '#1f6b4a', numero: '#123b2b' },
+  { fundo: '#e9ddf7', texto: '#3b2a5c', bloco: '#f1eafa', dia: '#5b3f8c', numero: '#3b2a5c' },
+  { fundo: '#dcebfa', texto: '#12395f', bloco: '#e8f2fc', dia: '#2f6fa8', numero: '#12395f' },
+  { fundo: '#fdf0e3', texto: '#7a4a12', bloco: '#fef6ec', dia: '#a8651c', numero: '#7a4a12' },
+];
+
+const semana = (iso) => new Date(iso).toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '').toUpperCase();
+
+// Desenho: docs/telas/M1 (Hoje). Próximas consultas, atividades de hoje e pedidos esperando resposta.
 export default function Hoje() {
-  const { usuario } = useAuth();
   const [p, setP] = useState(null);
   const [filtro, setFiltro] = useState('TODOS');
   const [erro, setErro] = useState('');
@@ -15,53 +25,89 @@ export default function Hoje() {
     api.get('/painel/responsavel').then(setP).catch((e) => setErro(e.message));
   }, []);
 
+  const cor = (nome) => CORES[Math.max(0, p.filhos.findIndex((f) => f.nome === nome)) % CORES.length];
   const nomeFiltro = filtro === 'TODOS' ? null : p?.filhos.find((f) => f.id === filtro)?.nome;
   const doFilho = (x) => !nomeFiltro || x.crianca_nome === nomeFiltro;
+  const consultas = p ? p.proximas_consultas.filter(doFilho) : [];
+  const atividades = p ? p.atividades.filter(doFilho) : [];
+  const feitas = atividades.filter((a) => a.feitas_hoje > 0).length;
 
   return (
-    <>
-      <h1>Olá, {usuario.nome.split(' ')[0]}</h1>
+    <div className="hoje">
+      <div className="hoje-topo">
+        <h1>Hoje</h1>
+        <Link to="/familia/avisos" className="sino" aria-label={p?.avisos_nao_lidos ? `Avisos, ${p.avisos_nao_lidos} novos` : 'Avisos'}>
+          <Icone nome="avisos" tamanho={22} />
+          {p?.avisos_nao_lidos > 0 && <span className="sino-ponto" />}
+        </Link>
+      </div>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {!p && !erro && <p className="carregando">Carregando…</p>}
 
-      {p && p.filhos.length > 1 && (
-        <div className="abas">
-          <button className={filtro === 'TODOS' ? 'aba ativa' : 'aba'} onClick={() => setFiltro('TODOS')}>Todos</button>
-          {p.filhos.map((f) => (
-            <button key={f.id} className={filtro === f.id ? 'aba ativa' : 'aba'} onClick={() => setFiltro(f.id)}>{f.nome}</button>
-          ))}
-        </div>
-      )}
-
-      {p && p.pedidos_pendentes.length > 0 && (
-        <Link to="/familia/solicitacoes" className="cartao destaque">
-          {p.pedidos_pendentes.length === 1 ? '1 pedido de acesso' : `${p.pedidos_pendentes.length} pedidos de acesso`}
-          <span className="detalhe"> · {p.pedidos_pendentes.map((x) => `${x.profissional_nome} (${x.crianca_nome})`).join(' · ')}</span>
-        </Link>
-      )}
-
       {p && (
         <>
-          <h2 className="titulo-lista">Próximas consultas</h2>
-          {p.proximas_consultas.filter(doFilho).length === 0 && <p className="vazio">Nenhuma consulta marcada.</p>}
-          {p.proximas_consultas.filter(doFilho).map((c) => (
-            <Link key={c.id} to="/familia/agenda" className="cartao">
-              <p className="etiqueta">{diaCurto(c.inicio)} · {hora(c.inicio)}</p>
-              <strong>{c.crianca_nome}</strong>
-              <p className="detalhe">{c.tipo || 'Consulta'} · {c.profissional_nome}{!c.presenca_confirmada && ' · falta confirmar'}</p>
-            </Link>
-          ))}
+          <div className="filhos-filtro">
+            <button aria-pressed={filtro === 'TODOS'} className={`filtro-filho ${filtro === 'TODOS' ? 'on' : ''}`} onClick={() => setFiltro('TODOS')}>Todos</button>
+            {p.filhos.map((f, i) => (
+              <button key={f.id} aria-pressed={filtro === f.id} className={`filtro-filho com-avatar ${filtro === f.id ? 'on' : ''}`} onClick={() => setFiltro(f.id)}>
+                <span className="mini-avatar" style={{ background: CORES[i % CORES.length].fundo, color: CORES[i % CORES.length].texto }}>{f.nome[0]}</span>{f.nome}
+              </button>
+            ))}
+            <Link to="/familia/filhos/adicionar" className="filtro-filho adicionar" aria-label="Adicionar outro filho">+</Link>
+          </div>
 
-          <h2 className="titulo-lista">Atividades de hoje</h2>
-          {p.atividades.filter(doFilho).length === 0 && <p className="vazio">Nenhuma atividade por enquanto.</p>}
-          {p.atividades.filter(doFilho).map((a) => (
-            <Link key={a.id} to="/familia/atividades" className="cartao">
-              <strong>{a.titulo}</strong>
-              <p className="detalhe">{a.crianca_nome} · {a.feitas_hoje} {a.feitas_hoje === 1 ? 'feita' : 'feitas'} hoje</p>
+          {p.pedidos_pendentes.length > 0 && (
+            <Link to="/familia/solicitacoes" className="faixa-pedidos">
+              <div>
+                <b>{p.pedidos_pendentes.length === 1 ? '1 pedido de acesso' : `${p.pedidos_pendentes.length} pedidos de acesso`}</b><br />
+                {p.pedidos_pendentes.map((x) => `${x.profissional_nome} (${x.crianca_nome})`).join(' · ')}
+              </div>
+              <span aria-hidden="true">›</span>
             </Link>
-          ))}
+          )}
+
+          <h2 className="secao-celular">Próximas consultas</h2>
+          {consultas.length === 0 ? (
+            <div className="vazio-grande"><p>Nenhuma consulta marcada. Quando a clínica marcar, ela aparece aqui.</p></div>
+          ) : (
+            <div className="lista-cartao">
+              {consultas.map((c) => {
+                const k = cor(c.crianca_nome);
+                return (
+                  <Link key={c.id} to="/familia/agenda" className="linha-cartao">
+                    <div className="bloco-dia" style={{ background: k.bloco }}>
+                      <span style={{ color: k.dia }}>{semana(c.inicio)}</span>
+                      <b style={{ color: k.numero }}>{new Date(c.inicio).getDate()}</b>
+                    </div>
+                    <div className="texto-linha">
+                      <strong>{hora(c.inicio)} · {c.crianca_nome}</strong>
+                      <small>{c.tipo || nomeEspecialidade(c) || 'Consulta'} · {c.profissional_nome}{!c.presenca_confirmada && ' · falta confirmar'}</small>
+                    </div>
+                    {p.filhos.length > 1 && <span className="mini-avatar" style={{ background: k.fundo, color: k.texto }}>{c.crianca_nome[0]}</span>}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="secao-celular-topo">
+            <h2>Atividades de hoje</h2>
+            {atividades.length > 0 && <span>{feitas} de {atividades.length}</span>}
+          </div>
+          {atividades.length === 0 ? (
+            <div className="vazio-grande"><p>Nenhuma atividade por enquanto.</p></div>
+          ) : (
+            <div className="lista-cartao">
+              {atividades.map((a) => (
+                <Link key={a.id} to="/familia/atividades" className="linha-cartao compacta">
+                  <span className={`marca-feita ${a.feitas_hoje > 0 ? 'feita' : ''}`} aria-hidden="true">{a.feitas_hoje > 0 ? '✓' : ''}</span>
+                  <div className="texto-linha"><strong>{a.titulo}</strong><small>{a.crianca_nome}</small></div>
+                </Link>
+              ))}
+            </div>
+          )}
         </>
       )}
-    </>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ Software B2B para clínicas de crianças com TEA: sistema da clínica (computado
 - Front: React + Vite, JavaScript, CSS puro. Back: Node + Express, JavaScript puro. Banco: SQLite. Login: JWT + bcrypt.
 - Código SIMPLES, sem abstrações espertas e sem bibliotecas novas sem perguntar. Comentários em PORTUGUÊS, curtos, explicando o porquê.
 - Nomes de variáveis, rotas e tabelas em português, como nos docs.
-- Textos da interface: português simples, sem jargão. Botões pouco arredondados (10px).
+- Textos da interface: português simples, sem jargão. Botões e campos pouco arredondados (12px, como nos desenhos; nada de forma de pílula).
 
 ## Regras que nunca podem quebrar
 1. Profissional só acessa criança com vínculo APROVADO pelo responsável, dentro do escopo aprovado. Toda leitura clínica passa pela regra central de acesso (T-17).

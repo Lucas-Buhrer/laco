@@ -1,6 +1,9 @@
 /* Telas do app dos pais (celular) */
 .passo { margin: 24px 0 0; color: var(--texto-suave); font-size: 14px; font-weight: 600; }
 .titulo-passo { margin-top: 8px; font-size: 30px; }
+.conteudo-familia h1 { font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+.conteudo-familia h2 { font-size: 20px; }
+.conteudo-familia .subtitulo { font-size: 15px; line-height: 1.45; }
 .nota { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.5; }
 .detalhe { margin: 4px 0 0; color: var(--texto-suave); font-size: 14px; line-height: 1.5; }
 .etiqueta { margin: 12px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--texto-suave); }
@@ -10,8 +13,9 @@
 
 .cartao {
   display: block; margin-top: 16px; padding: 16px; background: var(--branco);
-  border: 1px solid #dce5df; border-radius: var(--raio); color: var(--texto); text-decoration: none;
+  border: 1px solid #dce5df; border-radius: var(--raio-cartao-celular); color: var(--texto); text-decoration: none;
 }
+a.cartao:hover, button.cartao:hover { border-color: #b9c9bf; box-shadow: 0 2px 10px rgba(18, 36, 28, 0.08); color: var(--texto); }
 .cartao > button { margin: 12px 8px 0 0; }
 .cartao.destaque { background: var(--verde-claro); border-color: var(--verde); font-weight: 700; }
 .titulo-cartao { font-size: 20px; margin: 4px 0 0; }
@@ -24,7 +28,6 @@
 .marcar input { width: 22px; height: 22px; flex-shrink: 0; }
 .lista-termo { margin: 0; padding-left: 20px; line-height: 1.8; }
 .codigo-grande { margin: 8px 0; font-size: 26px; font-weight: 700; letter-spacing: 0.06em; word-break: break-all; }
-.botao.perigo { background: var(--erro-texto); color: var(--branco); }
 
 .campo select {
   height: 52px; padding: 0 12px; border: 1px solid var(--borda); border-radius: var(--raio);
@@ -32,8 +35,9 @@
 }
 
 .abas { display: flex; gap: 8px; margin-top: 16px; }
-.aba { flex: 1; min-height: 44px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-weight: 600; cursor: pointer; }
-.aba.ativa { background: var(--verde-claro); border-color: var(--verde); }
+.aba { flex: 1; min-height: 40px; padding: 0 16px; border: 1px solid var(--borda); border-radius: 10px; background: var(--branco); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.aba:hover { background: #eef4f0; border-color: #8fa399; }
+.aba.ativa { background: #a9ddbb; border-color: #a9ddbb; color: #0f2e21; }
 .linha-acesso { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
 .linha-acesso small { color: var(--texto-suave); }
 .pagina-publica { max-width: 640px; margin: 0 auto; padding: 32px 24px; line-height: 1.6; }
@@ -61,3 +65,39 @@
   .numero, .cartao { break-inside: avoid; }
   @page { size: A4; margin: 18mm; }
 }
+
+/* ===== Tela Hoje (desenho M1) ===== */
+.hoje-topo { display: flex; align-items: center; justify-content: space-between; }
+.hoje-topo h1 { font-size: 30px; }
+.sino { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #dce5df; border-radius: 50%; background: var(--branco); color: var(--texto); }
+.sino:hover { background: #eef4f0; border-color: #b9c9bf; color: var(--texto); }
+.sino-ponto { position: absolute; top: 9px; right: 10px; width: 9px; height: 9px; border-radius: 50%; background: #e0a21b; border: 2px solid var(--branco); }
+.filhos-filtro { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+.filtro-filho { min-height: 44px; padding: 0 16px; border: 1px solid #b9c9bf; border-radius: 10px; background: var(--branco); color: var(--texto); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: background-color 0.15s, border-color 0.15s; }
+.filtro-filho:hover { background: #eef4f0; border-color: #8fa399; }
+.filtro-filho.on { background: #a9ddbb; border-color: #a9ddbb; color: #0f2e21; font-weight: 700; }
+.filtro-filho.com-avatar { padding: 0 16px 0 8px; }
+.filtro-filho.adicionar { width: 44px; padding: 0; justify-content: center; border: 1px dashed #7fa38e; border-radius: 50%; background: transparent; color: var(--verde-forte); font-size: 22px; font-weight: 400; }
+.mini-avatar { width: 28px; height: 28px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 13px; font-weight: 700; }
+.faixa-pedidos { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; margin-top: 16px; padding: 14px 16px; border-radius: 14px; background: #fcefc9; color: #4a3500; font-size: 14px; line-height: 1.35; text-decoration: none; transition: filter 0.15s; }
+.faixa-pedidos:hover { filter: brightness(0.96); color: #4a3500; }
+.faixa-pedidos b { font-size: 15px; }
+.faixa-pedidos span { font-size: 24px; }
+.secao-celular { margin: 24px 0 0; font-size: 20px; }
+.secao-celular-topo { display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; }
+.secao-celular-topo h2 { font-size: 20px; }
+.secao-celular-topo span { font-size: 14px; color: #5e7066; }
+.lista-cartao { margin-top: 12px; background: var(--branco); border: 1px solid #dce5df; border-radius: var(--raio-cartao-celular); display: flex; flex-direction: column; overflow: hidden; }
+.linha-cartao { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #e6ece8; color: var(--texto); text-decoration: none; transition: background-color 0.15s; }
+.linha-cartao:last-child { border-bottom: 0; }
+.linha-cartao:hover { background: #f6faf7; color: var(--texto); }
+.linha-cartao.compacta { padding: 12px 16px; }
+.bloco-dia { width: 56px; height: 56px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 12px; }
+.bloco-dia span { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; }
+.bloco-dia b { font-size: 24px; font-weight: 600; line-height: 1; }
+.texto-linha { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.texto-linha strong { font-size: 16px; font-weight: 600; }
+.linha-cartao.compacta .texto-linha strong { font-size: 15px; }
+.texto-linha small { font-size: 13px; color: #4b5f55; }
+.marca-feita { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 2px solid #7fa38e; border-radius: 50%; background: var(--branco); color: var(--branco); font-weight: 700; }
+.marca-feita.feita { background: #4faf7c; border-color: #4faf7c; }

@@ -1,42 +1,58 @@
-/* Clínica: menu lateral + conteúdo */
+/* Clínica: menu lateral + conteúdo (desenhos D2, D5, D7) */
 .layout-clinica { display: flex; min-height: 100vh; }
 .menu-lateral {
-  width: 240px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
-  padding: 24px 16px; background: var(--branco); border-right: 1px solid #dce5df;
+  width: 240px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px;
+  padding: 28px 16px; background: var(--branco); border-right: 1px solid #dce5df;
   /* Fixo na tela: não estica com o conteúdo e rola sozinho se o menu for maior que a janela */
   position: sticky; top: 0; align-self: flex-start; height: 100vh; overflow-y: auto;
 }
-.menu-clinica { margin: 0 0 16px; font-size: 14px; color: var(--texto-suave); }
+.menu-lateral .logo { padding: 0 12px 24px; color: var(--verde-escuro); }
 .menu-lateral nav { display: flex; flex-direction: column; gap: 4px; }
 .item-menu {
-  display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--raio);
-  color: var(--texto-suave); font-size: 15px; font-weight: 500; text-decoration: none;
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 0 12px;
+  border: 0; border-radius: 12px; background: transparent; font: inherit;
+  color: var(--texto-suave); font-size: 15px; font-weight: 500; text-decoration: none; text-align: left; cursor: pointer;
 }
+.item-menu:hover { background: #eef4f0; color: var(--texto); }
 .item-menu.active { background: var(--verde-claro); color: #0f2e21; font-weight: 700; }
-.menu-rodape { margin-top: auto; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
-.menu-rodape span { color: var(--texto-suave); margin-bottom: 8px; }
-.conteudo { flex: 1; padding: 40px 48px; min-width: 0; }
+.menu-rodape {
+  margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 12px; border-top: 1px solid #e6ece8;
+}
+.menu-rodape .avatar {
+  width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--verde-claro); color: #123b2b; font-weight: 700;
+}
+.menu-rodape div { display: flex; flex-direction: column; min-width: 0; }
+.menu-rodape strong { font-size: 14px; font-weight: 600; }
+.menu-rodape div span { font-size: 12px; color: #5e7066; }
+.conteudo { flex: 1; padding: 40px 56px; min-width: 0; }
 
-/* Família: conteúdo + menu fixo embaixo (celular) */
+/* Família: conteúdo + menu fixo embaixo (celular, desenhos M*) */
 .layout-familia { max-width: 480px; min-height: 100vh; margin: 0 auto; display: flex; flex-direction: column; }
-.conteudo-familia { flex: 1; padding: 28px 24px 96px; }
+.conteudo-familia { flex: 1; padding: 28px 20px 112px; }
 .menu-inferior {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 100%; max-width: 480px; display: flex;
+  width: 100%; max-width: 480px; display: flex; padding: 8px 8px 12px;
   background: var(--branco); border-top: 1px solid #dce5df;
 }
 .item-inferior {
-  flex: 1; display: flex; align-items: center; justify-content: center; min-height: 60px;
-  color: var(--texto-suave); font-size: 14px; font-weight: 600; text-decoration: none;
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 52px; border-radius: 12px;
+  color: #5e7066; font-size: 12px; font-weight: 500; text-decoration: none;
 }
-.item-inferior.active { color: var(--verde-forte); box-shadow: inset 0 3px 0 var(--verde); }
+.icone-inferior { height: 30px; min-width: 56px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: background 0.15s; }
+.item-inferior:hover .icone-inferior { background: #eef4f0; }
+.item-inferior.active { color: #0f2e21; font-weight: 700; }
+.item-inferior.active .icone-inferior { background: var(--verde-claro); }
 
 @media (max-width: 800px) {
   .layout-clinica { flex-direction: column; }
-  .menu-lateral { width: 100%; border-right: 0; border-bottom: 1px solid #dce5df; position: static; height: auto; align-self: stretch; }
+  .menu-lateral { width: 100%; border-right: 0; border-bottom: 1px solid #dce5df; position: static; height: auto; align-self: stretch; padding: 16px; }
+  .menu-lateral .logo { padding-bottom: 8px; }
   .menu-lateral nav { flex-direction: row; flex-wrap: wrap; }
+  .item-menu { width: auto; }
+  .menu-rodape { margin-top: 8px; }
   .conteudo { padding: 24px 16px; }
 }
 
-/* Contador de avisos não lidos */
-.contador { margin-left: 8px; min-width: 22px; padding: 0 6px; border-radius: 999px; background: var(--verde-forte); color: var(--branco); font-size: 12px; font-weight: 700; text-align: center; line-height: 22px; }
+/* Contador de avisos não lidos: pequeno selo quadrado, sem forma de pílula */
+.contador { margin-left: auto; min-width: 22px; padding: 0 6px; border-radius: 8px; background: var(--verde-forte); color: var(--branco); font-size: 12px; font-weight: 700; text-align: center; line-height: 22px; }

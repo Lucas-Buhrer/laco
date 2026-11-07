@@ -24,11 +24,13 @@ function criarControladorCriancas(banco) {
     }
     const vinculadas = banco
       .prepare(
-        `SELECT c.id, c.nome, c.data_nascimento, v.aprovado_em
+        `SELECT c.id, c.nome, c.data_nascimento, v.aprovado_em,
+                (SELECT MAX(x.inicio) FROM consultas x WHERE x.crianca_id = c.id AND x.profissional_id = v.profissional_id AND x.status = 'REALIZADA') AS ultima_sessao,
+                (SELECT MIN(x.inicio) FROM consultas x WHERE x.crianca_id = c.id AND x.profissional_id = v.profissional_id AND x.status = 'AGENDADA' AND x.inicio >= ?) AS proxima_consulta
          FROM vinculos v JOIN criancas c ON c.id = v.crianca_id
          WHERE v.profissional_id = ? AND v.status = 'APROVADO' ORDER BY c.nome`
       )
-      .all(req.usuario.id);
+      .all(agoraIso(), req.usuario.id);
     res.json({ dados: vinculadas });
   }
 

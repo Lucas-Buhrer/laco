@@ -1,45 +1,55 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import useNaoLidas from './useNaoLidas.js';
+import Icone from './Icone.jsx';
 
-// Menu de cada papel, como no doc 06
+// Menu de cada papel, como nos desenhos D2 (profissional), D7 (administração) e D5 (recepção)
 const MENUS = {
   PROFISSIONAL: [
-    ['', 'Painel'], ['criancas', 'Crianças'], ['pre-cadastros', 'Pré-cadastros'],
-    ['agenda', 'Agenda'], ['codigo-da-familia', 'Código da família'], ['conta', 'Conta'],
+    ['', 'Painel', 'painel'], ['criancas', 'Crianças', 'criancas'], ['pre-cadastros', 'Pré-cadastros', 'precadastro'],
+    ['agenda', 'Agenda', 'agenda'], ['codigo-da-familia', 'Código da família', 'codigo'], ['conta', 'Conta', 'conta'],
   ],
   ADMIN_CLINICA: [
-    ['', 'Painel'], ['equipe', 'Equipe'], ['pre-cadastros', 'Pré-cadastros'],
-    ['agenda', 'Agenda da clínica'], ['clinica', 'Clínica'], ['conta', 'Conta'],
+    ['', 'Painel', 'painel'], ['equipe', 'Equipe', 'criancas'], ['pre-cadastros', 'Pré-cadastros', 'precadastro'],
+    ['agenda', 'Agenda da clínica', 'agenda'], ['clinica', 'Clínica', 'clinica'], ['conta', 'Conta', 'conta'],
   ],
-  // Recepção não tem tela de conta: a senha é redefinida pelo admin
-  RECEPCAO: [['', 'Painel'], ['pre-cadastros', 'Pré-cadastros'], ['agenda', 'Agenda']],
+  // Recepção não tem tela de conta: a senha é redefinida pelo admin. O "Sair" fica no menu.
+  RECEPCAO: [['', 'Painel', 'painel'], ['pre-cadastros', 'Pré-cadastros', 'precadastro'], ['agenda', 'Agenda', 'agenda']],
 };
 
-const NOME_PAPEL = { PROFISSIONAL: 'Profissional', ADMIN_CLINICA: 'Administração', RECEPCAO: 'Recepção' };
+const NOME_PAPEL = { ADMIN_CLINICA: 'Administração', RECEPCAO: 'Recepção' };
 
 export default function LayoutClinica() {
   const { usuario, sair } = useAuth();
   const naoLidas = useNaoLidas();
+  const nomeClinica = usuario.clinica?.nome || '';
+  // No desenho: profissional mostra "Clínica Aurora"; administração e recepção, "Administração · Aurora"
+  const subtitulo = usuario.papel === 'PROFISSIONAL' ? nomeClinica : `${NOME_PAPEL[usuario.papel]} · ${nomeClinica.replace(/^Clínica\s+/i, '')}`;
 
   return (
     <div className="layout-clinica">
       <a className="pular" href="#conteudo">Ir para o conteúdo</a>
       <aside className="menu-lateral">
         <span className="logo">laço</span>
-        <p className="menu-clinica">{usuario.clinica?.nome}</p>
         <nav>
-          {MENUS[usuario.papel].map(([caminho, nome]) => (
+          {MENUS[usuario.papel].map(([caminho, nome, icone]) => (
             <NavLink key={nome} to={`/clinica/${caminho}`} end={caminho === ''} className="item-menu">
-              {nome}
+              <Icone nome={icone} />{nome}
             </NavLink>
           ))}
-          <NavLink to="/clinica/avisos" className="item-menu">Avisos{naoLidas > 0 && <span className="contador">{naoLidas}</span>}</NavLink>
+          <NavLink to="/clinica/avisos" className="item-menu">
+            <Icone nome="avisos" />Avisos{naoLidas > 0 && <span className="contador">{naoLidas}</span>}
+          </NavLink>
+          {usuario.papel === 'RECEPCAO' && (
+            <button className="item-menu" onClick={sair}><Icone nome="sair" />Sair</button>
+          )}
         </nav>
         <div className="menu-rodape">
-          <strong>{usuario.nome}</strong>
-          <span>{NOME_PAPEL[usuario.papel]}</span>
-          <button className="botao-sec" onClick={sair}>Sair</button>
+          <span className="avatar">{usuario.nome[0]}</span>
+          <div>
+            <strong>{usuario.nome}</strong>
+            <span>{subtitulo}</span>
+          </div>
         </div>
       </aside>
       <main className="conteudo" id="conteudo" tabIndex={-1}>

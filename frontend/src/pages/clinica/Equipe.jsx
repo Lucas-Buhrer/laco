@@ -178,7 +178,7 @@ export default function Equipe() {
               <td>{p.nome}</td>
               <td>{nomeEspecialidade(p)}</td>
               <td>{p.criancas}</td>
-              <td>{!p.ativo ? 'Desativado' : p.senha_temporaria ? 'Senha temporária' : 'Ativo'}</td>
+              <td>{!p.ativo ? <span className="pill mu">Desativado</span> : p.senha_temporaria ? <span className="pill wa">Senha temporária</span> : <span className="pill ok">Ativo</span>}</td>
               <td className="acoes-linha">
                 {p.ativo ? (
                   <>
@@ -196,7 +196,7 @@ export default function Equipe() {
               <td>{r.nome}</td>
               <td>Recepção · usuário: {r.codigo_usuario}</td>
               <td>—</td>
-              <td>{!r.ativo ? 'Desativada' : r.senha_temporaria ? 'Senha temporária' : 'Ativa'}</td>
+              <td>{!r.ativo ? <span className="pill mu">Desativada</span> : r.senha_temporaria ? <span className="pill wa">Senha temporária</span> : <span className="pill ok">Ativa</span>}</td>
               <td className="acoes-linha">
                 {r.ativo ? (
                   <>

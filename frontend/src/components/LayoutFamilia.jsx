@@ -1,8 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import Icone from './Icone.jsx';
 
-// App dos pais: pensado para celular (360px), menu fixo embaixo
+// App dos pais: pensado para celular (360px), menu fixo embaixo, como nos desenhos M*
 const MENU = [
-  ['', 'Hoje'], ['agenda', 'Agenda'], ['atividades', 'Atividades'], ['acessos', 'Acessos'], ['mais', 'Mais'],
+  ['', 'Hoje', 'painel'], ['agenda', 'Agenda', 'agenda'], ['atividades', 'Atividades', 'atividades'],
+  ['acessos', 'Acessos', 'acessos'], ['mais', 'Mais', 'mais'],
 ];
 
 export default function LayoutFamilia() {
@@ -12,9 +14,10 @@ export default function LayoutFamilia() {
       <main className="conteudo-familia" id="conteudo" tabIndex={-1}>
         <Outlet />
       </main>
-      <nav className="menu-inferior">
-        {MENU.map(([caminho, nome]) => (
+      <nav className="menu-inferior" aria-label="Principal">
+        {MENU.map(([caminho, nome, icone]) => (
           <NavLink key={nome} to={`/familia/${caminho}`} end={caminho === ''} className="item-inferior">
+            <span className="icone-inferior"><Icone nome={icone} tamanho={22} /></span>
             {nome}
           </NavLink>
         ))}
