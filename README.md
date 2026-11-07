@@ -33,10 +33,17 @@ Senha fraca só na demonstração: qualquer senha criada pelo sistema exige 8 ca
 |---|---|
 | `npm run dev` | back-end e front-end juntos |
 | `npm run seed` | recria o banco com os dados da demonstração (datas sempre relativas a hoje) |
-| `npm test` | roda os 146 testes automáticos (inclui o ensaio da demonstração) |
+| `npm run seed:mes` | **acrescenta um mês de uso simulado** (7 profissionais na Aurora, 20 crianças, 169 consultas, registros, atividades, avisos). Rode depois do `seed`; se já foi rodado, avisa e não duplica |
+| `npm test` | roda os 156 testes automáticos (inclui o ensaio da demonstração) |
 | `npm run limpeza` | inativa pré-cadastros sem ativação em 30 dias e exclui aos 90 |
 
 Se o `seed` disser que não consegue apagar `backend/dados/laco.db`, pare o `npm run dev` antes (o arquivo está em uso) e rode de novo.
+
+## Dados de um mês de uso (opcional)
+
+Depois de `npm run seed`, rode `npm run seed:mes` para a clínica parecer usada há um mês: de 30 dias atrás até 14 dias à frente, com consultas realizadas, faltas, canceladas, remarcadas e futuras (confirmadas ou não), registros de sessão com observações visíveis e privadas, atividades com adesão, pareceres, pedidos de acesso pendentes e pré-cadastros em andamento.
+Os 4 profissionais novos entram com a mesma senha da demonstração: `marta@aurora.test`, `rui@aurora.test`, `sara@aurora.test` e `tiago@aurora.test` (código da clínica `AURORA`). As famílias seguem o formato `nome.sobrenome@exemplo.test` (por exemplo `patricia.gomes@exemplo.test`); não é preciso usá-las.
+Para voltar ao banco enxuto da demo, rode `npm run seed` (apaga tudo e recria).
 
 ## Para a apresentação
 

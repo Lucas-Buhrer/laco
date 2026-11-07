@@ -8,6 +8,7 @@
     "start": "node src/server.js",
     "banco": "node src/database/criar.js",
     "seed": "node src/database/seed.js",
+    "seed:mes": "node src/database/seed-mes.js",
     "limpeza": "node src/scripts/limpeza.js",
     "test": "node --test"
   },
