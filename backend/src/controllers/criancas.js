@@ -42,6 +42,10 @@ function criarControladorCriancas(banco) {
          FROM criancas WHERE id = ?`
       )
       .get(req.params.id);
+    // O profissional também fica sabendo do limite do próprio acesso (só o dele)
+    if (req.acessoComo === 'PROFISSIONAL') {
+      c.escopo = { ver_historico_anterior: req.vinculo.ver_historico_anterior, aprovado_em: req.vinculo.aprovado_em };
+    }
     res.json({ dados: c });
   }
 

@@ -56,6 +56,7 @@ function criarRotasCriancas(banco) {
   rotas.get('/:id/relatorio', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('VER_RELATORIO'), rel.relatorio);
   rotas.post('/:id/pareceres', exigirPapel('PROFISSIONAL'), exigirAcessoCrianca('PUBLICAR_PARECER_PRE'), rel.publicarParecer);
   rotas.get('/:id/pareceres', exigirAcessoCrianca('VER_PARECERES'), rel.listarPareceres);
+  rotas.get('/:id/resumo-periodo', exigirPapel('PROFISSIONAL'), exigirAcessoCrianca('VER_RESUMO_PARECER'), rel.resumoParaProfissional);
 
   return rotas;
 }

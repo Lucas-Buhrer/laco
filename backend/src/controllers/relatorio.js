@@ -131,6 +131,46 @@ function criarControladorRelatorio(banco) {
     res.status(201).json({ dados: { id } });
   }
 
+  // GET /criancas/:id/resumo-periodo?inicio=&fim= — para quem vai escrever o parecer.
+  // Só números do PRÓPRIO atendimento (consultas dele, atividades que ele criou, registros dentro do escopo):
+  // nunca consultas de outra clínica nem de outro profissional.
+  function resumoParaProfissional(req, res) {
+    if (req.acessoComo !== 'PROFISSIONAL') return res.status(403).json({ erro: 'Só o profissional usa este resumo.' });
+    const p = lerPeriodo(req.query?.inicio, req.query?.fim);
+    if (p.erro) return res.status(400).json({ erro: p.erro });
+    const corte = inicioDoEscopo(req);
+    // Sem histórico liberado, o período começa na aprovação
+    const inicio = corte && p.inicio < corte.slice(0, 10) ? corte.slice(0, 10) : p.inicio;
+    const id = req.params.id;
+    const de = `${inicio}T00:00:00`;
+    const ate = `${p.fim}T23:59:59`;
+    const contar = (status) =>
+      banco.prepare('SELECT COUNT(*) AS n FROM consultas WHERE crianca_id = ? AND profissional_id = ? AND status = ? AND inicio >= ? AND inicio <= ?')
+        .get(id, req.usuario.id, status, de, ate).n;
+
+    const atividades = banco.prepare('SELECT id, frequencia, criada_em FROM atividades WHERE crianca_id = ? AND profissional_id = ?').all(id, req.usuario.id);
+    let esperado = 0;
+    for (let dia = inicio; dia <= p.fim; dia = somarDias(dia, 1)) {
+      for (const a of atividades) if (a.criada_em.slice(0, 10) <= dia) esperado += esperadoPorSemana(a.frequencia) / 7;
+    }
+    const feitas = atividades.length
+      ? banco.prepare(`SELECT COUNT(*) AS n FROM execucoes_atividade e JOIN atividades a ON a.id = e.atividade_id
+                       WHERE a.crianca_id = ? AND a.profissional_id = ? AND e.data >= ? AND e.data <= ?`).get(id, req.usuario.id, inicio, p.fim).n
+      : 0;
+    const humor = banco
+      .prepare('SELECT AVG(humor) AS media FROM registros_sessao WHERE crianca_id = ? AND profissional_id = ? AND humor IS NOT NULL AND criado_em >= ? AND criado_em <= ?')
+      .get(id, req.usuario.id, de, ate).media;
+    res.json({
+      dados: {
+        periodo: { inicio, fim: p.fim },
+        consultas_realizadas: contar('REALIZADA'),
+        faltas: contar('FALTA'),
+        adesao_percentual: esperado > 0 ? Math.min(100, Math.round((feitas / esperado) * 100)) : null,
+        humor_medio: humor === null ? null : Math.round(humor * 10) / 10,
+      },
+    });
+  }
+
   // GET /criancas/:id/pareceres — família: todos os publicados; profissional: só os próprios
   function listarPareceres(req, res) {
     const ehProf = req.acessoComo === 'PROFISSIONAL';
@@ -143,7 +183,7 @@ function criarControladorRelatorio(banco) {
     res.json({ dados: linhas });
   }
 
-  return { relatorio, publicarParecer, listarPareceres };
+  return { relatorio, publicarParecer, listarPareceres, resumoParaProfissional };
 }
 
 module.exports = criarControladorRelatorio;

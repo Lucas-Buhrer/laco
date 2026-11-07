@@ -12,6 +12,7 @@ async function mae(api) {
   return r.corpo.dados.token;
 }
 const theo = (api) => api.banco.prepare("SELECT id FROM criancas WHERE nome = 'Theo'").get().id;
+const idDe = (api, email) => api.banco.prepare('SELECT id FROM usuarios WHERE email = ?').get(email).id;
 const dia = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return formatar(d).slice(0, 10); };
 const periodo = `inicio=${dia(-90)}&fim=${dia(0)}`;
 
@@ -111,5 +112,38 @@ test('Relatório é só da família: profissional, ADM, recepção e outra famí
   // o profissional lê só os próprios pareceres; a família lê todos
   const lista = await api.chamar('GET', `/api/criancas/${theo(api)}/pareceres`, null, await mae(api));
   assert.strictEqual(lista.corpo.dados.length, 1);
+  api.fechar();
+});
+
+test('Resumo do período para o parecer: só números do próprio profissional, respeitando o escopo', async () => {
+  const api = iniciar();
+  const carlos = await clinica(api, 'AURORA', 'carlos@laco.test');
+  const r = await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?${periodo}`, null, carlos);
+  assert.strictEqual(r.status, 200);
+  const d = r.corpo.dados;
+  assert.ok(d.consultas_realizadas >= 5 && d.faltas >= 1);
+  assert.ok(d.humor_medio >= 1 && d.humor_medio <= 5);
+  // nada de consulta de outra clínica nem de texto clínico
+  const texto = JSON.stringify(r.corpo);
+  for (const proibido of ['Horizonte', 'Marina', 'observacao', 'resumo', 'Anotação']) assert.ok(!texto.includes(proibido));
+  // o número bate com as consultas do próprio Carlos, não com todas da criança
+  const meus = api.banco.prepare("SELECT COUNT(*) AS n FROM consultas WHERE crianca_id = ? AND profissional_id = ? AND status = 'REALIZADA' AND inicio >= ?").get(theo(api), idDe(api, 'carlos@laco.test'), `${dia(-90)}T00:00:00`).n;
+  assert.strictEqual(d.consultas_realizadas, meus);
+  // o perfil mostra ao profissional o limite do próprio acesso
+  const perfil = await api.chamar('GET', `/api/criancas/${theo(api)}`, null, carlos);
+  assert.ok(perfil.corpo.dados.escopo.aprovado_em);
+  // sem vínculo aprovado, família e administração não usam esta rota
+  const ana = await clinica(api, 'AURORA', 'profissional@laco.test');
+  assert.strictEqual((await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?${periodo}`, null, ana)).status, 404);
+  assert.strictEqual((await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?${periodo}`, null, await mae(api))).status, 403);
+  assert.strictEqual((await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?${periodo}`, null, await clinica(api, 'AURORA', 'admin@laco.test'))).status, 403);
+  assert.strictEqual((await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?inicio=2020-13-01&fim=2020-01-01`, null, carlos)).status, 400);
+  // o escopo corta o início: a Ana aprovada hoje, sem histórico, só enxerga a partir de hoje
+  const vinculo = api.banco.prepare("SELECT id FROM vinculos WHERE status = 'PENDENTE'").get();
+  await api.chamar('POST', `/api/vinculos/${vinculo.id}/aprovar`, { ver_historico_anterior: false }, await mae(api));
+  const cortado = await api.chamar('GET', `/api/criancas/${theo(api)}/resumo-periodo?${periodo}`, null, ana);
+  assert.strictEqual(cortado.status, 200);
+  assert.strictEqual(cortado.corpo.dados.periodo.inicio, dia(0));
+  assert.strictEqual(cortado.corpo.dados.consultas_realizadas, 0);
   api.fechar();
 });

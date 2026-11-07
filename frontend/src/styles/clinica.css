@@ -357,3 +357,21 @@ input[type='checkbox'], input[type='radio'] { accent-color: #1f6b4a; }
 .registro-form .barra-salvar { grid-column: 1 / -1; position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; gap: 12px; margin: 8px 0 0; padding: 14px 0; background: linear-gradient(to top, #f3f6f4 70%, rgba(243, 246, 244, 0)); }
 .registro-form select { height: 52px; padding: 0 12px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-size: 16px; }
 @media (max-width: 1000px) { .registro-form .barra-salvar { justify-content: stretch; } .registro-form .barra-salvar > * { flex: 1; } }
+
+/* ===== Parecer ===== */
+.duas-datas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.nota-limite { padding: 10px 12px; border-radius: 10px; background: #fff7dc; color: #4a3500; }
+.texto-parecer { width: 100%; min-height: 280px; resize: vertical; line-height: 1.55; }
+.contador-letras { align-self: flex-end; font-weight: 500; color: #5e7066; }
+.faixa-regra { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fcefc9; color: #4a3500; font-size: 14px; line-height: 1.5; }
+.titulo-lateral { font-size: 18px; margin: 0; }
+.resumo-numeros { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.resumo-numeros div { padding: 12px 14px; border-radius: 12px; background: #f6faf7; border: 1px solid #e6ece8; }
+.resumo-numeros b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 600; line-height: 1.05; }
+.resumo-numeros span { font-size: 13px; color: #4b5f55; }
+.parecer-anterior { padding-top: 10px; border-top: 1px solid #eef2ef; }
+.parecer-anterior:first-of-type { border-top: 0; padding-top: 0; }
+.parecer-anterior small { font-size: 12px; font-weight: 700; color: #5e7066; }
+.parecer-anterior p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.confirma-parecer { grid-column: 1 / -1; margin-top: 0; }
+.registro-form > .confirma-parecer { margin-top: 0; }

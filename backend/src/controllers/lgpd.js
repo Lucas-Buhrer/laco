@@ -34,6 +34,8 @@ const ACOES = {
   EDITAR_CRIANCA: 'editou os dados da criança',
   EXPORTAR_DADOS: 'baixou os dados da criança',
   VER_RESPONSAVEIS: 'viu a lista de responsáveis',
+  VER_RESUMO_PARECER: 'viu o resumo do período para escrever um parecer',
+  PUBLICAR_PARECER: 'publicou um parecer',
   GERAR_CONVITE_RESPONSAVEL: 'gerou um convite para outro responsável',
   ENTRAR_COMO_RESPONSAVEL: 'entrou como responsável',
   SAIR_DA_CRIANCA: 'saiu como responsável',
