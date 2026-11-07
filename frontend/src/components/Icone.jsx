@@ -11,6 +11,10 @@ const CAMINHOS = {
   avisos: <path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0" />,
   atividades: <><circle cx="12" cy="12" r="9" /><path d="M8 12.5l2.7 2.7L16 9.5" /></>,
   acessos: <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" />,
+  tempo: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+  relatorio: <path d="M7 3h8l4 4v14H7zM14 3v5h5M10 13h6M10 17h6" />,
+  olho: <><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></>,
+  cadeado: <path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3" />,
   mais: <><circle cx="5" cy="12" r="1.5" /><circle cx="12" cy="12" r="1.5" /><circle cx="19" cy="12" r="1.5" /></>,
 };
 

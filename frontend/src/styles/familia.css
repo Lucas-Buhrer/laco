@@ -101,3 +101,26 @@ a.cartao:hover, button.cartao:hover { border-color: #b9c9bf; box-shadow: 0 2px 1
 .texto-linha small { font-size: 13px; color: #4b5f55; }
 .marca-feita { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 2px solid #7fa38e; border-radius: 50%; background: var(--branco); color: var(--branco); font-weight: 700; }
 .marca-feita.feita { background: #4faf7c; border-color: #4faf7c; }
+
+/* ===== Tela Mais (desenho M18) ===== */
+.perfil-mais { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.avatar-grande { width: 52px; height: 52px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--verde-claro); color: #123b2b; font-size: 20px; font-weight: 700; }
+.perfil-mais div { display: flex; flex-direction: column; min-width: 0; }
+.perfil-mais strong { font-size: 17px; font-weight: 600; }
+.perfil-mais small { font-size: 14px; color: var(--texto-suave); overflow: hidden; text-overflow: ellipsis; }
+.faixa-avisos { display: flex; align-items: center; gap: 12px; min-height: 56px; margin-top: 18px; padding: 0 16px; background: var(--branco); border: 1px solid #dce5df; border-radius: var(--raio-cartao-celular); color: var(--texto); text-decoration: none; font-size: 16px; transition: background-color 0.15s, filter 0.15s; }
+.faixa-avisos span:first-of-type { flex: 1; }
+.faixa-avisos.novos { background: #fcefc9; border-color: #fcefc9; color: #4a3500; }
+.faixa-avisos:hover { filter: brightness(0.97); color: inherit; }
+.selo-numero { min-width: 24px; padding: 0 7px; border-radius: 8px; background: #4a3500; color: #fcefc9; font-size: 13px; font-style: normal; font-weight: 700; text-align: center; line-height: 24px; }
+.titulo-grupo { margin: 24px 0 0; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #5e7066; }
+.linha-menu { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 0 16px; border-bottom: 1px solid #e6ece8; color: var(--texto); text-decoration: none; transition: background-color 0.15s; }
+.linha-menu:last-child { border-bottom: 0; }
+.linha-menu:hover { background: #f6faf7; color: var(--texto); }
+.icone-menu { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #e4f4e9; color: var(--verde-forte); }
+.nome-menu { flex: 1; font-size: 16px; font-weight: 600; }
+.seta-linha { color: #8fa399; font-size: 22px; line-height: 1; }
+.botao-sair { width: 100%; margin-top: 28px; gap: 8px; }
+.confirma-sair { margin-top: 28px; padding: 16px; background: var(--branco); border: 1px solid #d9b8a8; border-radius: var(--raio-cartao-celular); }
+.confirma-sair p { margin: 4px 0 0; font-size: 14px; color: var(--texto-suave); }
+.confirma-sair .acoes-topo { margin-top: 14px; }
