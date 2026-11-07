@@ -9,6 +9,7 @@ const criarControladorRegistros = require('../controllers/registros');
 const criarControladorAtividades = require('../controllers/atividades');
 const criarControladorLgpd = require('../controllers/lgpd');
 const criarControladorResponsaveis = require('../controllers/responsaveis');
+const criarControladorRelatorio = require('../controllers/relatorio');
 
 // Montado em /api/criancas
 function criarRotasCriancas(banco) {
@@ -19,6 +20,7 @@ function criarRotasCriancas(banco) {
   const ativ = criarControladorAtividades(banco);
   const lgpd = criarControladorLgpd(banco);
   const resp = criarControladorResponsaveis(banco);
+  const rel = criarControladorRelatorio(banco);
   const { exigirAcessoCrianca } = criarAcessoCrianca(banco);
 
   rotas.use(criarAutenticacao(banco));
@@ -49,6 +51,11 @@ function criarRotasCriancas(banco) {
   rotas.post('/:id/convites-responsavel', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('GERAR_CONVITE_RESPONSAVEL_PRE'), resp.gerarConvite);
   rotas.post('/:id/sair', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('SAIR_PRE'), resp.sair);
   rotas.put('/:id/meu-parentesco', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('MUDAR_PARENTESCO_PRE'), resp.mudarParentesco);
+
+  // Relatório e pareceres (T-42): relatório só para a família; parecer é publicado pelo profissional
+  rotas.get('/:id/relatorio', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('VER_RELATORIO'), rel.relatorio);
+  rotas.post('/:id/pareceres', exigirPapel('PROFISSIONAL'), exigirAcessoCrianca('PUBLICAR_PARECER_PRE'), rel.publicarParecer);
+  rotas.get('/:id/pareceres', exigirAcessoCrianca('VER_PARECERES'), rel.listarPareceres);
 
   return rotas;
 }

@@ -55,6 +55,7 @@ export default function PerfilCrianca() {
       </div>
       <div className="acoes-topo">
         <Link className="botao" to={`/clinica/criancas/${id}/registro`}>Registrar sessão</Link>
+        <Link className="botao-sec" to={`/clinica/criancas/${id}/parecer`}>Escrever parecer</Link>
       </div>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}

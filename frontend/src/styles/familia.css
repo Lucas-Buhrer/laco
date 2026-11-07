@@ -41,3 +41,23 @@
 .aviso-item { display: flex; justify-content: space-between; gap: 12px; width: 100%; text-align: left; font: inherit; cursor: pointer; }
 .aviso-item time { color: var(--texto-suave); font-size: 13px; white-space: nowrap; }
 .aviso-item.nao-lido { border-left: 4px solid var(--verde); font-weight: 600; }
+
+/* Relatório de evolução */
+.folha h3 { margin: 24px 0 8px; font-size: 18px; font-family: 'Bricolage Grotesque', sans-serif; }
+.barras { display: flex; align-items: flex-end; gap: 16px; height: 150px; }
+.barra-coluna { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; flex: 1; font-size: 13px; }
+.barra { width: 100%; max-width: 56px; background: var(--verde); border-radius: 6px 6px 0 0; min-height: 2px; }
+.lista-humor { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.lista-humor li { display: grid; grid-template-columns: 110px 1fr 110px; gap: 8px; align-items: center; }
+.trilho { height: 10px; background: var(--verde-claro); border-radius: 5px; overflow: hidden; }
+.preenchido { height: 100%; background: var(--verde-forte); }
+.parecer { margin-top: 24px; }
+.so-impressao { display: none; }
+@media print {
+  .nao-imprimir, .menu-inferior { display: none !important; }
+  .so-impressao { display: block; font-weight: 700; color: var(--verde-escuro); }
+  .layout-familia, .conteudo-familia { max-width: none; padding: 0; }
+  body { background: #fff; }
+  .numero, .cartao { break-inside: avoid; }
+  @page { size: A4; margin: 18mm; }
+}

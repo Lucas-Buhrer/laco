@@ -13,6 +13,7 @@ export default function Mais() {
       <Link className="cartao destaque" to="/familia/avisos">Avisos{naoLidas > 0 && ` (${naoLidas} novos)`}</Link>
       <Link className="cartao destaque" to="/familia/filhos">Meus filhos</Link>
       <Link className="cartao destaque" to="/familia/linha-do-tempo">Linha do tempo</Link>
+      <Link className="cartao destaque" to="/familia/relatorio">Relatório de evolução</Link>
       <Link className="cartao destaque" to="/familia/solicitacoes">Pedidos de acesso</Link>
       <Link className="cartao destaque" to="/familia/responsaveis">Responsáveis</Link>
       <Link className="cartao destaque" to="/familia/convidar">Convidar outra clínica</Link>
