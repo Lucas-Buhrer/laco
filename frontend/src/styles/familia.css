@@ -38,3 +38,6 @@
 .linha-acesso small { color: var(--texto-suave); }
 .pagina-publica { max-width: 640px; margin: 0 auto; padding: 32px 24px; line-height: 1.6; }
 .pagina-publica h2 { margin-top: 24px; font-size: 22px; }
+.aviso-item { display: flex; justify-content: space-between; gap: 12px; width: 100%; text-align: left; font: inherit; cursor: pointer; }
+.aviso-item time { color: var(--texto-suave); font-size: 13px; white-space: nowrap; }
+.aviso-item.nao-lido { border-left: 4px solid var(--verde); font-weight: 600; }

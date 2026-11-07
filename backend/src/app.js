@@ -12,6 +12,7 @@ const criarRotasEquipe = require('./routes/equipe');
 const criarRotasConsultas = require('./routes/consultas');
 const criarRotasRegistros = require('./routes/registros');
 const criarRotasPainel = require('./routes/painel');
+const criarRotasNotificacoes = require('./routes/notificacoes');
 const criarRotasLgpd = require('./routes/lgpd');
 const criarRotasAtividades = require('./routes/atividades');
 const { naoEncontrado, tratarErro } = require('./middlewares/erros');
@@ -35,6 +36,7 @@ function criarApp(banco) {
   app.use('/api/consultas', criarRotasConsultas(banco));
   app.use('/api/registros', criarRotasRegistros(banco));
   app.use('/api/painel', criarRotasPainel(banco));
+  app.use('/api/notificacoes', criarRotasNotificacoes(banco));
   app.use('/api/lgpd', criarRotasLgpd(banco));
   app.use('/api/atividades', criarRotasAtividades(banco));
   app.use('/api/clinica', criarRotasEquipe(banco));

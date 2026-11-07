@@ -35,3 +35,6 @@
   .menu-lateral nav { flex-direction: row; flex-wrap: wrap; }
   .conteudo { padding: 24px 16px; }
 }
+
+/* Contador de avisos não lidos */
+.contador { margin-left: 8px; min-width: 22px; padding: 0 6px; border-radius: 999px; background: var(--verde-forte); color: var(--branco); font-size: 12px; font-weight: 700; text-align: center; line-height: 22px; }

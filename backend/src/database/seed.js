@@ -160,7 +160,7 @@ function popular(banco) {
 
   // ---------- aviso para a mãe sobre o pedido da Ana ----------
   banco.prepare('INSERT INTO notificacoes (usuario_id, texto, link, criada_em) VALUES (?, ?, ?, ?)')
-    .run(mariana, 'Dra. Ana Souza pediu acesso aos dados do Theo.', '/solicitacoes', agora);
+    .run(mariana, 'Dra. Ana Souza pediu acesso aos dados do Theo.', '/familia/solicitacoes', agora);
 
   // ---------- Davi: pré-cadastro com código de ativação (impresso no terminal) ----------
   const daviId = crypto.randomUUID();

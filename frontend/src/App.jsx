@@ -23,6 +23,7 @@ import AtividadesFamilia from './pages/familia/AtividadesFamilia.jsx';
 import QuemAcessou from './pages/familia/QuemAcessou.jsx';
 import Privacidade from './pages/familia/Privacidade.jsx';
 import Politica from './pages/Politica.jsx';
+import Avisos from './pages/Avisos.jsx';
 import Agenda from './pages/clinica/Agenda.jsx';
 import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
 import Consulta from './pages/clinica/Consulta.jsx';
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="pre-cadastros" element={<PreCadastros />} />
               <Route path="codigo-da-familia" element={<CodigoDaFamilia />} />
               <Route path="criancas" element={<Criancas />} />
+              <Route path="avisos" element={<Avisos />} />
               <Route path="criancas/:id" element={<PerfilCrianca />} />
               <Route path="criancas/:id/registro" element={<RegistrarSessao />} />
               <Route path="agenda" element={<Agenda />} />
@@ -79,6 +81,7 @@ export default function App() {
               <Route path="linha-do-tempo" element={<LinhaDoTempoFamilia />} />
               <Route path="atividades" element={<AtividadesFamilia />} />
               <Route path="quem-acessou" element={<QuemAcessou />} />
+              <Route path="avisos" element={<Avisos />} />
               <Route path="privacidade" element={<Privacidade />} />
               <Route path="filhos" element={<Filhos />} />
               <Route path="filhos/adicionar" element={<AdicionarFilho />} />

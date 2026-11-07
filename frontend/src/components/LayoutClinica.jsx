@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import useNaoLidas from './useNaoLidas.js';
 
 // Menu de cada papel, como no doc 06
 const MENUS = {
@@ -19,6 +20,7 @@ const NOME_PAPEL = { PROFISSIONAL: 'Profissional', ADMIN_CLINICA: 'Administra√ß√
 
 export default function LayoutClinica() {
   const { usuario, sair } = useAuth();
+  const naoLidas = useNaoLidas();
 
   return (
     <div className="layout-clinica">
@@ -31,6 +33,7 @@ export default function LayoutClinica() {
               {nome}
             </NavLink>
           ))}
+          <NavLink to="/clinica/avisos" className="item-menu">Avisos{naoLidas > 0 && <span className="contador">{naoLidas}</span>}</NavLink>
         </nav>
         <div className="menu-rodape">
           <strong>{usuario.nome}</strong>
