@@ -124,3 +124,22 @@ a.cartao:hover, button.cartao:hover { border-color: #b9c9bf; box-shadow: 0 2px 1
 .confirma-sair { margin-top: 28px; padding: 16px; background: var(--branco); border: 1px solid #d9b8a8; border-radius: var(--raio-cartao-celular); }
 .confirma-sair p { margin: 4px 0 0; font-size: 14px; color: var(--texto-suave); }
 .confirma-sair .acoes-topo { margin-top: 14px; }
+
+/* ===== Quem tem acesso (desenho M4) ===== */
+.cab-filho { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
+.cab-filho h2 { font-size: 20px; }
+.cab-filho small { margin-left: auto; font-size: 13px; color: #5e7066; }
+.bloco-acesso { border-bottom: 1px solid #e6ece8; }
+.bloco-acesso:last-child { border-bottom: 0; }
+.linha-acesso-prof { display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
+.avatar-prof { width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #cdebd6; color: #123b2b; font-weight: 700; }
+.avatar-prof.pendente { background: #fcefc9; color: #4a3500; }
+.aguardando { color: #8a6200 !important; font-weight: 600; }
+.pequeno-celular { min-height: 44px; padding: 0 14px; font-size: 14px; }
+.ajustes { display: flex; flex-direction: column; gap: 4px; padding: 4px 16px 16px 74px; }
+.ajustes .botao { align-self: flex-start; margin-top: 10px; min-height: 44px; font-size: 14px; }
+.confirma-revogar { margin-top: 10px; padding: 12px 14px; border: 1px solid #d9b8a8; border-radius: 12px; background: #fff9f6; }
+.confirma-revogar p { margin: 0 0 10px; font-size: 14px; }
+.confirma-revogar .acoes-topo { margin-top: 0; }
+.dois-botoes { display: flex; gap: 10px; margin-top: 24px; }
+.dois-botoes .botao-sec { flex: 1; min-height: 48px; border-radius: 14px; font-size: 14px; text-align: center; background: transparent; }
