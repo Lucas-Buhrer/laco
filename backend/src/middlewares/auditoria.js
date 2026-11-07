@@ -1,6 +1,8 @@
 // Auditoria (RN-07, RF-71): todo acesso a dados de criança vira uma linha em log_acesso.
 // A tabela é só de inserção: nenhuma rota atualiza ou apaga.
 
+const { agoraIso } = require('../utils/datas');
+
 function criarAuditoria(banco) {
   const inserir = banco.prepare(
     `INSERT INTO log_acesso (usuario_id, crianca_id, acao, recurso, recurso_id, ip, criado_em)
@@ -17,7 +19,7 @@ function criarAuditoria(banco) {
       recurso,
       recursoId === null ? null : String(recursoId),
       req.ip,
-      new Date().toISOString().slice(0, 19)
+      agoraIso()
     );
   }
 

@@ -1,10 +1,19 @@
-// Datas em texto ISO (UTC, sem fuso), no mesmo formato em todo o código novo: 2026-11-07T14:00:00
+// Datas em texto, HORA LOCAL, sem fuso: 2026-11-07T14:00:00.
+// Um formato só em todo o sistema (código, seed e padrão do banco), para comparar texto com texto.
+const pad = (n) => String(n).padStart(2, '0');
+
+function formatar(data) {
+  return `${data.getFullYear()}-${pad(data.getMonth() + 1)}-${pad(data.getDate())}T${pad(data.getHours())}:${pad(data.getMinutes())}:${pad(data.getSeconds())}`;
+}
+
 function agoraIso() {
-  return new Date().toISOString().slice(0, 19);
+  return formatar(new Date());
 }
 
 function maisDias(dias) {
-  return new Date(Date.now() + dias * 24 * 60 * 60 * 1000).toISOString().slice(0, 19);
+  const d = new Date();
+  d.setDate(d.getDate() + dias);
+  return formatar(d);
 }
 
 // Aceita só AAAA-MM-DD e confere se a data existe de verdade
@@ -14,4 +23,4 @@ function dataValida(texto) {
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === texto;
 }
 
-module.exports = { agoraIso, maisDias, dataValida };
+module.exports = { agoraIso, maisDias, dataValida, formatar };

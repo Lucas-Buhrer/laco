@@ -7,6 +7,7 @@ const ambiente = require('./config/ambiente');
 const criarRotasAuth = require('./routes/auth');
 const criarRotasPreCadastros = require('./routes/preCadastros');
 const criarRotasCriancas = require('./routes/criancas');
+const criarRotasVinculos = require('./routes/vinculos');
 const { naoEncontrado, tratarErro } = require('./middlewares/erros');
 
 function criarApp(banco) {
@@ -24,6 +25,7 @@ function criarApp(banco) {
   app.use('/api/auth', criarRotasAuth(banco));
   app.use('/api/clinica/pre-cadastros', criarRotasPreCadastros(banco));
   app.use('/api/criancas', criarRotasCriancas(banco));
+  app.use('/api/vinculos', criarRotasVinculos(banco));
 
   // Sempre por último: rota desconhecida e erros inesperados
   app.use(naoEncontrado);

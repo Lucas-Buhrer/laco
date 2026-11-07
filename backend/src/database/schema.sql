@@ -7,7 +7,7 @@ CREATE TABLE clinicas (
   codigo_acesso TEXT NOT NULL UNIQUE,   -- usado no login da equipe
   cnpj TEXT,
   email_contato TEXT,
-  criada_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 CREATE TABLE usuarios (
@@ -28,7 +28,7 @@ CREATE TABLE usuarios (
   desativado_em TEXT,
   motivo_desativacao TEXT,
   senha_temporaria INTEGER NOT NULL DEFAULT 0,
-  criado_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 -- E-mail único por clínica para a equipe
 CREATE UNIQUE INDEX ux_usuarios_clinica_email ON usuarios(clinica_id, email)
@@ -44,7 +44,7 @@ CREATE TABLE consentimentos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
   versao_termo TEXT NOT NULL,
-  aceito_em TEXT NOT NULL DEFAULT (datetime('now')),
+  aceito_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   revogado_em TEXT
 );
 
@@ -66,7 +66,7 @@ CREATE TABLE criancas (
   sensibilidades TEXT,
   observacoes TEXT,
   criada_por INTEGER REFERENCES usuarios(id),
-  criada_em TEXT NOT NULL DEFAULT (datetime('now')),
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   anonimizada_em TEXT
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE codigos_ativacao (
   crianca_id TEXT NOT NULL REFERENCES criancas(id),
   codigo_hash TEXT NOT NULL,   -- só o hash é guardado
   criado_por INTEGER NOT NULL REFERENCES usuarios(id),
-  criado_em TEXT NOT NULL DEFAULT (datetime('now')),
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   expira_em TEXT NOT NULL,
   usado_em TEXT,
   cancelado_em TEXT,
@@ -95,7 +95,7 @@ CREATE TABLE convites_compartilhamento (
   crianca_id TEXT NOT NULL REFERENCES criancas(id),
   codigo_hash TEXT NOT NULL,
   criado_por INTEGER NOT NULL REFERENCES usuarios(id),
-  criado_em TEXT NOT NULL DEFAULT (datetime('now')),
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   expira_em TEXT NOT NULL,
   usado_em TEXT
 );
@@ -106,7 +106,7 @@ CREATE TABLE responsaveis_crianca (
   responsavel_id INTEGER NOT NULL REFERENCES usuarios(id),
   parentesco TEXT NOT NULL CHECK (parentesco IN ('MAE','PAI','OUTRO')),
   parentesco_outro TEXT,
-  entrou_em TEXT NOT NULL DEFAULT (datetime('now')),
+  entrou_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   saiu_em TEXT   -- o limite de 2 ativos por criança é conferido no código
 );
 
@@ -115,7 +115,7 @@ CREATE TABLE convites_responsavel (
   crianca_id TEXT NOT NULL REFERENCES criancas(id),
   codigo_hash TEXT NOT NULL,
   criado_por INTEGER NOT NULL REFERENCES usuarios(id),
-  criado_em TEXT NOT NULL DEFAULT (datetime('now')),
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   expira_em TEXT NOT NULL,
   usado_em TEXT,
   tentativas_falhas INTEGER NOT NULL DEFAULT 0
@@ -131,7 +131,7 @@ CREATE TABLE vinculos (
     CHECK (status IN ('PENDENTE','APROVADO','RECUSADO','REVOGADO','EXPIRADO','ENCERRADO')),
   ver_historico_anterior INTEGER NOT NULL DEFAULT 0,
   ver_horarios_outras_clinicas INTEGER NOT NULL DEFAULT 1,
-  solicitado_em TEXT NOT NULL DEFAULT (datetime('now')),
+  solicitado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   respondido_em TEXT,
   aprovado_em TEXT,
   revogado_em TEXT,
@@ -156,7 +156,7 @@ CREATE TABLE consultas (
   confirmada_em TEXT,
   confirmada_por TEXT CHECK (confirmada_por IN ('RESPONSAVEL','CONTATO')),  -- "Confirmada por contato" (RN-35)
   aguardando_aprovacao INTEGER NOT NULL DEFAULT 0,   -- vínculo ainda pendente
-  criada_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 -- O prazo de confirmação (1 dia antes) e a cor da agenda são calculados na leitura, não guardados.
 CREATE INDEX ix_consultas_crianca ON consultas(crianca_id, inicio);
@@ -172,7 +172,7 @@ CREATE TABLE registros_sessao (
   humor INTEGER CHECK (humor BETWEEN 1 AND 5),
   observacao TEXT,                                   -- privada por padrão
   observacao_visivel_familia INTEGER NOT NULL DEFAULT 0,
-  criado_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 CREATE TABLE adendos_registro (
@@ -180,7 +180,7 @@ CREATE TABLE adendos_registro (
   registro_id INTEGER NOT NULL REFERENCES registros_sessao(id),
   profissional_id INTEGER NOT NULL REFERENCES usuarios(id),
   texto TEXT NOT NULL,
-  criado_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 CREATE TABLE pareceres (
@@ -190,7 +190,7 @@ CREATE TABLE pareceres (
   periodo_inicio TEXT NOT NULL,
   periodo_fim TEXT NOT NULL,
   texto TEXT NOT NULL,
-  publicado_em TEXT NOT NULL DEFAULT (datetime('now'))   -- não editável depois
+  publicado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))   -- não editável depois
 );
 
 CREATE TABLE atividades (
@@ -202,7 +202,7 @@ CREATE TABLE atividades (
   frequencia TEXT,
   prazo TEXT,
   status TEXT NOT NULL DEFAULT 'ATIVA' CHECK (status IN ('ATIVA','ENCERRADA')),
-  criada_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 CREATE TABLE execucoes_atividade (
@@ -211,7 +211,7 @@ CREATE TABLE execucoes_atividade (
   data TEXT NOT NULL,
   como_foi INTEGER NOT NULL CHECK (como_foi BETWEEN 1 AND 3),
   observacao TEXT,
-  registrada_em TEXT NOT NULL DEFAULT (datetime('now'))
+  registrada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 -- Log de auditoria: só inserção (nenhuma rota atualiza ou apaga)
@@ -223,7 +223,7 @@ CREATE TABLE log_acesso (
   recurso TEXT,
   recurso_id TEXT,
   ip TEXT,
-  criado_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criado_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 CREATE INDEX ix_log_crianca ON log_acesso(crianca_id, criado_em);
 
@@ -234,7 +234,7 @@ CREATE TABLE solicitacoes_lgpd (
   tipo TEXT NOT NULL CHECK (tipo IN ('EXPORTACAO','EXCLUSAO','REVOGACAO')),
   protocolo TEXT NOT NULL UNIQUE,
   status TEXT NOT NULL DEFAULT 'REGISTRADA',
-  criada_em TEXT NOT NULL DEFAULT (datetime('now')),
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime')),
   concluida_em TEXT
 );
 
@@ -245,7 +245,7 @@ CREATE TABLE notificacoes (
   texto TEXT NOT NULL,
   link TEXT,
   lida INTEGER NOT NULL DEFAULT 0,
-  criada_em TEXT NOT NULL DEFAULT (datetime('now'))
+  criada_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
 
 -- Sem dados pessoais (RN-33)
@@ -254,5 +254,5 @@ CREATE TABLE log_exclusoes (
   tipo TEXT NOT NULL CHECK (tipo IN ('PRE_CADASTRO_NAO_ATIVADO')),
   protocolo TEXT NOT NULL,
   motivo TEXT NOT NULL,
-  excluido_em TEXT NOT NULL DEFAULT (datetime('now'))
+  excluido_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
 );
