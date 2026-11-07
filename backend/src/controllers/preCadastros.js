@@ -32,6 +32,7 @@ function criarControladorPreCadastros(banco) {
     return {
       id: c.id,
       dias_sem_ativacao: diasSemAtivacao,
+      indicados: banco.prepare('SELECT profissional_id FROM pre_cadastro_profissionais WHERE crianca_id = ?').all(c.id).map((x) => x.profissional_id),
       nome: c.nome,
       data_nascimento: c.data_nascimento,
       responsavel_nome: c.contato_responsavel_nome,

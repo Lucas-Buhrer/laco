@@ -43,7 +43,7 @@ export default function LayoutClinica() {
           <button className="item-menu" onClick={sair}><Icone nome="sair" />Sair</button>
         </nav>
         <div className="menu-rodape">
-          <span className="avatar">{usuario.nome[0]}</span>
+          <span className="avatar">{usuario.nome.replace(/^(Dra?\.|Dr\.)\s+/i, '')[0]}</span>
           <div>
             <strong>{usuario.nome}</strong>
             <span>{subtitulo}</span>

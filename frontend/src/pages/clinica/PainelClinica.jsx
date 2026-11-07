@@ -79,7 +79,7 @@ export default function PainelClinica() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {!p && !erro && <p className="carregando">Carregando…</p>}
 
-      {p && papel === 'PROFISSIONAL' && <PainelProfissional p={p} pre={pre} />}
+      {p && papel === 'PROFISSIONAL' && <PainelProfissional p={p} pre={pre} meuId={usuario.id} />}
       {p && papel === 'ADMIN_CLINICA' && <PainelAdmin p={p} pre={pre} equipe={equipe} />}
       {p && papel === 'RECEPCAO' && <PainelRecepcao p={p} pre={pre} equipe={equipe} recarregar={() => api.get('/clinica/pre-cadastros').then(setPre)} />}
     </div>
@@ -87,14 +87,15 @@ export default function PainelClinica() {
 }
 
 // ---------- D2 ----------
-function PainelProfissional({ p, pre }) {
-  const aguardandoAtivacao = pre.filter((c) => c.status === 'AGUARDANDO_ATIVACAO');
+function PainelProfissional({ p, pre, meuId }) {
+  // Só as crianças que a clínica indicou para ESTE profissional e cuja família ainda não ativou a conta
+  const aguardandoAtivacao = pre.filter((c) => c.status === 'AGUARDANDO_ATIVACAO' && c.indicados.includes(meuId));
   return (
     <>
       <div className="kpis tres">
         <Kpi numero={p.consultas_hoje.length} texto={p.consultas_hoje.length === 1 ? 'consulta hoje' : 'consultas hoje'} />
         <Kpi numero={p.criancas_aprovadas} texto="crianças com acesso aprovado" />
-        <Kpi numero={p.pedidos_pendentes.length} texto="aguardando aprovação dos pais" aviso />
+        <Kpi numero={p.pedidos_pendentes.length + aguardandoAtivacao.length} texto="aguardando aprovação dos pais" aviso />
       </div>
       <div className="painel-duas" style={{ gridTemplateColumns: '1.5fr 1fr' }}>
         <section className="secao">

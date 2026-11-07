@@ -51,7 +51,7 @@
 .titulo-dia.hoje { color: var(--verde-forte); }
 .linha-consulta {
   display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; margin-top: 8px;
-  padding: 12px 16px; border-radius: 10px; border: 1px solid; text-decoration: none; color: var(--texto);
+  padding: 12px 16px; border-radius: 10px; border-width: 1px; border-style: solid; text-decoration: none; color: var(--texto);
 }
 .linha-consulta:hover { filter: brightness(0.97); box-shadow: 0 2px 8px rgba(18, 36, 28, 0.1); color: var(--texto); }
 .linha-consulta small { color: var(--texto-suave); }
@@ -73,7 +73,7 @@ textarea { font-family: inherit; font-size: 16px; padding: 12px 16px; border: 1p
 .colunas-agenda { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 16px; margin-top: 20px; overflow-x: auto; padding: 12px; border-radius: var(--raio); }
 .coluna-prof h2 { font-size: 18px; }
 .coluna-prof h2 small { display: block; font-size: 13px; font-weight: 500; color: var(--texto-suave); font-family: 'Figtree', sans-serif; }
-.bloco-consulta { display: block; margin-top: 8px; padding: 10px 12px; border: 1px solid; border-radius: var(--raio); text-decoration: none; color: var(--texto); font-size: 15px; }
+.bloco-consulta { display: block; margin-top: 8px; padding: 10px 12px; border-width: 1px; border-style: solid; border-radius: var(--raio); text-decoration: none; color: var(--texto); font-size: 15px; }
 .bloco-consulta em { display: block; margin-top: 2px; font-style: normal; font-size: 13px; }
 .dia-hoje { background: #eaf6ee; border-radius: var(--raio); }
 section.dia-hoje { padding: 4px 12px 12px; }
@@ -103,7 +103,7 @@ button.icone { width: 40px; height: 40px; border: 1px solid var(--borda); border
 .legenda-agenda .grupo { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .legenda-agenda .grupo.separado { margin-left: 24px; padding-left: 24px; border-left: 1px solid #dce5df; }
 .legenda-agenda .item { display: flex; align-items: center; gap: 8px; }
-.legenda-agenda .amostra { width: 14px; height: 14px; border-radius: 4px; border: 1px solid; display: inline-block; }
+.legenda-agenda .amostra { width: 14px; height: 14px; border-radius: 4px; border-width: 1px; border-style: solid; display: inline-block; }
 
 .dias-semana { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .rotulo-semana { margin-right: 4px; color: var(--texto-suave); font-size: 14px; }
@@ -131,7 +131,7 @@ button.icone { width: 40px; height: 40px; border: 1px solid var(--borda); border
 .hl { height: 64px; border-bottom: 1px solid #e6ece8; font-size: 12px; color: #5e7066; padding: 4px 10px 0; text-align: right; }
 .col { position: relative; border-left: 1px solid #e6ece8; }
 .col-hoje { background: #edf6f0; }
-a.ev { position: absolute; left: 6px; right: 6px; display: block; border: 1px solid; border-radius: 10px; padding: 6px 10px; font-size: 13px; line-height: 1.25; overflow: hidden; text-decoration: none; }
+a.ev { position: absolute; left: 6px; right: 6px; display: block; border-width: 1px; border-style: solid; border-radius: 10px; padding: 6px 10px; font-size: 13px; line-height: 1.25; overflow: hidden; text-decoration: none; }
 a.ev.cor-verde { border-color: transparent; }
 a.ev span { display: block; font-size: 12px; font-weight: 600; }
 a.ev:hover, a.ev:focus-visible { filter: brightness(0.97); z-index: 3; }
@@ -354,7 +354,7 @@ input[type='checkbox'], input[type='radio'] { accent-color: #1f6b4a; }
 .opcao-priv.aberta.on { background: #a9ddbb; border-color: #a9ddbb; color: #0f2e21; }
 .nota.destaque-priv { padding: 10px 12px; border-radius: 10px; background: #fff7dc; color: #4a3500; }
 .registro-form { padding-bottom: 8px; }
-.registro-form .barra-salvar { grid-column: 1; position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; gap: 12px; margin: 8px 0 0; padding: 14px 0; background: linear-gradient(to top, #f3f6f4 70%, rgba(243, 246, 244, 0)); }
+.registro-form .barra-salvar { grid-column: 1; position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; gap: 12px; margin: 8px 0 0; padding: 14px 0; background: #f3f6f4; border-top: 1px solid #dce5df; }
 .registro-form select { height: 52px; padding: 0 12px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-size: 16px; }
 @media (max-width: 1000px) { .registro-form .barra-salvar { grid-column: 1 / -1; justify-content: stretch; } .registro-form .barra-salvar > * { flex: 1; } }
 
@@ -375,3 +375,6 @@ input[type='checkbox'], input[type='radio'] { accent-color: #1f6b4a; }
 .parecer-anterior p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .confirma-parecer { grid-column: 1 / -1; margin-top: 0; }
 .registro-form > .confirma-parecer { margin-top: 0; }
+
+/* Borda tracejada do "Cancelada" (a regra mais específica de a.ev não pode apagá-la) */
+a.ev.cor-cancelada, .amostra.cor-cancelada, .linha-consulta.cor-cancelada, .bloco-consulta.cor-cancelada { border-style: dashed; }
