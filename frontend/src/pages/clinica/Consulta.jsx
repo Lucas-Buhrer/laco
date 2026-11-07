@@ -65,45 +65,53 @@ export default function Consulta() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
-      <div className="caixa estreita">
-        <p><strong>Criança:</strong> {c.crianca_nome}</p>
-        <p><strong>Profissional:</strong> {c.profissional_nome} ({nomeEspecialidade(c)})</p>
-        <p><strong>Tipo:</strong> {c.tipo || '—'}</p>
-        <p><strong>Situação:</strong> <span className={`chip ${classeCor(c)}`}>{frase(c)}</span></p>
-        {c.status === 'AGENDADA' && !c.presenca_confirmada && (
-          <p className="nota">Os responsáveis podem confirmar no app até o fim do dia anterior. Depois disso, só falando com a clínica.</p>
-        )}
-        {c.contatos.length > 0 && (
-          <div>
-            <p><strong>Responsáveis:</strong></p>
-            {c.contatos.map((r, i) => <p key={i} className="nota">{r.nome} {r.telefone && `· ${r.telefone}`}</p>)}
+      <div className="pagina-duas">
+        <div className="caixa">
+          <h2>Detalhes</h2>
+          <dl className="pares">
+            <div><dt>Criança</dt><dd>{c.crianca_nome}</dd></div>
+            <div><dt>Profissional</dt><dd>{c.profissional_nome}<br /><small className="suave">{nomeEspecialidade(c)}</small></dd></div>
+            <div><dt>Quando</dt><dd>{diaLongo(c.inicio)}, {hora(c.inicio)}</dd></div>
+            <div><dt>Tipo</dt><dd>{c.tipo || '—'}</dd></div>
+            <div className="inteira"><dt>Situação</dt><dd><span className={`chip ${classeCor(c)}`}>{frase(c)}</span></dd></div>
+            {c.contatos.length > 0 && (
+              <div className="inteira">
+                <dt>Responsáveis</dt>
+                {c.contatos.map((r, i) => <dd key={i}>{r.nome}{r.telefone && <span className="suave"> · {r.telefone}</span>}</dd>)}
+              </div>
+            )}
+          </dl>
+          {c.status === 'AGENDADA' && !c.presenca_confirmada && (
+            <p className="nota">Os responsáveis podem confirmar no app até o fim do dia anterior. Depois disso, só falando com a clínica.</p>
+          )}
+        </div>
+
+        {podeMexer && (
+          <div className="caixa">
+            <h2>O que você quer fazer</h2>
+            <div className="botoes-coluna">
+              {!c.presenca_confirmada && (
+                <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/confirmar-contato`, {}), 'Confirmação por contato registrada.')}>
+                  Registrar confirmação por telefone
+                </button>
+              )}
+              <button className="botao-sec" onClick={() => { setModo('REMARCAR'); setConflito(false); }}>Remarcar</button>
+              <button className="botao-sec" onClick={() => setModo('CANCELAR')}>Cancelar consulta</button>
+              {ehProf && (
+                <>
+                  <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/realizada`, {}), 'Marcada como realizada.')}>Marcar como realizada</button>
+                  <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/falta`, {}), 'Marcada como falta.')}>Marcar que faltou</button>
+                </>
+              )}
+            </div>
+            {ehProf && <p className="nota">Realizada e falta ficam disponíveis depois do horário da consulta.</p>}
+            {!ehProf && <p className="nota">Marcar como realizada ou como falta é feito pelo profissional que atendeu.</p>}
           </div>
         )}
       </div>
 
-      {podeMexer && (
-        <div className="caixa estreita">
-          <h2>O que você quer fazer</h2>
-          {!c.presenca_confirmada && (
-            <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/confirmar-contato`, {}), 'Confirmação por contato registrada.')}>
-              Registrar confirmação por telefone
-            </button>
-          )}
-          <button className="botao-sec" onClick={() => { setModo('REMARCAR'); setConflito(false); }}>Remarcar</button>
-          <button className="botao-sec" onClick={() => setModo('CANCELAR')}>Cancelar consulta</button>
-          {ehProf && (
-            <>
-              <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/realizada`, {}), 'Marcada como realizada.')}>Marcar como realizada</button>
-              <button className="botao-sec" onClick={() => acao(() => api.post(`/consultas/${id}/falta`, {}), 'Marcada como falta.')}>Marcar que faltou</button>
-              <p className="nota">Realizada e falta ficam disponíveis depois do horário da consulta.</p>
-            </>
-          )}
-          {!ehProf && <p className="nota">Marcar como realizada ou como falta é feito pelo profissional que atendeu.</p>}
-        </div>
-      )}
-
       {modo === 'REMARCAR' && (
-        <form className="caixa estreita" onSubmit={(e) => { e.preventDefault(); remarcar(false); }}>
+        <form className="caixa estreita grade-form" onSubmit={(e) => { e.preventDefault(); remarcar(false); }}>
           <h2>Remarcar consulta</h2>
           <p className="nota">Escolha a nova data e o horário. A família é avisada no app. A consulta atual fica no histórico como Remarcada.</p>
           <label className="campo">Nova data<input type="date" value={nova.data} onChange={(e) => setNova({ ...nova, data: e.target.value })} required /></label>

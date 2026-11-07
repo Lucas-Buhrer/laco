@@ -40,13 +40,17 @@ export default function CodigoDaFamilia() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {ok && <p className="aviso-info" role="status">Pedido enviado. Agora a família decide.</p>}
 
-      <form className="caixa estreita" onSubmit={pedir}>
+      <div className="pagina-duas" style={{ gridTemplateColumns: 'minmax(320px, 1fr) minmax(0, 1.2fr)' }}>
+        <div>
+      <form className="caixa" onSubmit={pedir}>
         <label className="campo">Código recebido dos pais
           <input value={codigo} onChange={(e) => setCodigo(e.target.value)} required autoComplete="off" />
         </label>
         <button className="botao" disabled={enviando}>Pedir acesso</button>
         <p className="nota">O código vale por 7 dias e só pode ser usado uma vez. Depois do pedido, a família decide.</p>
       </form>
+        </div>
+        <div>
 
       <h2 className="titulo-lista">Meus pedidos</h2>
       {pedidos && pedidos.length === 0 && <p className="vazio">Você ainda não fez pedidos.</p>}
@@ -58,6 +62,8 @@ export default function CodigoDaFamilia() {
           </div>
         </div>
       ))}
+        </div>
+      </div>
     </>
   );
 }

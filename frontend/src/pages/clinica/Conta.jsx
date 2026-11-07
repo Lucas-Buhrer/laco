@@ -39,7 +39,7 @@ export default function Conta() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {ok && <p className="aviso-info" role="status">Senha alterada. Use a nova na próxima vez que entrar.</p>}
 
-      <form className="caixa estreita" onSubmit={salvar}>
+      <form className="caixa estreita compacta" onSubmit={salvar}>
         <label className="campo">Senha atual
           <input type="password" value={f.atual} onChange={mudar('atual')} required autoComplete="current-password" />
         </label>

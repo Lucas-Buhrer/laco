@@ -115,7 +115,7 @@ export default function Equipe() {
       </div>
 
       {form === 'PROF' && (
-        <form className="caixa estreita" onSubmit={salvarProf}>
+        <form className="caixa estreita grade-form" onSubmit={salvarProf}>
           <h2>{editando ? 'Editar profissional' : 'Novo profissional'}</h2>
           <label className="campo">Nome<input value={prof.nome} onChange={mudarProf('nome')} required /></label>
           <label className="campo">E-mail<input type="email" value={prof.email} onChange={mudarProf('email')} required /></label>
@@ -139,7 +139,7 @@ export default function Equipe() {
       )}
 
       {form === 'REC' && (
-        <form className="caixa estreita" onSubmit={salvarRec}>
+        <form className="caixa estreita grade-form" onSubmit={salvarRec}>
           <h2>Nova recepção</h2>
           <label className="campo">Nome<input value={rec.nome} onChange={(e) => setRec({ ...rec, nome: e.target.value })} required /></label>
           <label className="campo">Código de usuário (para entrar, sem e-mail)

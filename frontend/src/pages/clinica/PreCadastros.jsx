@@ -82,14 +82,14 @@ export default function PreCadastros() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 
       <div className="duas-colunas">
-        <form className="caixa" onSubmit={gerar}>
-          <label className="campo">Nome da criança
+        <form className="caixa grade-form" onSubmit={gerar}>
+          <label className="campo span2">Nome da criança
             <input value={f.nome} onChange={mudar('nome')} required />
           </label>
           <label className="campo">Data de nascimento
             <input type="date" value={f.data_nascimento} onChange={mudar('data_nascimento')} required />
           </label>
-          <label className="campo">Nome do responsável
+          <label className="campo span2">Nome do responsável
             <input value={f.responsavel_nome} onChange={mudar('responsavel_nome')} required />
           </label>
           <label className="campo">Parentesco
@@ -114,14 +114,16 @@ export default function PreCadastros() {
 
           <fieldset className="profissionais">
             <legend>Profissionais indicados</legend>
-            {profissionais.map((p) => (
-              <label key={p.id} className="marcar">
-                <input type="checkbox" checked={f.profissionais.includes(p.id)} onChange={() => marcar(p.id)} />
-                {p.nome} · {nomeEspecialidade(p)}
-              </label>
-            ))}
+            <div className="grupo-opcoes">
+              {profissionais.map((p) => (
+                <label key={p.id} className="marcar">
+                  <input type="checkbox" checked={f.profissionais.includes(p.id)} onChange={() => marcar(p.id)} />
+                  {p.nome} · {nomeEspecialidade(p)}
+                </label>
+              ))}
+            </div>
           </fieldset>
-          <button className="botao" disabled={enviando}>{enviando ? 'Gerando…' : 'Gerar código de ativação'}</button>
+          <button className="botao span2" disabled={enviando}>{enviando ? 'Gerando…' : 'Gerar código de ativação'}</button>
         </form>
 
         <div>

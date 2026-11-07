@@ -39,7 +39,7 @@ export default function Parecer() {
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 
-      <form className="caixa estreita" onSubmit={(e) => { e.preventDefault(); setConfirmando(true); }}>
+      <form className="caixa estreita grade-form" onSubmit={(e) => { e.preventDefault(); setConfirmando(true); }}>
         <label className="campo">De<input type="date" value={f.periodo_inicio} onChange={(e) => setF({ ...f, periodo_inicio: e.target.value })} required /></label>
         <label className="campo">Até<input type="date" value={f.periodo_fim} onChange={(e) => setF({ ...f, periodo_fim: e.target.value })} required /></label>
         <label className="campo">Texto do parecer

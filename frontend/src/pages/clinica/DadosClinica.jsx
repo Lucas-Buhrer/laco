@@ -53,7 +53,7 @@ export default function DadosClinica() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
-      <form className="caixa estreita" onSubmit={salvar}>
+      <form className="caixa estreita grade-form" onSubmit={salvar}>
         <h2>Dados da clínica</h2>
         <label className="campo">Nome da clínica<input value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} required /></label>
         <label className="campo">CNPJ (opcional)<input value={f.cnpj} onChange={(e) => setF({ ...f, cnpj: e.target.value })} /></label>
@@ -85,7 +85,7 @@ export default function DadosClinica() {
       ))}
 
       {novo ? (
-        <form className="caixa estreita" onSubmit={adicionar}>
+        <form className="caixa estreita grade-form" onSubmit={adicionar}>
           <h2>Novo administrador</h2>
           <label className="campo">Nome<input value={novo.nome} onChange={(e) => setNovo({ ...novo, nome: e.target.value })} required /></label>
           <label className="campo">E-mail<input type="email" value={novo.email} onChange={(e) => setNovo({ ...novo, email: e.target.value })} required /></label>

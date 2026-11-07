@@ -49,38 +49,48 @@ export default function RegistrarSessao() {
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 
-      <form className="caixa estreita" onSubmit={salvar}>
-        <label className="campo">Resumo da sessão
-          <textarea rows={5} value={resumo} onChange={(e) => setResumo(e.target.value)} required />
-        </label>
+      <form className="registro-form" onSubmit={salvar}>
+        <div className="caixa">
+          <label className="campo">Resumo da sessão
+            <textarea rows={10} value={resumo} onChange={(e) => setResumo(e.target.value)} required />
+          </label>
+          <label className="campo">Observação do profissional
+            <textarea rows={4} value={observacao} onChange={(e) => setObservacao(e.target.value)} />
+          </label>
+          <fieldset className="profissionais">
+            <legend>Quem lê a observação</legend>
+            <div className="grupo-opcoes linha">
+              <label className="marcar"><input type="radio" name="obs" checked={!mostrar} onChange={() => setMostrar(false)} />Só para mim</label>
+              <label className="marcar"><input type="radio" name="obs" checked={mostrar} onChange={() => setMostrar(true)} />Mostrar para a família</label>
+            </div>
+            <p className="nota">“Só para mim”: ninguém mais lê esta observação, nem a família, nem outros profissionais, nem a administração.</p>
+          </fieldset>
+        </div>
 
-        <fieldset className="profissionais">
-          <legend>Objetivos trabalhados</legend>
-          {OBJETIVOS.map((o) => (
-            <label key={o} className="marcar"><input type="checkbox" checked={objetivos.includes(o)} onChange={() => marcar(o)} />{o}</label>
-          ))}
-        </fieldset>
-
-        <fieldset className="profissionais">
-          <legend>Humor</legend>
-          {HUMORES.map(([valor, nome]) => (
-            <label key={valor} className="marcar">
-              <input type="radio" name="humor" checked={humor === valor} onChange={() => setHumor(valor)} />{nome}
-            </label>
-          ))}
-        </fieldset>
-
-        <label className="campo">Observação do profissional
-          <textarea rows={3} value={observacao} onChange={(e) => setObservacao(e.target.value)} />
-        </label>
-        <fieldset className="profissionais">
-          <legend>Quem lê a observação</legend>
-          <label className="marcar"><input type="radio" name="obs" checked={!mostrar} onChange={() => setMostrar(false)} />Só para mim</label>
-          <label className="marcar"><input type="radio" name="obs" checked={mostrar} onChange={() => setMostrar(true)} />Mostrar para a família</label>
-          <p className="nota">“Só para mim”: ninguém mais lê esta observação, nem a família, nem outros profissionais, nem a administração.</p>
-        </fieldset>
-        <p className="nota">Resumo, objetivos e humor aparecem sempre para os responsáveis. Só a observação pode ficar escondida.</p>
-        <button className="botao" disabled={enviando}>Salvar e encerrar sessão</button>
+        <div className="registro-dir">
+          <div className="caixa">
+            <fieldset className="profissionais">
+              <legend>Objetivos trabalhados</legend>
+              <div className="grupo-opcoes">
+                {OBJETIVOS.map((o) => (
+                  <label key={o} className="marcar"><input type="checkbox" checked={objetivos.includes(o)} onChange={() => marcar(o)} />{o}</label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset className="profissionais">
+              <legend>Humor</legend>
+              <div className="grupo-opcoes linha">
+                {HUMORES.map(([valor, nome]) => (
+                  <label key={valor} className="marcar">
+                    <input type="radio" name="humor" checked={humor === valor} onChange={() => setHumor(valor)} />{nome}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <p className="nota">Resumo, objetivos e humor aparecem sempre para os responsáveis. Só a observação pode ficar escondida.</p>
+          </div>
+          <button className="botao botao-grande" disabled={enviando}>Salvar e encerrar sessão</button>
+        </div>
       </form>
     </>
   );

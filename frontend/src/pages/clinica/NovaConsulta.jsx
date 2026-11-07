@@ -66,8 +66,8 @@ export default function NovaConsulta() {
       {opcoes && opcoes.length === 0 && <p className="vazio">Nenhuma criança disponível para agendar ainda.</p>}
 
       {opcoes && opcoes.length > 0 && (
-        <form className="caixa estreita" onSubmit={enviar}>
-          <label className="campo">Criança e profissional
+        <form className="caixa estreita grade-form" onSubmit={enviar}>
+          <label className="campo span2">Criança e profissional
             <select value={escolha} onChange={(e) => { setEscolha(e.target.value); setConflito(false); }}>
               {opcoes.map((o, i) => (
                 <option key={o.vinculo_id} value={i}>

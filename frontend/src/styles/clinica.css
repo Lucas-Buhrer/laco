@@ -236,3 +236,48 @@ a.linha-painel:hover { background: #f6faf7; margin: 0 -12px; padding: 16px 12px;
 .linha-criancas.cab span { font-size: 13px; color: #5e7066; }
 a.linha-criancas:hover { background: #f6faf7; margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: 12px; color: var(--texto); }
 @media (max-width: 800px) { .linha-criancas { grid-template-columns: 1fr 1fr; } .linha-criancas.cab { display: none; } }
+
+/* ===== Melhor uso da largura da tela (clínica) ===== */
+.caixa.estreita { max-width: 880px; width: 100%; }
+.caixa.estreita.compacta { max-width: 560px; }
+.caixa.larga { max-width: 1180px; width: 100%; }
+
+/* Formulário em duas colunas: títulos, textos, grupos e botões ocupam a linha toda */
+.grade-form { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; align-items: start; }
+.grade-form > h2, .grade-form > p, .grade-form > fieldset, .grade-form > .acoes-topo, .grade-form > .span2,
+.grade-form > .aviso-conflito, .grade-form > .campo:has(textarea) { grid-column: 1 / -1; }
+.grade-form > .acoes-topo { margin-top: 0; }
+@media (max-width: 760px) { .grade-form { grid-template-columns: 1fr; } }
+
+/* Grupos de marcar (objetivos, profissionais): opções lado a lado */
+.grupo-opcoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 20px; }
+.grupo-opcoes.linha { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+
+/* Duas áreas lado a lado: o principal e um lado com apoio (perfil, consulta, código da família) */
+.pagina-duas { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); gap: 28px; align-items: start; margin-top: 8px; }
+.pagina-duas > section, .pagina-duas > div { min-width: 0; }
+.pagina-duas .titulo-lista:first-child { margin-top: 24px; }
+@media (max-width: 1000px) { .pagina-duas { grid-template-columns: 1fr; } }
+.pagina-duas .caixa { margin-top: 24px; }
+
+/* Dados em pares (rótulo e valor), usados nos detalhes da consulta */
+.pares { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; margin: 0; }
+.pares dt { font-size: 13px; font-weight: 600; color: #5e7066; }
+.pares dd { margin: 2px 0 0; font-size: 16px; font-weight: 600; }
+.pares .inteira { grid-column: 1 / -1; }
+.botoes-coluna { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.botoes-coluna .botao-sec, .botoes-coluna .botao { justify-content: center; }
+
+/* Pré-cadastro: formulário e lista com a largura bem dividida */
+.duas-colunas { grid-template-columns: minmax(380px, 560px) minmax(0, 1fr) !important; }
+@media (max-width: 1100px) { .duas-colunas { grid-template-columns: 1fr !important; } }
+
+/* Registro da sessão: texto à esquerda, escolhas à direita */
+.registro-form { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); gap: 24px; align-items: start; max-width: 1180px; }
+.registro-form > .caixa, .registro-dir > .caixa { margin-top: 24px; }
+.registro-dir { display: flex; flex-direction: column; gap: 16px; }
+.registro-dir .botao-grande { margin-top: 0; }
+.registro-form textarea { width: 100%; resize: vertical; }
+@media (max-width: 1000px) { .registro-form { grid-template-columns: 1fr; } }
+.suave { color: var(--texto-suave); font-weight: 500; }
+.pagina-duas .linha-lista { margin-top: 10px; }

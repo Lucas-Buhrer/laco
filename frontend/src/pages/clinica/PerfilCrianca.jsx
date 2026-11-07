@@ -60,34 +60,40 @@ export default function PerfilCrianca() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
-      <h2 className="titulo-lista">Linha do tempo</h2>
-      {itens && itens.length === 0 && <p className="vazio">Nada para mostrar ainda. O que aparece aqui depende do que a família liberou.</p>}
-      {itens && (
-        <LinhaDoTempo
-          itens={itens}
-          aoAdendo={(registroId) => setAdendo({ registroId, texto: '' })}
-        />
-      )}
+      <div className="pagina-duas">
+        <section>
+          <h2 className="titulo-lista">Linha do tempo</h2>
+          {itens && itens.length === 0 && <p className="vazio">Nada para mostrar ainda. O que aparece aqui depende do que a família liberou.</p>}
+          {itens && (
+            <LinhaDoTempo
+              itens={itens}
+              aoAdendo={(registroId) => setAdendo({ registroId, texto: '' })}
+            />
+          )}
+        </section>
 
-      {adendo && (
-        <form className="caixa estreita" onSubmit={enviarAdendo}>
-          <h2>Adendo ao registro</h2>
-          <p className="nota">O registro original não muda. O adendo aparece logo abaixo dele, com a data.</p>
-          <label className="campo">Texto do adendo
-            <textarea rows={4} value={adendo.texto} onChange={(e) => setAdendo({ ...adendo, texto: e.target.value })} required />
-          </label>
-          <div className="acoes-topo">
-            <button className="botao">Salvar adendo</button>
-            <button type="button" className="botao-sec" onClick={() => setAdendo(null)}>Cancelar</button>
+        <div>
+          {adendo && (
+            <form className="caixa" onSubmit={enviarAdendo}>
+              <h2>Adendo ao registro</h2>
+              <p className="nota">O registro original não muda. O adendo aparece logo abaixo dele, com a data.</p>
+              <label className="campo">Texto do adendo
+                <textarea rows={4} value={adendo.texto} onChange={(e) => setAdendo({ ...adendo, texto: e.target.value })} required />
+              </label>
+              <div className="acoes-topo">
+                <button className="botao">Salvar adendo</button>
+                <button type="button" className="botao-sec" onClick={() => setAdendo(null)}>Cancelar</button>
+              </div>
+            </form>
+          )}
+
+          <AtividadesClinica criancaId={id} />
+
+          <div className="caixa">
+            <h2>Seu acesso</h2>
+            <p className="nota">A família pode retirar seu acesso a qualquer momento. Cada abertura desta página fica registrada.</p>
           </div>
-        </form>
-      )}
-
-      <AtividadesClinica criancaId={id} />
-
-      <div className="caixa">
-        <h2>Seu acesso</h2>
-        <p className="nota">A família pode retirar seu acesso a qualquer momento. Cada abertura desta página fica registrada.</p>
+        </div>
       </div>
     </>
   );
