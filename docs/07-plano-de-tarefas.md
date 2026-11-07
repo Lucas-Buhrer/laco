@@ -41,7 +41,7 @@ Como Claude executa todas as áreas e o dono orquestra, as tarefas são organiza
 | | T-33 | Painéis dos dois perfis | BE+FE | P0 | RF-80, RF-81 ✅ |
 | Tarde 1 | T-34 | LGPD: painel de acessos, exportação, solicitações, política/termo | BE+FE | P0/P1 | RF-70 a RF-76 ✅ |
 | | T-35 | Notificações internas | BE+FE | P1 | RF-90 ✅ |
-| | T-36 | Conflito de horário, expiração de convite/vínculo, confirmação de presença (prazo de **1 dia antes**; depois, só contato com a clínica) | BE | P1 | RF-36, RF-44, RF-46 |
+| | T-36 | Conflito de horário, expiração de convite/vínculo, confirmação de presença (prazo de **1 dia antes**; depois, só contato com a clínica) | BE | P1 | RF-36, RF-44, RF-46 ✅ |
 | | T-43 | **Agenda viva:** cores por dias que faltam (azul, amarelo, vermelho, verde), coluna por profissional, destaque do dia de hoje, estados de consultas passadas (Realizada, Remarcada, Cancelada, Faltou) | BE+FE | P0 | RF-47a, RF-42a, RN-35 |
 | | T-44 | **Ações da consulta:** remarcar, cancelar, marcar realizada/faltou (só depois do horário), registrar confirmação por telefone; aviso à família | BE+FE | P0 | RF-42a, RF-44, F-49 a F-49d |
 | | T-40 | **Segundo responsável:** convite, aceite, sair, avisos ao outro, vários aparelhos | BE+FE | P1 | RF-08, RF-09, RN-28 a RN-31 |

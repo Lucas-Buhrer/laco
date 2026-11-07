@@ -4,6 +4,7 @@ const { hashCodigo } = require('../utils/codigos');
 const { agoraIso } = require('../utils/datas');
 const criarAuditoria = require('../middlewares/auditoria');
 const criarAvisos = require('../utils/avisos');
+const { expirarVinculos } = require('../utils/expiracao');
 
 const NAO_ENCONTRADO = { erro: 'Não encontrado.' };
 const MSG_CODIGO = 'Código inválido ou vencido. Peça um novo código à família.';
@@ -29,6 +30,7 @@ function criarControladorVinculos(banco) {
 
   // GET /vinculos
   function listar(req, res) {
+    expirarVinculos(banco);
     if (req.usuario.papel === 'RESPONSAVEL') {
       const linhas = banco
         .prepare(
@@ -64,6 +66,7 @@ function criarControladorVinculos(banco) {
 
   // Carrega o vínculo SÓ se quem pede é responsável ativo da criança; senão null (vira 404)
   function vinculoDoResponsavel(req) {
+    expirarVinculos(banco);
     const v = banco
       .prepare(
         `SELECT v.*, c.nome AS crianca_nome, u.nome AS profissional_nome
@@ -84,6 +87,7 @@ function criarControladorVinculos(banco) {
   function aprovar(req, res) {
     const v = vinculoDoResponsavel(req);
     if (!v) return res.status(404).json(NAO_ENCONTRADO);
+    if (v.status === 'EXPIRADO') return res.status(409).json({ erro: 'Este pedido expirou. O profissional pode pedir de novo.' });
     if (v.status !== 'PENDENTE') return res.status(409).json({ erro: 'Este pedido já foi respondido.' });
 
     const historico = booleano(req.body?.ver_historico_anterior, 0); // padrão: não compartilha

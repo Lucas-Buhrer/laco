@@ -16,12 +16,13 @@ test('RF-90: o responsável recebe o aviso do pedido da Ana e marca como lido', 
   const familia = await mae(api);
   const lista = await api.chamar('GET', '/api/notificacoes', null, familia);
   assert.strictEqual(lista.status, 200);
-  assert.strictEqual(lista.corpo.dados.nao_lidas, 1);
-  assert.strictEqual(lista.corpo.dados.avisos[0].link, '/familia/solicitacoes');
-
-  const id = lista.corpo.dados.avisos[0].id;
-  assert.strictEqual((await api.chamar('POST', `/api/notificacoes/${id}/ler`, {}, familia)).status, 200);
-  assert.strictEqual((await api.chamar('GET', '/api/notificacoes', null, familia)).corpo.dados.nao_lidas, 0);
+  // além do pedido da Ana, o seed tem consultas sem confirmação, que geram lembretes
+  const pedido = lista.corpo.dados.avisos.find((a) => a.link === "/familia/solicitacoes");
+  assert.ok(pedido);
+  const antes = lista.corpo.dados.nao_lidas;
+  assert.ok(antes >= 1);
+  assert.strictEqual((await api.chamar("POST", `/api/notificacoes/${pedido.id}/ler`, {}, familia)).status, 200);
+  assert.strictEqual((await api.chamar("GET", "/api/notificacoes", null, familia)).corpo.dados.nao_lidas, antes - 1);
   api.fechar();
 });
 

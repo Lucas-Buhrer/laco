@@ -2,6 +2,7 @@
 // O painel da clínica (ADM/Recepção) nunca traz dado clínico: só agenda e cadastro.
 const { agoraIso } = require('../utils/datas');
 const { corDaConsulta, diasAte } = require('./consultas');
+const { expirarVinculos, criarLembretesDeConfirmacao } = require('../utils/expiracao');
 
 function criarControladorPainel(banco) {
   const hoje = () => agoraIso().slice(0, 10);
@@ -19,6 +20,7 @@ function criarControladorPainel(banco) {
 
   // GET /painel/profissional
   function profissional(req, res) {
+    expirarVinculos(banco);
     const uid = req.usuario.id;
     const agenda = consultasDoDia(
       `AND c.profissional_id = ? AND c.clinica_id = ?
@@ -39,6 +41,8 @@ function criarControladorPainel(banco) {
 
   // GET /painel/responsavel
   function responsavel(req, res) {
+    expirarVinculos(banco);
+    criarLembretesDeConfirmacao(banco, req.usuario.id);
     const uid = req.usuario.id;
     const filhos = banco
       .prepare(
