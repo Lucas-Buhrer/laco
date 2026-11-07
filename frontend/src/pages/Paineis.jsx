@@ -1,16 +1,6 @@
 import { useAuth } from '../context/AuthContext.jsx';
 
 // Telas provisórias: os painéis de verdade vêm nas tarefas T-19 e T-33.
-export function PainelClinica() {
-  const { usuario } = useAuth();
-  return (
-    <>
-      <h1>Olá, {usuario.nome}</h1>
-      <p className="subtitulo">Painel da clínica. Em construção.</p>
-    </>
-  );
-}
-
 export function HojeFamilia() {
   const { usuario, sair } = useAuth();
   return (

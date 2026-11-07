@@ -11,7 +11,11 @@ import Acessos from './pages/familia/Acessos.jsx';
 import Solicitacoes from './pages/familia/Solicitacoes.jsx';
 import ConvidarClinica from './pages/familia/ConvidarClinica.jsx';
 import Mais from './pages/familia/Mais.jsx';
-import { PainelClinica, HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
+import PainelClinica from './pages/clinica/PainelClinica.jsx';
+import PreCadastros from './pages/clinica/PreCadastros.jsx';
+import CodigoDaFamilia from './pages/clinica/CodigoDaFamilia.jsx';
+import Criancas from './pages/clinica/Criancas.jsx';
+import { HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
 function Inicio() {
@@ -36,6 +40,9 @@ export default function App() {
           <Route element={<RotaProtegida papeis={['PROFISSIONAL', 'ADMIN_CLINICA', 'RECEPCAO']} entrarEm="/entrar" />}>
             <Route path="/clinica" element={<LayoutClinica />}>
               <Route index element={<PainelClinica />} />
+              <Route path="pre-cadastros" element={<PreCadastros />} />
+              <Route path="codigo-da-familia" element={<CodigoDaFamilia />} />
+              <Route path="criancas" element={<Criancas />} />
               <Route path="*" element={<EmConstrucao />} />
             </Route>
           </Route>

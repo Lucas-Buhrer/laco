@@ -1,0 +1,36 @@
+/* Telas da clínica (computador) */
+.acoes-topo { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.numeros { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.numero {
+  min-width: 200px; padding: 16px 20px; background: var(--branco); border: 1px solid #dce5df;
+  border-radius: var(--raio); color: var(--texto-suave); font-size: 14px;
+}
+.numero strong { display: block; font-size: 32px; color: var(--texto); font-family: 'Bricolage Grotesque', sans-serif; }
+.caixa {
+  margin-top: 24px; padding: 20px; background: var(--branco); border: 1px solid #dce5df; border-radius: var(--raio);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.caixa h2 { font-size: 20px; }
+.caixa p { margin: 0; }
+.caixa.estreita { max-width: 460px; }
+.codigo-caixa { background: var(--verde-claro); border-color: var(--verde); gap: 8px; }
+.duas-colunas { display: grid; grid-template-columns: minmax(320px, 440px) 1fr; gap: 32px; align-items: start; }
+.profissionais { border: 1px solid var(--borda); border-radius: var(--raio); padding: 8px 14px 14px; margin: 0; }
+.profissionais legend { font-size: 14px; font-weight: 600; padding: 0 6px; }
+.titulo-lista { margin-top: 32px; font-size: 22px; }
+.linha-lista {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px;
+  padding: 12px 16px; background: var(--branco); border: 1px solid #dce5df; border-radius: var(--raio);
+}
+.acoes-linha { display: flex; gap: 8px; }
+.acoes-linha .botao-sec { min-height: 38px; padding: 0 12px; font-size: 14px; }
+.tabela { width: 100%; margin-top: 24px; border-collapse: collapse; background: var(--branco); border-radius: var(--raio); }
+.tabela th, .tabela td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e1e9e4; }
+.tabela th { font-size: 13px; color: var(--texto-suave); }
+
+@media (max-width: 900px) {
+  .duas-colunas { grid-template-columns: 1fr; }
+}
+@media print {
+  .menu-lateral, form, .titulo-lista, .linha-lista, .acoes-topo { display: none; }
+}
