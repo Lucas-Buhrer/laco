@@ -59,7 +59,7 @@
 .campo-senha input::-ms-reveal { display: none; }
 .ver-senha { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); min-height: 36px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--verde-forte); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
 .ver-senha:hover { background: #eef4f0; }
-.atalhos-demo { margin-top: 24px; padding: 14px 16px; border: 1px dashed #b9c9bf; border-radius: 12px; background: #f6faf7; }
+.atalhos-demo { margin-top: 20px; padding: 14px 16px; border: 1px dashed #b9c9bf; border-radius: 12px; background: #f6faf7; }
 .atalhos-demo p { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #5e7066; }
 .atalhos-demo div { display: flex; flex-wrap: wrap; gap: 8px; }
 .atalhos-demo .botao-sec { min-height: 40px; padding: 0 14px; font-size: 14px; }

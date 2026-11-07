@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
+// Atalho só da versão de demonstração (aparece com npm run dev): preenche o login fictício do doc 09
+const MOSTRAR_ATALHO = import.meta.env.DEV;
+
 // Desenho: docs/telas/M6-Login (celular).
 export default function LoginResponsavel() {
   const { usuario, entrarResponsavel, sessaoExpirou } = useAuth();
@@ -45,6 +48,15 @@ export default function LoginResponsavel() {
         </label>
         <button className="botao botao-grande" disabled={enviando}>{enviando ? 'Entrando…' : 'Entrar'}</button>
       </form>
+
+      {MOSTRAR_ATALHO && (
+        <div className="atalhos-demo">
+          <p>Demonstração · entrar como</p>
+          <div>
+            <button type="button" className="botao-sec" onClick={() => { setEmail('responsavel@laco.test'); setSenha('123456'); setErro(''); }}>Responsável (Mariana)</button>
+          </div>
+        </div>
+      )}
 
       <div className="login-rodape-familia">
         <p className="primeira-vez">Primeira vez aqui?</p>
