@@ -96,7 +96,7 @@ main:focus { outline: none; }
 
 /* Botões e abas com área de toque confortável, e telas de 360px sem rolagem lateral */
 .acoes-linha .botao-sec { min-height: 44px !important; }
-html, body { overflow-x: hidden; }
+html, body { overflow-x: clip; } /* clip (e não hidden) para não quebrar o menu lateral fixo */
 img, table { max-width: 100%; }
 @media (max-width: 420px) {
   .lista-humor li { grid-template-columns: 1fr; gap: 2px; }
