@@ -148,6 +148,7 @@ export default function PreCadastros() {
                 <p className="detalhe">
                   {STATUS[c.status]}
                   {c.codigo_valido_ate && ` · código vale até ${dataBR(c.codigo_valido_ate)}`}
+                  {c.status === 'INATIVO' && ` · sem ativação há ${c.dias_sem_ativacao} dias · será excluído aos 90 dias`}
                 </p>
               </div>
               {(c.status === 'AGUARDANDO_ATIVACAO' || c.status === 'INATIVO') && (

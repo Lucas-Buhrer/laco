@@ -3,6 +3,7 @@ const crypto = require('node:crypto');
 const { gerarCodigo, hashCodigo } = require('../utils/codigos');
 const { agoraIso, maisDias, dataValida } = require('../utils/datas');
 const criarAuditoria = require('../middlewares/auditoria');
+const { executarLimpeza, BASE } = require('../utils/limpeza');
 
 const PARENTESCOS = ['MAE', 'PAI', 'OUTRO'];
 const DIAS_VALIDADE_CODIGO = 7; // RN-15
@@ -25,8 +26,12 @@ function criarControladorPreCadastros(banco) {
     const codigo = banco
       .prepare('SELECT expira_em FROM codigos_ativacao WHERE crianca_id = ? AND usado_em IS NULL AND cancelado_em IS NULL ORDER BY id DESC LIMIT 1')
       .get(c.id);
+    // Dias desde a criação ou do último código (conta a inativação e a exclusão)
+    const base = banco.prepare(`SELECT ${BASE} AS base FROM criancas c WHERE c.id = ?`).get(c.id).base;
+    const diasSemAtivacao = Math.floor((Date.now() - new Date(base).getTime()) / 86400000);
     return {
       id: c.id,
+      dias_sem_ativacao: diasSemAtivacao,
       nome: c.nome,
       data_nascimento: c.data_nascimento,
       responsavel_nome: c.contato_responsavel_nome,
@@ -59,6 +64,7 @@ function criarControladorPreCadastros(banco) {
 
   // GET /clinica/pre-cadastros
   function listar(req, res) {
+    executarLimpeza(banco); // a mesma verificação do script, feita na hora de abrir a lista (doc 05, 4.5)
     const criancas = banco
       .prepare('SELECT * FROM criancas WHERE clinica_origem_id = ? ORDER BY criada_em DESC')
       .all(req.usuario.clinica_id);
