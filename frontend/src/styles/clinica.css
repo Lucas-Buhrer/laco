@@ -433,3 +433,12 @@ a.ev.cor-cancelada, .amostra.cor-cancelada, .linha-consulta.cor-cancelada, .bloc
 div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: 12px; }
 .linha-criancas .botao-sec.pequeno { white-space: nowrap; }
 @media (max-width: 1000px) { .linha-criancas { grid-template-columns: 1fr 1fr; } }
+
+/* ===== Perfil: abas, "Seu acesso" e filtros da linha do tempo ===== */
+.abas-perfil { max-width: 420px; margin-top: 24px; }
+.tl-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 4px 32px; }
+.tl-filtros .aba { flex: 0 0 auto; min-height: 36px; padding: 0 14px; font-size: 14px; }
+.lista-acesso { margin: 0; }
+.lista-acesso > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eef2ef; }
+.lista-acesso dt { font-size: 14px; color: #4b5f55; }
+.lista-acesso dd { margin: 0; font-size: 14px; font-weight: 600; text-align: right; }

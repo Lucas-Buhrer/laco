@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../../api/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
-import { hora, classeCor, diaMini } from '../../utils/consultas.js';
+import { hora, classeCor, diaMini, somarDias, hojeISO } from '../../utils/consultas.js';
 import { nomeEspecialidade } from '../../utils/especialidades.js';
 
 const DIAS_PARA_EXCLUIR = 90; // mesmo prazo do servidor (RN-33)
@@ -47,6 +47,7 @@ export default function PainelClinica() {
   const [p, setP] = useState(null);
   const [pre, setPre] = useState([]);
   const [equipe, setEquipe] = useState([]);
+  const [proximas, setProximas] = useState([]);
   const [erro, setErro] = useState('');
 
   useEffect(() => {
@@ -55,6 +56,8 @@ export default function PainelClinica() {
       api.get('/clinica/pre-cadastros').then(setPre),
     ];
     if (papel !== 'PROFISSIONAL') pedidos.push(api.get('/clinica/profissionais').then(setEquipe));
+    // O profissional também vê as consultas dos próximos 7 dias (só as dele)
+    else pedidos.push(api.get(`/consultas?de=${somarDias(hojeISO(), 1)}&ate=${somarDias(hojeISO(), 7)}`).then(setProximas));
     Promise.all(pedidos).catch((e) => setErro(e.message));
   }, [papel]);
 
@@ -79,7 +82,7 @@ export default function PainelClinica() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {!p && !erro && <p className="carregando">Carregando…</p>}
 
-      {p && papel === 'PROFISSIONAL' && <PainelProfissional p={p} pre={pre} meuId={usuario.id} />}
+      {p && papel === 'PROFISSIONAL' && <PainelProfissional p={p} pre={pre} meuId={usuario.id} proximas={proximas} />}
       {p && papel === 'ADMIN_CLINICA' && <PainelAdmin p={p} pre={pre} equipe={equipe} />}
       {p && papel === 'RECEPCAO' && <PainelRecepcao p={p} pre={pre} equipe={equipe} recarregar={() => api.get('/clinica/pre-cadastros').then(setPre)} />}
     </div>
@@ -87,7 +90,7 @@ export default function PainelClinica() {
 }
 
 // ---------- D2 ----------
-function PainelProfissional({ p, pre, meuId }) {
+function PainelProfissional({ p, pre, meuId, proximas }) {
   // Só as crianças que a clínica indicou para ESTE profissional e cuja família ainda não ativou a conta
   const aguardandoAtivacao = pre.filter((c) => c.status === 'AGUARDANDO_ATIVACAO' && c.indicados.includes(meuId));
   return (
@@ -130,6 +133,22 @@ function PainelProfissional({ p, pre, meuId }) {
           <p className="nota-fina">Enquanto não houver aprovação, só aparecem os dados cadastrais.</p>
         </section>
       </div>
+
+      <section className="secao">
+        <div className="secao-topo"><h2>Próximas consultas</h2><Link to="/clinica/agenda">Ver a agenda</Link></div>
+        {proximas.filter((c) => c.status === 'AGENDADA').length === 0 && <p className="vazio">Nenhuma consulta marcada para os próximos 7 dias.</p>}
+        {proximas.filter((c) => c.status === 'AGENDADA').slice(0, 6).map((c) => {
+          const [texto, classe] = seloDaConsulta(c);
+          return (
+            <Link key={c.id} to={`/clinica/agenda/${c.id}`} className="linha-painel">
+              <span className="hora" style={{ width: 90 }}>{diaMini(c.inicio)}</span>
+              <span className="hora">{hora(c.inicio)}</span>
+              <span className="nome"><strong>{c.crianca_nome}</strong><small>{c.tipo || 'Consulta'} · {c.duracao_min} min</small></span>
+              <span className={classe}>{texto}</span>
+            </Link>
+          );
+        })}
+      </section>
     </>
   );
 }

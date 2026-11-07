@@ -20,6 +20,7 @@ export default function PerfilCrianca() {
   const [erro, setErro] = useState('');
   const [adendo, setAdendo] = useState(null); // { registroId, texto }
   const [aviso, setAviso] = useState('');
+  const [aba, setAba] = useState('LINHA');
 
   function carregar() {
     Promise.all([api.get(`/criancas/${id}`), api.get(`/criancas/${id}/linha-do-tempo`)])
@@ -62,14 +63,25 @@ export default function PerfilCrianca() {
 
       <div className="pagina-duas">
         <section>
-          <h2 className="titulo-lista">Linha do tempo</h2>
-          {itens && itens.length === 0 && <p className="vazio">Nada para mostrar ainda. O que aparece aqui depende do que a família liberou.</p>}
-          {itens && (
-            <LinhaDoTempo
-              itens={itens}
-              aoAdendo={(registroId) => setAdendo({ registroId, texto: '' })}
-            />
+          <div className="abas abas-perfil" role="tablist">
+            <button role="tab" aria-selected={aba === 'LINHA'} className={aba === 'LINHA' ? 'aba ativa' : 'aba'} onClick={() => setAba('LINHA')}>Linha do tempo</button>
+            <button role="tab" aria-selected={aba === 'ATIVIDADES'} className={aba === 'ATIVIDADES' ? 'aba ativa' : 'aba'} onClick={() => setAba('ATIVIDADES')}>Atividades de casa</button>
+          </div>
+
+          {aba === 'LINHA' && (
+            <>
+              {itens && itens.length === 0 && (
+                <div className="vazio-grande">
+                  <h2>Nada para mostrar ainda</h2>
+                  <p>Registre a primeira sessão ou crie uma atividade de casa. O que aparece aqui depende do que a família liberou.</p>
+                </div>
+              )}
+              {itens && itens.length > 0 && (
+                <LinhaDoTempo itens={itens} aoAdendo={(registroId) => setAdendo({ registroId, texto: '' })} />
+              )}
+            </>
           )}
+          {aba === 'ATIVIDADES' && <AtividadesClinica criancaId={id} />}
         </section>
 
         <div>
@@ -87,10 +99,16 @@ export default function PerfilCrianca() {
             </form>
           )}
 
-          <AtividadesClinica criancaId={id} />
-
           <div className="caixa">
             <h2>Seu acesso</h2>
+            {crianca.escopo && (
+              <dl className="lista-acesso">
+                <div><dt>Suas sessões e atividades</dt><dd><i className="pill ok">Sim</i></dd></div>
+                <div><dt>Histórico de outros profissionais</dt><dd><i className={crianca.escopo.ver_historico_anterior ? 'pill ok' : 'pill mu'}>{crianca.escopo.ver_historico_anterior ? 'Liberado' : 'Não liberado'}</i></dd></div>
+                <div><dt>Aviso de conflito de horário</dt><dd><i className={crianca.escopo.ver_horarios_outras_clinicas ? 'pill ok' : 'pill mu'}>{crianca.escopo.ver_horarios_outras_clinicas ? 'Sim' : 'Não'}</i></dd></div>
+                <div><dt>Acesso desde</dt><dd>{new Date(crianca.escopo.aprovado_em).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</dd></div>
+              </dl>
+            )}
             <p className="nota">A família pode retirar seu acesso a qualquer momento. Cada abertura desta página fica registrada.</p>
           </div>
         </div>

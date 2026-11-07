@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import Icone from './Icone.jsx';
+import useTitulo from './useTitulo.js';
 
 // App dos pais: pensado para celular (360px), menu fixo embaixo, como nos desenhos M*
 const MENU = [
@@ -8,6 +9,7 @@ const MENU = [
 ];
 
 export default function LayoutFamilia() {
+  useTitulo();
   return (
     <div className="layout-familia">
       <a className="pular" href="#conteudo">Ir para o conteúdo</a>

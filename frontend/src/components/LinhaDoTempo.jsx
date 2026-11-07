@@ -114,6 +114,7 @@ function Atividade({ atividade }) {
 // Usada pela clínica e pela família. O servidor já decide o que cada um pode ler;
 // aqui só se desenha (a observação privada só chega para o próprio autor, marcada como interna).
 export default function LinhaDoTempo({ itens, aoAdendo }) {
+  const [filtro, setFiltro] = useState('TUDO');
   // Junta a consulta com o registro da mesma sessão
   const registros = itens.filter((i) => i.tipo === 'REGISTRO').map((i) => i.registro);
   const porConsulta = new Map(registros.filter((r) => r.consulta_id).map((r) => [r.consulta_id, r]));
@@ -134,9 +135,24 @@ export default function LinhaDoTempo({ itens, aoAdendo }) {
   // Humor das últimas sessões, para ver a tendência de relance
   const humores = eventos.filter((e) => e.tipo === 'SESSAO' && e.registro?.humor).slice(0, 10).reverse();
 
+  // Filtro da lista: "Consultas" inclui as sessões que vieram de uma consulta
+  const mostrados = eventos.filter((e) => {
+    if (filtro === 'SESSOES') return e.tipo === 'SESSAO';
+    if (filtro === 'CONSULTAS') return e.tipo === 'CONSULTA' || (e.tipo === 'SESSAO' && e.consulta);
+    if (filtro === 'ATIVIDADES') return e.tipo === 'ATIVIDADE';
+    return true;
+  });
+
   let mesAtual = '';
   return (
     <div className="tl">
+      <div className="tl-filtros" role="tablist" aria-label="Filtrar a linha do tempo">
+        {[['TUDO', 'Tudo'], ['SESSOES', 'Sessões'], ['CONSULTAS', 'Consultas'], ['ATIVIDADES', 'Atividades']].map(([chave, nome]) => (
+          <button key={chave} role="tab" aria-selected={filtro === chave} className={filtro === chave ? 'aba ativa' : 'aba'} onClick={() => setFiltro(chave)}>{nome}</button>
+        ))}
+      </div>
+      {mostrados.length === 0 && <p className="vazio">Nada neste filtro.</p>}
+
       {humores.length >= 3 && (
         <div className="tl-resumo-humor">
           <strong>Humor nas últimas {humores.length} sessões</strong>
@@ -150,7 +166,7 @@ export default function LinhaDoTempo({ itens, aoAdendo }) {
         </div>
       )}
 
-      {eventos.map((e, n) => {
+      {mostrados.map((e, n) => {
         const mes = mesDoItem(e.data);
         const novoMes = mes !== mesAtual;
         mesAtual = mes;

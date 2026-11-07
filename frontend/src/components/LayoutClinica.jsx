@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import useNaoLidas from './useNaoLidas.js';
 import Icone from './Icone.jsx';
+import useTitulo from './useTitulo.js';
 
 // Menu de cada papel, como nos desenhos D2 (profissional), D7 (administração) e D5 (recepção)
 const MENUS = {
@@ -22,6 +23,7 @@ const NOME_PAPEL = { ADMIN_CLINICA: 'Administração', RECEPCAO: 'Recepção' };
 export default function LayoutClinica() {
   const { usuario, sair } = useAuth();
   const naoLidas = useNaoLidas();
+  useTitulo();
   const nomeClinica = usuario.clinica?.nome || '';
   // No desenho: profissional mostra "Clínica Aurora"; administração e recepção, "Administração · Aurora"
   const subtitulo = usuario.papel === 'PROFISSIONAL' ? nomeClinica : `${NOME_PAPEL[usuario.papel]} · ${nomeClinica.replace(/^Clínica\s+/i, '')}`;
