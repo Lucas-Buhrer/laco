@@ -281,3 +281,55 @@ a.linha-criancas:hover { background: #f6faf7; margin: 0 -12px; padding-left: 12p
 @media (max-width: 1000px) { .registro-form { grid-template-columns: 1fr; } }
 .suave { color: var(--texto-suave); font-weight: 500; }
 .pagina-duas .linha-lista { margin-top: 10px; }
+
+/* ===== Linha do tempo (clínica e família) ===== */
+.tl { position: relative; margin-top: 8px; max-width: 760px; }
+.tl-mes { margin: 28px 0 12px 32px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #5e7066; font-family: 'Figtree', sans-serif; }
+.tl-item { position: relative; margin: 0 0 12px 32px; }
+.tl-item::before { content: ''; position: absolute; left: -22px; top: 0; bottom: -12px; width: 2px; background: #dce5df; }
+.tl-ponto { position: absolute; left: -29px; top: 22px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #f3f6f4; background: #4faf7c; z-index: 1; }
+.tl-item.consulta .tl-ponto { background: #b9c9bf; top: 14px; }
+.tl-item.atividade .tl-ponto { background: #e0a21b; top: 14px; }
+
+.tl-cartao { padding: 16px 20px; background: var(--branco); border: 1px solid #dce5df; border-radius: 18px; transition: border-color 0.15s, box-shadow 0.15s; }
+.tl-cartao:hover { border-color: #b9c9bf; box-shadow: 0 2px 10px rgba(18, 36, 28, 0.06); }
+.tl-cab { display: flex; align-items: center; gap: 14px; }
+.bloco-dia.pequeno { width: 46px; height: 46px; border-radius: 10px; background: #e4f4e9; }
+.bloco-dia.pequeno span { color: #1f6b4a; font-size: 10px; }
+.bloco-dia.pequeno b { color: #123b2b; font-size: 20px; }
+.tl-quem { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tl-quem strong { font-size: 16px; font-weight: 600; }
+.tl-quem small { font-size: 13px; color: #5e7066; }
+.resumo { margin: 14px 0 0; font-size: 16px; line-height: 1.55; color: var(--texto); }
+.resumo.recolhido { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.link-pequeno { margin-top: 6px; padding: 4px 0; border: 0; background: none; color: var(--verde-forte); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.link-pequeno:hover { color: var(--verde-escuro); text-decoration: underline; }
+.tl-acao { display: block; }
+
+.tl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #eef2ef; }
+.humor { display: inline-flex; align-items: flex-end; gap: 10px; }
+.humor-barras { display: inline-flex; align-items: flex-end; gap: 3px; height: 24px; }
+.humor-barras i { display: block; width: 5px; border-radius: 2px; }
+.humor-texto { font-size: 14px; font-weight: 600; }
+.humor-texto small { font-weight: 500; color: #5e7066; }
+.etiquetas { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.etiqueta-obj { padding: 4px 10px; border-radius: 8px; background: #eef4f0; color: #2f4a3d; font-size: 13px; font-style: normal; font-weight: 600; }
+
+.tl-nota { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--fundo); font-size: 14px; line-height: 1.5; }
+.tl-nota.interna { background: #fcefc9; color: #4a3500; }
+.tl-nota svg { margin-top: 2px; }
+.tl-adendo { margin: 10px 0 0 12px; padding: 4px 0 4px 12px; border-left: 3px solid #cdebd6; font-size: 14px; line-height: 1.5; }
+.tl-adendo strong { display: block; font-size: 12px; color: #5e7066; }
+
+.tl-curta { display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: #f8faf8; border: 1px solid #e6ece8; border-radius: 12px; font-size: 14px; }
+.tl-dia-curto { min-width: 54px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #5e7066; }
+.tl-curta-texto { flex: 1; min-width: 0; }
+.tl-curta-texto small { color: #5e7066; }
+.tl-curta.atividade { background: #fffaee; border-color: #f3e3b0; }
+
+.tl-resumo-humor { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 0 0 8px 32px; padding: 14px 20px; background: var(--branco); border: 1px solid #dce5df; border-radius: 18px; }
+.tl-resumo-humor strong { font-size: 14px; }
+.mini-grafico { display: flex; align-items: flex-end; gap: 6px; height: 48px; }
+.mini-grafico span { display: flex; align-items: flex-end; height: 100%; }
+.mini-grafico i { display: block; width: 10px; border-radius: 3px; }
+@media (max-width: 480px) { .tl-resumo-humor { flex-direction: column; align-items: flex-start; } }
