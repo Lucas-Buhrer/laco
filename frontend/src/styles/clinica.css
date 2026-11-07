@@ -354,9 +354,9 @@ input[type='checkbox'], input[type='radio'] { accent-color: #1f6b4a; }
 .opcao-priv.aberta.on { background: #a9ddbb; border-color: #a9ddbb; color: #0f2e21; }
 .nota.destaque-priv { padding: 10px 12px; border-radius: 10px; background: #fff7dc; color: #4a3500; }
 .registro-form { padding-bottom: 8px; }
-.registro-form .barra-salvar { grid-column: 1 / -1; position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; gap: 12px; margin: 8px 0 0; padding: 14px 0; background: linear-gradient(to top, #f3f6f4 70%, rgba(243, 246, 244, 0)); }
+.registro-form .barra-salvar { grid-column: 1; position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: flex-end; gap: 12px; margin: 8px 0 0; padding: 14px 0; background: linear-gradient(to top, #f3f6f4 70%, rgba(243, 246, 244, 0)); }
 .registro-form select { height: 52px; padding: 0 12px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-size: 16px; }
-@media (max-width: 1000px) { .registro-form .barra-salvar { justify-content: stretch; } .registro-form .barra-salvar > * { flex: 1; } }
+@media (max-width: 1000px) { .registro-form .barra-salvar { grid-column: 1 / -1; justify-content: stretch; } .registro-form .barra-salvar > * { flex: 1; } }
 
 /* ===== Parecer ===== */
 .duas-datas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

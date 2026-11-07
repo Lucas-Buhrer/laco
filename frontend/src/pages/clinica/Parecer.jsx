@@ -40,11 +40,13 @@ export default function Parecer() {
     return () => clearTimeout(espera);
   }, [id, crianca, f.periodo_inicio, f.periodo_fim]);
 
-  const atalhos = [
-    ['Último mês', somarDias(hoje, -30)],
-    ['Últimos 3 meses', somarDias(hoje, -90)],
-    ...(corte ? [['Desde a aprovação', corte]] : []),
-  ].map(([nome, inicio]) => [nome, corte && inicio < corte ? corte : inicio]);
+  // Quando o limite do acesso faz vários atalhos caírem na mesma data, sobra só "Desde a aprovação"
+  const atalhos = [];
+  for (const [nome, dias] of [['Último mês', 30], ['Últimos 3 meses', 90]]) {
+    const inicio = somarDias(hoje, -dias);
+    if (!corte || inicio > corte) atalhos.push([nome, inicio]);
+  }
+  if (corte) atalhos.push(['Desde a aprovação', corte]);
 
   async function publicar() {
     setErro('');
