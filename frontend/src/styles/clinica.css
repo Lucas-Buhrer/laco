@@ -54,3 +54,11 @@
 .linha-consulta em { font-style: normal; font-size: 14px; }
 .aviso-conflito { background: #fdf0c8; border-color: #e5c867; }
 @media (max-width: 700px) { .linha-consulta { grid-template-columns: 56px 1fr; } .linha-consulta em { grid-column: 2; } }
+
+/* Perfil da criança e linha do tempo */
+.cabeca-perfil { display: flex; align-items: center; gap: 16px; }
+.cabeca-perfil .inicial { width: 56px; height: 56px; font-size: 24px; }
+.linha-tempo { max-width: 720px; }
+.obs { margin: 10px 0 0; padding: 10px 12px; background: var(--fundo); border-radius: var(--raio); font-size: 14px; line-height: 1.5; }
+.obs-interna { background: #fdf0c8; }
+textarea { font-family: inherit; font-size: 16px; padding: 12px 16px; border: 1px solid var(--borda); border-radius: var(--raio); }

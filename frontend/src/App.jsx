@@ -16,6 +16,9 @@ import PreCadastros from './pages/clinica/PreCadastros.jsx';
 import CodigoDaFamilia from './pages/clinica/CodigoDaFamilia.jsx';
 import Criancas from './pages/clinica/Criancas.jsx';
 import Equipe from './pages/clinica/Equipe.jsx';
+import PerfilCrianca from './pages/clinica/PerfilCrianca.jsx';
+import RegistrarSessao from './pages/clinica/RegistrarSessao.jsx';
+import LinhaDoTempoFamilia from './pages/familia/LinhaDoTempoFamilia.jsx';
 import Agenda from './pages/clinica/Agenda.jsx';
 import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
 import Consulta from './pages/clinica/Consulta.jsx';
@@ -48,6 +51,8 @@ export default function App() {
               <Route path="pre-cadastros" element={<PreCadastros />} />
               <Route path="codigo-da-familia" element={<CodigoDaFamilia />} />
               <Route path="criancas" element={<Criancas />} />
+              <Route path="criancas/:id" element={<PerfilCrianca />} />
+              <Route path="criancas/:id/registro" element={<RegistrarSessao />} />
               <Route path="agenda" element={<Agenda />} />
               <Route path="agenda/nova" element={<RotaProtegida papeis={['PROFISSIONAL', 'RECEPCAO']} entrarEm="/entrar" />}>
                 <Route index element={<NovaConsulta />} />
@@ -65,6 +70,7 @@ export default function App() {
             <Route path="/familia" element={<LayoutFamilia />}>
               <Route index element={<HojeFamilia />} />
               <Route path="agenda" element={<AgendaFamilia />} />
+              <Route path="linha-do-tempo" element={<LinhaDoTempoFamilia />} />
               <Route path="filhos" element={<Filhos />} />
               <Route path="filhos/adicionar" element={<AdicionarFilho />} />
               <Route path="solicitacoes" element={<Solicitacoes />} />

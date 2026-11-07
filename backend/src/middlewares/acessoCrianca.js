@@ -23,7 +23,8 @@ function criarAcessoCrianca(banco) {
   // Uso: rotas.get('/:id', exigirLogin, exigirAcessoCrianca('VER_PERFIL'), controlador)
   function exigirAcessoCrianca(acao) {
     return function (req, res, next) {
-      const criancaId = req.params.id;
+      // Rotas de registros/atividades descobrem a criança pelo recurso (req.criancaId); as demais, pela URL
+      const criancaId = req.criancaId || req.params.id;
       const usuario = req.usuario;
 
       if (usuario.papel === 'RESPONSAVEL' && buscarResponsavel.get(criancaId, usuario.id)) {

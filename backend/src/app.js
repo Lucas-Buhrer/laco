@@ -10,6 +10,8 @@ const criarRotasCriancas = require('./routes/criancas');
 const criarRotasVinculos = require('./routes/vinculos');
 const criarRotasEquipe = require('./routes/equipe');
 const criarRotasConsultas = require('./routes/consultas');
+const criarRotasRegistros = require('./routes/registros');
+const criarRotasAtividades = require('./routes/atividades');
 const { naoEncontrado, tratarErro } = require('./middlewares/erros');
 
 function criarApp(banco) {
@@ -29,6 +31,8 @@ function criarApp(banco) {
   app.use('/api/criancas', criarRotasCriancas(banco));
   app.use('/api/vinculos', criarRotasVinculos(banco));
   app.use('/api/consultas', criarRotasConsultas(banco));
+  app.use('/api/registros', criarRotasRegistros(banco));
+  app.use('/api/atividades', criarRotasAtividades(banco));
   app.use('/api/clinica', criarRotasEquipe(banco));
 
   // Sempre por último: rota desconhecida e erros inesperados

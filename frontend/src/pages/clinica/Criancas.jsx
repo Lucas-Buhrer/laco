@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { api } from '../../api/api.js';
 
@@ -34,7 +35,7 @@ export default function Criancas() {
           <thead><tr><th>Nome</th><th>Idade</th><th>Acesso</th></tr></thead>
           <tbody>
             {lista.map((c) => (
-              <tr key={c.id}><td>{c.nome}</td><td>{idade(c.data_nascimento)}</td><td>Aprovado</td></tr>
+              <tr key={c.id}><td><Link to={`/clinica/criancas/${c.id}`}>{c.nome}</Link></td><td>{idade(c.data_nascimento)}</td><td>Aprovado</td></tr>
             ))}
           </tbody>
         </table>
