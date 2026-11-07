@@ -28,13 +28,32 @@ function criarControladorVinculos(banco) {
     "SELECT id, nome FROM usuarios WHERE id = ? AND clinica_id = ? AND papel = 'PROFISSIONAL' AND ativo = 1"
   );
 
+  // Reconhecimento do profissional (doc 05, 4.3b): se alguém com o MESMO registro (conselho + número + UF) já
+  // atendeu esta criança em OUTRA clínica, só o responsável fica sabendo. Nada disso vai para a clínica (S-44).
+  const buscarAtendimentoAnterior = banco.prepare(
+    `SELECT cl.nome AS clinica_nome, v2.aprovado_em AS de, COALESCE(v2.encerrado_em, v2.revogado_em) AS ate
+     FROM vinculos v2 JOIN usuarios u2 ON u2.id = v2.profissional_id JOIN clinicas cl ON cl.id = u2.clinica_id
+     WHERE v2.crianca_id = ? AND v2.status IN ('APROVADO','ENCERRADO') AND v2.aprovado_em IS NOT NULL
+       AND u2.clinica_id <> ? AND u2.registro_conselho = ? AND u2.registro_numero = ? AND u2.registro_uf = ?
+     ORDER BY v2.aprovado_em DESC LIMIT 1`
+  );
+  const buscarRegistro = banco.prepare('SELECT clinica_id, registro_conselho, registro_numero, registro_uf FROM usuarios WHERE id = ?');
+  function comReconhecimento(linha) {
+    if (linha.status !== 'PENDENTE') return linha;
+    const prof = buscarRegistro.get(linha.profissional_id);
+    // Sem registro informado, não há reconhecimento
+    if (!prof?.registro_conselho || !prof.registro_numero || !prof.registro_uf) return { ...linha, ja_atendeu: null };
+    const anterior = buscarAtendimentoAnterior.get(linha.crianca_id, prof.clinica_id, prof.registro_conselho, prof.registro_numero, prof.registro_uf);
+    return { ...linha, ja_atendeu: anterior ? { clinica_nome: anterior.clinica_nome, de: anterior.de, ate: anterior.ate } : null };
+  }
+
   // GET /vinculos
   function listar(req, res) {
     expirarVinculos(banco);
     if (req.usuario.papel === 'RESPONSAVEL') {
       const linhas = banco
         .prepare(
-          `SELECT v.id, v.crianca_id, c.nome AS crianca_nome, v.status, v.origem,
+          `SELECT v.id, v.crianca_id, v.profissional_id, c.nome AS crianca_nome, v.status, v.origem,
                   v.ver_historico_anterior, v.ver_horarios_outras_clinicas,
                   v.solicitado_em, v.respondido_em, v.aprovado_em, v.revogado_em, v.encerrado_em, v.motivo_encerramento,
                   u.nome AS profissional_nome, u.especialidade, u.especialidade_outro, cl.nome AS clinica_nome
@@ -46,7 +65,7 @@ function criarControladorVinculos(banco) {
            ORDER BY v.solicitado_em DESC`
         )
         .all(req.usuario.id);
-      return res.json({ dados: linhas });
+      return res.json({ dados: linhas.map(comReconhecimento) });
     }
 
     // Profissional: os próprios pedidos. Pedido feito pelo código da família e ainda não aprovado

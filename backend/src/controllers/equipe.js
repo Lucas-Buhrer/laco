@@ -147,6 +147,20 @@ function criarControladorEquipe(banco) {
     res.json({ dados: resumo });
   }
 
+  // POST /clinica/profissionais/:id/reativar — a conta volta, mas os vínculos NÃO voltam (RN-21):
+  // a família precisa aprovar de novo
+  function reativarProfissional(req, res) {
+    const prof = buscarProfissional(req);
+    if (!prof) return res.status(404).json(NAO_ENCONTRADO);
+    if (prof.ativo) return res.status(409).json({ erro: 'Este profissional já está ativo.' });
+    // Nova senha temporária: a antiga pode estar na mão de quem não deve
+    const senha = gerarSenhaTemporaria();
+    banco.prepare('UPDATE usuarios SET ativo = 1, desativado_em = NULL, motivo_desativacao = NULL, senha_hash = ?, senha_temporaria = 1 WHERE id = ?')
+      .run(bcrypt.hashSync(senha, 10), prof.id);
+    registrar(req, 'REATIVAR_PROFISSIONAL', { recurso: 'usuario', recursoId: prof.id });
+    res.json({ dados: { id: prof.id, senha_temporaria: senha } });
+  }
+
   // GET /clinica/recepcao
   function listarRecepcao(req, res) {
     const linhas = banco
@@ -194,7 +208,7 @@ function criarControladorEquipe(banco) {
   }
 
   return {
-    listarProfissionais, criarProfissional, editarProfissional, desativarProfissional,
+    listarProfissionais, criarProfissional, editarProfissional, desativarProfissional, reativarProfissional,
     listarRecepcao, criarRecepcao, desativarRecepcao, redefinirSenhaRecepcao,
   };
 }

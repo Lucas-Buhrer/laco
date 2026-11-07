@@ -18,6 +18,7 @@ function criarRotasEquipe(banco) {
   rotas.post('/profissionais', soAdmin, c.criarProfissional);
   rotas.put('/profissionais/:id', soAdmin, c.editarProfissional);
   rotas.post('/profissionais/:id/desativar', soAdmin, c.desativarProfissional);
+  rotas.post('/profissionais/:id/reativar', soAdmin, c.reativarProfissional);
 
   // Agenda completa da clínica, sem dados clínicos (a recepção e o ADM; o profissional usa /consultas)
   rotas.get('/agenda', exigirPapel('ADMIN_CLINICA', 'RECEPCAO'), consultas.listar);

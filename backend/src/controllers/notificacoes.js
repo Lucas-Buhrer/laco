@@ -1,12 +1,15 @@
 // Avisos dentro do app (RF-90). Cada pessoa só lê e marca os próprios avisos.
 
-const { expirarVinculos, criarLembretesDeConfirmacao } = require('../utils/expiracao');
+const { expirarVinculos, criarLembretesDeConfirmacao, criarLembreteDeAtividades } = require('../utils/expiracao');
 
 function criarControladorNotificacoes(banco) {
   // GET /notificacoes — os mais novos primeiro, com o total de não lidos
   function listar(req, res) {
     expirarVinculos(banco); // o aviso de pedido expirado nasce aqui, na leitura
-    if (req.usuario.papel === 'RESPONSAVEL') criarLembretesDeConfirmacao(banco, req.usuario.id);
+    if (req.usuario.papel === 'RESPONSAVEL') {
+      criarLembretesDeConfirmacao(banco, req.usuario.id);
+      criarLembreteDeAtividades(banco, req.usuario.id);
+    }
     const avisos = banco
       .prepare('SELECT id, texto, link, lida, criada_em FROM notificacoes WHERE usuario_id = ? ORDER BY criada_em DESC, id DESC LIMIT 100')
       .all(req.usuario.id);

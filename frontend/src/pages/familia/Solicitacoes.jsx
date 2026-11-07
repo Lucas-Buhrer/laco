@@ -4,6 +4,8 @@ import { api } from '../../api/api.js';
 
 import { nomeEspecialidade } from '../../utils/especialidades.js';
 
+const mesAno = (iso) => new Date(iso).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
+
 // Desenho: docs/telas/M2. Cada pedido vale para UM profissional (RN-18).
 function Pedido({ pedido, aoResponder, aoErro }) {
   // Padrões seguros: histórico anterior desligado, aviso de conflito ligado
@@ -29,6 +31,14 @@ function Pedido({ pedido, aoResponder, aoErro }) {
       <p className="etiqueta">Pedido de acesso</p>
       <h2 className="titulo-cartao">{pedido.profissional_nome} quer acompanhar {pedido.crianca_nome}</h2>
       <p className="detalhe">{[nomeEspecialidade(pedido), pedido.clinica_nome].filter(Boolean).join(' · ')}</p>
+
+      {pedido.ja_atendeu && (
+        <p className="aviso-info" role="note">
+          Já atendeu {pedido.crianca_nome} na {pedido.ja_atendeu.clinica_nome}
+          {pedido.ja_atendeu.de && `, de ${mesAno(pedido.ja_atendeu.de)}${pedido.ja_atendeu.ate ? ` a ${mesAno(pedido.ja_atendeu.ate)}` : ''}`}
+          {' '}(mesmo registro profissional informado).
+        </p>
+      )}
 
       <p className="etiqueta">O que poderá ver</p>
       <p className="detalhe">Consultas e atividades feitas por ele(a). Sempre incluído.</p>

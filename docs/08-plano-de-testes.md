@@ -156,3 +156,26 @@ Usar o `seed` (doc 09). Testes automatizados criam banco temporário próprio e 
 - 100% dos casos F-xx de prioridade P0 passando.
 - Roteiro manual completo sem defeito crítico ou alto.
 - Checklist LGPD do doc 04 completo.
+
+## 9. Cobertura automatizada (T-38)
+
+`npm test` roda 144 testes em `backend/tests/` (banco em memória + seed). Resumo de onde cada grupo está:
+
+| Arquivo | Casos |
+|---|---|
+| `auth.test.js` | F-01, F-03 a F-05, F-20, F-21, F-43, S-07, S-11, S-16, S-29, S-30, S-42 |
+| `precadastro.test.js` | F-02, F-06 a F-08, F-19, F-41, S-20, S-21, S-23, S-40 |
+| `vinculos.test.js` + `seguranca-vinculo.test.js` | F-09, F-18, S-01 a S-06, S-08, S-09, S-10, S-22, S-24, S-25, S-32, S-33, S-41 |
+| `equipe.test.js` + `completos.test.js` | F-15, F-22, F-23, F-44, S-12 (404 em vez de 403) |
+| `consultas.test.js` + `consultas-acoes.test.js` | F-10, F-24 a F-28, F-34, F-35, F-45, F-47 a F-49d, S-26 a S-28, S-31 |
+| `registros.test.js` + `atividades.test.js` | F-11 a F-14, S-19, S-43 |
+| `lgpd.test.js` | F-16, F-17, S-15, S-18 |
+| `responsaveis.test.js` | F-29 a F-33, S-35, S-37 |
+| `limpeza.test.js` | F-36, F-37, S-39 |
+| `relatorio.test.js` | F-38 a F-40, S-36, S-38 |
+| `painel.test.js` + `notificacoes.test.js` + `expiracao.test.js` | RF-36, RF-46, RF-80, RF-81, RF-90 |
+| `completos.test.js` | F-46, F-50, S-13, S-17, S-44 |
+
+**Só no roteiro manual** (dependem da tela): F-42 (filtro por filho na tela Hoje), cores visuais da agenda, folha de impressão A4 e a leitura em 360px.
+
+**Diferenças para o texto dos casos:** S-12 devolve 404 (não 403) para não revelar que o profissional de outra clínica existe; papéis trocados em rotas de outra área devolvem 403.

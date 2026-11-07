@@ -64,6 +64,13 @@ export default function Equipe() {
       setAviso(`${desativando.nome} foi desativado: ${r.vinculos_encerrados} acessos encerrados, ${r.consultas_canceladas} consultas canceladas, ${r.familias_avisadas} famílias avisadas.`);
       setDesativando(null);
     });
+  // A conta volta com senha nova, mas os acessos às crianças não: a família precisa aprovar de novo
+  const reativar = (p) =>
+    agir(async () => {
+      const r = await api.post(`/clinica/profissionais/${p.id}/reativar`, {});
+      setSenha({ para: p.nome, texto: r.senha_temporaria });
+      setAviso(`${p.nome} voltou. Os acessos às crianças não voltam sozinhos: a família precisa aprovar de novo.`);
+    });
   const redefinir = (r) =>
     agir(async () => {
       const res = await api.post(`/clinica/recepcao/${r.id}/redefinir-senha`, {});
@@ -178,7 +185,9 @@ export default function Equipe() {
                     <button className="botao-sec" onClick={() => editar(p)}>Editar</button>
                     <button className="botao-sec" onClick={() => setDesativando(p)}>Desativar</button>
                   </>
-                ) : null}
+                ) : (
+                  <button className="botao-sec" onClick={() => reativar(p)}>Reativar</button>
+                )}
               </td>
             </tr>
           ))}

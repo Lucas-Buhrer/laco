@@ -53,4 +53,25 @@ function criarLembretesDeConfirmacao(banco, responsavelId) {
   }
 }
 
-module.exports = { expirarVinculos, criarLembretesDeConfirmacao };
+// Lembrete diário das atividades de casa (RF-48a): um aviso por criança por dia, só se ainda houver algo por fazer hoje
+function criarLembreteDeAtividades(banco, responsavelId) {
+  const hoje = agoraIso().slice(0, 10);
+  const pendentes = banco
+    .prepare(
+      `SELECT cr.id, cr.nome, COUNT(*) AS n FROM atividades a JOIN criancas cr ON cr.id = a.crianca_id
+       WHERE a.status = 'ATIVA' AND (a.prazo IS NULL OR a.prazo >= ?)
+         AND NOT EXISTS (SELECT 1 FROM execucoes_atividade e WHERE e.atividade_id = a.id AND e.data = ?)
+         AND a.crianca_id IN (SELECT crianca_id FROM responsaveis_crianca WHERE responsavel_id = ? AND saiu_em IS NULL)
+       GROUP BY cr.id`
+    )
+    .all(hoje, hoje, responsavelId);
+  const jaTem = banco.prepare('SELECT 1 FROM notificacoes WHERE usuario_id = ? AND texto = ? AND criada_em >= ?');
+  const inserir = banco.prepare('INSERT INTO notificacoes (usuario_id, texto, link, criada_em) VALUES (?, ?, ?, ?)');
+  for (const p of pendentes) {
+    const texto = `Hoje ${p.n === 1 ? 'falta 1 atividade' : `faltam ${p.n} atividades`} de casa para fazer com ${p.nome}.`;
+    // O texto muda quando a quantidade muda; a data garante um aviso por dia
+    if (!jaTem.get(responsavelId, texto, `${hoje}T00:00:00`)) inserir.run(responsavelId, texto, '/familia/atividades', agoraIso());
+  }
+}
+
+module.exports = { expirarVinculos, criarLembretesDeConfirmacao, criarLembreteDeAtividades };
