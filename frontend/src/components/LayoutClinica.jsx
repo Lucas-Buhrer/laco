@@ -13,7 +13,7 @@ const MENUS = {
     ['', 'Painel', 'painel'], ['equipe', 'Equipe', 'criancas'], ['pre-cadastros', 'Pré-cadastros', 'precadastro'],
     ['agenda', 'Agenda da clínica', 'agenda'], ['clinica', 'Clínica', 'clinica'], ['conta', 'Conta', 'conta'],
   ],
-  // Recepção não tem tela de conta: a senha é redefinida pelo admin. O "Sair" fica no menu.
+  // Recepção não tem tela de conta: a senha é redefinida pelo admin
   RECEPCAO: [['', 'Painel', 'painel'], ['pre-cadastros', 'Pré-cadastros', 'precadastro'], ['agenda', 'Agenda', 'agenda']],
 };
 
@@ -40,9 +40,7 @@ export default function LayoutClinica() {
           <NavLink to="/clinica/avisos" className="item-menu">
             <Icone nome="avisos" />Avisos{naoLidas > 0 && <span className="contador">{naoLidas}</span>}
           </NavLink>
-          {usuario.papel === 'RECEPCAO' && (
-            <button className="item-menu" onClick={sair}><Icone nome="sair" />Sair</button>
-          )}
+          <button className="item-menu" onClick={sair}><Icone nome="sair" />Sair</button>
         </nav>
         <div className="menu-rodape">
           <span className="avatar">{usuario.nome[0]}</span>
