@@ -24,7 +24,7 @@ function criarControladorCriancas(banco) {
     }
     const vinculadas = banco
       .prepare(
-        `SELECT c.id, c.nome, c.data_nascimento, v.aprovado_em,
+        `SELECT c.id, c.nome, c.data_nascimento, v.aprovado_em, v.ver_historico_anterior,
                 (SELECT MAX(x.inicio) FROM consultas x WHERE x.crianca_id = c.id AND x.profissional_id = v.profissional_id AND x.status = 'REALIZADA') AS ultima_sessao,
                 (SELECT MIN(x.inicio) FROM consultas x WHERE x.crianca_id = c.id AND x.profissional_id = v.profissional_id AND x.status = 'AGENDADA' AND x.inicio >= ?) AS proxima_consulta
          FROM vinculos v JOIN criancas c ON c.id = v.crianca_id
@@ -44,7 +44,11 @@ function criarControladorCriancas(banco) {
       .get(req.params.id);
     // O profissional também fica sabendo do limite do próprio acesso (só o dele)
     if (req.acessoComo === 'PROFISSIONAL') {
-      c.escopo = { ver_historico_anterior: req.vinculo.ver_historico_anterior, aprovado_em: req.vinculo.aprovado_em };
+      c.escopo = {
+        ver_historico_anterior: req.vinculo.ver_historico_anterior,
+        ver_horarios_outras_clinicas: req.vinculo.ver_horarios_outras_clinicas,
+        aprovado_em: req.vinculo.aprovado_em,
+      };
     }
     res.json({ dados: c });
   }

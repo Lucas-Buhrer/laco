@@ -28,6 +28,7 @@ function idade(nascimento) {
 export default function Criancas() {
   const { usuario } = useAuth();
   const [lista, setLista] = useState(null);
+  const [busca, setBusca] = useState('');
   const [erro, setErro] = useState('');
 
   useEffect(() => {
@@ -36,10 +37,20 @@ export default function Criancas() {
 
   if (usuario.papel !== 'PROFISSIONAL') return <p className="aviso-erro">Esta tela é só para profissionais.</p>;
 
+  const termo = busca.trim().toLowerCase();
+  const visiveis = (lista || []).filter((c) => !termo || c.nome.toLowerCase().includes(termo));
+
   return (
     <>
-      <h1>Crianças</h1>
-      <p className="subtitulo">Só aparecem crianças cujas famílias aprovaram o seu acesso.</p>
+      <div className="avisos-cab">
+        <div>
+          <h1>Crianças</h1>
+          <p className="subtitulo">Só aparecem crianças cujas famílias aprovaram o seu acesso.</p>
+        </div>
+        {lista && lista.length > 3 && (
+          <input className="busca" type="search" placeholder="Buscar pelo nome" aria-label="Buscar pelo nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
+        )}
+      </div>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {lista && lista.length === 0 && (
         <div className="vazio-grande">
@@ -53,15 +64,19 @@ export default function Criancas() {
       )}
       {lista && lista.length > 0 && (
         <div className="tabela-cartao">
-          <div className="linha-criancas cab"><span>Nome</span><span>Idade</span><span>Última sessão</span><span>Próxima consulta</span><span>Acesso</span></div>
-          {lista.map((c) => (
-            <Link key={c.id} to={`/clinica/criancas/${c.id}`} className="linha-criancas">
-              <strong>{c.nome}</strong>
+          <div className="linha-criancas cab"><span>Nome</span><span>Idade</span><span>Última sessão</span><span>Próxima consulta</span><span>Histórico liberado</span><span /></div>
+          {visiveis.length === 0 && <p className="vazio">Ninguém com esse nome.</p>}
+          {visiveis.map((c) => (
+            <div key={c.id} className="linha-criancas">
+              <Link to={`/clinica/criancas/${c.id}`} className="nome-crianca">
+                <span className="avatar-mini">{c.nome[0]}</span><strong>{c.nome}</strong>
+              </Link>
               <span>{idade(c.data_nascimento)}</span>
               <span>{c.ultima_sessao ? diaRelativo(c.ultima_sessao) : '—'}</span>
               <span>{c.proxima_consulta ? diaRelativo(c.proxima_consulta) : 'Sem consulta marcada'}</span>
-              <span><i className="pill ok">Aprovado</i></span>
-            </Link>
+              <span><i className={c.ver_historico_anterior ? 'pill ok' : 'pill mu'}>{c.ver_historico_anterior ? 'Sim' : 'Não'}</i></span>
+              <Link className="botao-sec pequeno" to={`/clinica/criancas/${c.id}/registro`}>Registrar sessão</Link>
+            </div>
           ))}
         </div>
       )}

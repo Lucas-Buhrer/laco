@@ -425,3 +425,11 @@ a.ev.cor-cancelada, .amostra.cor-cancelada, .linha-consulta.cor-cancelada, .bloc
 .aviso-ponto { width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; background: #e0a21b; }
 .avisos .titulo-grupo { margin-top: 20px; }
 .avisos .lista-cartao { margin-top: 8px; }
+
+/* Lista de crianças: linha com ações (substitui o link da linha inteira) */
+.linha-criancas { grid-template-columns: 1.6fr 0.8fr 1.2fr 1.4fr 1fr auto; }
+.nome-crianca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; }
+.nome-crianca:hover strong { color: var(--verde-forte); text-decoration: underline; }
+div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: 12px; }
+.linha-criancas .botao-sec.pequeno { white-space: nowrap; }
+@media (max-width: 1000px) { .linha-criancas { grid-template-columns: 1fr 1fr; } }
