@@ -5,6 +5,12 @@ import LayoutClinica from './components/LayoutClinica.jsx';
 import LayoutFamilia from './components/LayoutFamilia.jsx';
 import LoginClinica from './pages/LoginClinica.jsx';
 import LoginResponsavel from './pages/LoginResponsavel.jsx';
+import AtivarConta from './pages/familia/AtivarConta.jsx';
+import { Filhos, AdicionarFilho } from './pages/familia/Filhos.jsx';
+import Acessos from './pages/familia/Acessos.jsx';
+import Solicitacoes from './pages/familia/Solicitacoes.jsx';
+import ConvidarClinica from './pages/familia/ConvidarClinica.jsx';
+import Mais from './pages/familia/Mais.jsx';
 import { PainelClinica, HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
@@ -23,6 +29,7 @@ export default function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/entrar" element={<LoginClinica />} />
           <Route path="/familia/entrar" element={<LoginResponsavel />} />
+          <Route path="/familia/ativar" element={<AtivarConta />} />
           <Route path="/sem-permissao" element={<SemPermissao />} />
 
           {/* Área da clínica: profissional, admin e recepção */}
@@ -37,6 +44,12 @@ export default function App() {
           <Route element={<RotaProtegida papeis={['RESPONSAVEL']} entrarEm="/familia/entrar" />}>
             <Route path="/familia" element={<LayoutFamilia />}>
               <Route index element={<HojeFamilia />} />
+              <Route path="filhos" element={<Filhos />} />
+              <Route path="filhos/adicionar" element={<AdicionarFilho />} />
+              <Route path="solicitacoes" element={<Solicitacoes />} />
+              <Route path="acessos" element={<Acessos />} />
+              <Route path="convidar" element={<ConvidarClinica />} />
+              <Route path="mais" element={<Mais />} />
               <Route path="*" element={<EmConstrucao />} />
             </Route>
           </Route>

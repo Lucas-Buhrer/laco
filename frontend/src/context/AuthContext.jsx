@@ -35,13 +35,20 @@ export function AuthProvider({ children }) {
     entrar('/auth/login-clinica', { codigo_clinica, identificador, senha });
   const entrarResponsavel = (email, senha) => entrar('/auth/login-responsavel', { email, senha });
 
+  // Conta recém-criada (ativação): já devolve um token, então entra direto
+  async function entrarComToken(token) {
+    guardarToken(token);
+    setSessaoExpirou(false);
+    setUsuario(await api.get('/auth/me'));
+  }
+
   function sair() {
     apagarToken();
     setUsuario(null);
   }
 
   return (
-    <AuthContext.Provider value={{ usuario, carregando, sessaoExpirou, entrarClinica, entrarResponsavel, sair }}>
+    <AuthContext.Provider value={{ usuario, carregando, sessaoExpirou, entrarClinica, entrarResponsavel, entrarComToken, sair }}>
       {children}
     </AuthContext.Provider>
   );

@@ -4,5 +4,6 @@ import App from './App.jsx';
 import './styles/base.css';
 import './styles/login.css';
 import './styles/layout.css';
+import './styles/familia.css';
 
 createRoot(document.getElementById('raiz')).render(<App />);

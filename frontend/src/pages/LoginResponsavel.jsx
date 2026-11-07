@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
-// Desenho: docs/telas/M6-Login (celular). "Ativar conta" será ligado na T-18.
+// Desenho: docs/telas/M6-Login (celular).
 export default function LoginResponsavel() {
   const { usuario, entrarResponsavel, sessaoExpirou } = useAuth();
   const navegar = useNavigate();
@@ -47,6 +47,8 @@ export default function LoginResponsavel() {
       </form>
 
       <p className="login-links">
+        Recebi um código da clínica: <Link to="/familia/ativar">ativar minha conta</Link>
+        <br />
         Sou da clínica: <Link to="/entrar">entrar pelo computador</Link>
       </p>
     </div>
