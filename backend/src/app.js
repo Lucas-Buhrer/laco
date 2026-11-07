@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const ambiente = require('./config/ambiente');
 const criarRotasAuth = require('./routes/auth');
+const { naoEncontrado, tratarErro } = require('./middlewares/erros');
 
 function criarApp(banco) {
   const app = express();
@@ -20,17 +21,9 @@ function criarApp(banco) {
 
   app.use('/api/auth', criarRotasAuth(banco));
 
-  // Rota desconhecida: mesmo padrão de erro do resto da API
-  app.use((req, res) => {
-    res.status(404).json({ erro: 'Não encontrado.' });
-  });
-
-  // Erro inesperado: não vaza detalhes para quem chamou (RNF-04)
-  // eslint-disable-next-line no-unused-vars
-  app.use((erro, req, res, next) => {
-    console.error('Erro inesperado:', erro.message);
-    res.status(500).json({ erro: 'Algo deu errado. Tente de novo.' });
-  });
+  // Sempre por último: rota desconhecida e erros inesperados
+  app.use(naoEncontrado);
+  app.use(tratarErro);
 
   return app;
 }
