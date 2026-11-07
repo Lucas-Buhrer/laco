@@ -8,6 +8,7 @@ const criarControladorCriancas = require('../controllers/criancas');
 const criarControladorRegistros = require('../controllers/registros');
 const criarControladorAtividades = require('../controllers/atividades');
 const criarControladorLgpd = require('../controllers/lgpd');
+const criarControladorResponsaveis = require('../controllers/responsaveis');
 
 // Montado em /api/criancas
 function criarRotasCriancas(banco) {
@@ -17,6 +18,7 @@ function criarRotasCriancas(banco) {
   const reg = criarControladorRegistros(banco);
   const ativ = criarControladorAtividades(banco);
   const lgpd = criarControladorLgpd(banco);
+  const resp = criarControladorResponsaveis(banco);
   const { exigirAcessoCrianca } = criarAcessoCrianca(banco);
 
   rotas.use(criarAutenticacao(banco));
@@ -41,6 +43,12 @@ function criarRotasCriancas(banco) {
   // LGPD (T-34): quem acessou e exportação, só para a família (a regra central deixa a família passar)
   rotas.get('/:id/acessos', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('VER_PAINEL_ACESSOS'), lgpd.acessos);
   rotas.get('/:id/exportar', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('EXPORTAR_PRE'), lgpd.exportar);
+
+  // Segundo responsável (T-40). Não existe rota para um responsável remover o outro.
+  rotas.get('/:id/responsaveis', exigirAcessoCrianca('VER_RESPONSAVEIS'), resp.listar);
+  rotas.post('/:id/convites-responsavel', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('GERAR_CONVITE_RESPONSAVEL_PRE'), resp.gerarConvite);
+  rotas.post('/:id/sair', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('SAIR_PRE'), resp.sair);
+  rotas.put('/:id/meu-parentesco', exigirPapel('RESPONSAVEL'), exigirAcessoCrianca('MUDAR_PARENTESCO_PRE'), resp.mudarParentesco);
 
   return rotas;
 }

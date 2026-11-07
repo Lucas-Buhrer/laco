@@ -49,6 +49,8 @@ export default function LoginResponsavel() {
       <p className="login-links">
         Recebi um código da clínica: <Link to="/familia/ativar">ativar minha conta</Link>
         <br />
+        Recebi um convite de outro responsável: <Link to="/familia/convite">usar o convite</Link>
+        <br />
         Sou da clínica: <Link to="/entrar">entrar pelo computador</Link>
         <br />
         <Link to="/politica">Política de privacidade</Link>

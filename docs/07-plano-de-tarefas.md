@@ -44,7 +44,7 @@ Como Claude executa todas as áreas e o dono orquestra, as tarefas são organiza
 | | T-36 | Conflito de horário, expiração de convite/vínculo, confirmação de presença (prazo de **1 dia antes**; depois, só contato com a clínica) | BE | P1 | RF-36, RF-44, RF-46 ✅ |
 | | T-43 | **Agenda viva:** cores por dias que faltam (azul, amarelo, vermelho, verde), coluna por profissional, destaque do dia de hoje, estados de consultas passadas (Realizada, Remarcada, Cancelada, Faltou) | BE+FE | P0 | RF-47a, RF-42a, RN-35 ✅ |
 | | T-44 | **Ações da consulta:** remarcar, cancelar, marcar realizada/faltou (só depois do horário), registrar confirmação por telefone; aviso à família | BE+FE | P0 | RF-42a, RF-44, F-49 a F-49d ✅ |
-| | T-40 | **Segundo responsável:** convite, aceite, sair, avisos ao outro, vários aparelhos | BE+FE | P1 | RF-08, RF-09, RN-28 a RN-31 |
+| | T-40 | **Segundo responsável:** convite, aceite, sair, avisos ao outro, vários aparelhos | BE+FE | P1 | RF-08, RF-09, RN-28 a RN-31 ✅ |
 | | T-41 | **Pré-cadastros inativos:** inativação aos 30 dias, exclusão aos 90, log sem dados pessoais, script `npm run limpeza` | BE+FE | P1 | RF-28, RN-33 |
 | | T-42 | **Relatório de evolução** e parecer do profissional, com folha de impressão | BE+FE | P1 | RF-55 a RF-57, RN-34 |
 | Tarde 2 | T-37 | Revisão de UX: estados vazio/erro (telas R23, R24, E1 a E5), 360px, acessibilidade, relatório A4 | FE | P0 | Checklist do doc 06 |

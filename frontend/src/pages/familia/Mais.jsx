@@ -14,6 +14,7 @@ export default function Mais() {
       <Link className="cartao destaque" to="/familia/filhos">Meus filhos</Link>
       <Link className="cartao destaque" to="/familia/linha-do-tempo">Linha do tempo</Link>
       <Link className="cartao destaque" to="/familia/solicitacoes">Pedidos de acesso</Link>
+      <Link className="cartao destaque" to="/familia/responsaveis">Responsáveis</Link>
       <Link className="cartao destaque" to="/familia/convidar">Convidar outra clínica</Link>
       <Link className="cartao destaque" to="/familia/quem-acessou">Quem acessou</Link>
       <Link className="cartao destaque" to="/familia/privacidade">Privacidade e dados</Link>

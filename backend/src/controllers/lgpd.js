@@ -33,12 +33,16 @@ const ACOES = {
   GERAR_CONVITE_CLINICA: 'gerou um código para outra clínica',
   EDITAR_CRIANCA: 'editou os dados da criança',
   EXPORTAR_DADOS: 'baixou os dados da criança',
+  VER_RESPONSAVEIS: 'viu a lista de responsáveis',
+  GERAR_CONVITE_RESPONSAVEL: 'gerou um convite para outro responsável',
+  ENTRAR_COMO_RESPONSAVEL: 'entrou como responsável',
+  SAIR_DA_CRIANCA: 'saiu como responsável',
   SOLICITAR_EXCLUSAO: 'pediu a exclusão dos dados',
   REVOGAR_CONSENTIMENTO: 'revogou o consentimento',
 };
 // Do responsável, só as ações que mudam algo aparecem no painel (ver a própria tela não é "acesso")
 const ACOES_DO_RESPONSAVEL = ['APROVAR_VINCULO', 'RECUSAR_VINCULO', 'REVOGAR_VINCULO', 'MUDAR_ESCOPO_VINCULO',
-  'GERAR_CONVITE_CLINICA', 'EDITAR_CRIANCA', 'EXPORTAR_DADOS', 'SOLICITAR_EXCLUSAO', 'REVOGAR_CONSENTIMENTO'];
+  'GERAR_CONVITE_CLINICA', 'GERAR_CONVITE_RESPONSAVEL', 'ENTRAR_COMO_RESPONSAVEL', 'SAIR_DA_CRIANCA', 'EDITAR_CRIANCA', 'EXPORTAR_DADOS', 'SOLICITAR_EXCLUSAO', 'REVOGAR_CONSENTIMENTO'];
 
 function criarControladorLgpd(banco) {
   const { registrar } = criarAuditoria(banco);

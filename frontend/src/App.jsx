@@ -23,6 +23,8 @@ import AtividadesFamilia from './pages/familia/AtividadesFamilia.jsx';
 import QuemAcessou from './pages/familia/QuemAcessou.jsx';
 import Privacidade from './pages/familia/Privacidade.jsx';
 import Politica from './pages/Politica.jsx';
+import Responsaveis from './pages/familia/Responsaveis.jsx';
+import AceitarConvite from './pages/familia/AceitarConvite.jsx';
 import Avisos from './pages/Avisos.jsx';
 import Agenda from './pages/clinica/Agenda.jsx';
 import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
@@ -50,6 +52,7 @@ export default function App() {
           <Route path="/familia/ativar" element={<AtivarConta />} />
           <Route path="/sem-permissao" element={<SemPermissao />} />
           <Route path="/politica" element={<Politica />} />
+          <Route path="/familia/convite" element={<AceitarConvite />} />
 
           {/* Área da clínica: profissional, admin e recepção */}
           <Route element={<RotaProtegida papeis={['PROFISSIONAL', 'ADMIN_CLINICA', 'RECEPCAO']} entrarEm="/entrar" />}>
@@ -81,6 +84,7 @@ export default function App() {
               <Route path="linha-do-tempo" element={<LinhaDoTempoFamilia />} />
               <Route path="atividades" element={<AtividadesFamilia />} />
               <Route path="quem-acessou" element={<QuemAcessou />} />
+              <Route path="responsaveis" element={<Responsaveis />} />
               <Route path="avisos" element={<Avisos />} />
               <Route path="privacidade" element={<Privacidade />} />
               <Route path="filhos" element={<Filhos />} />

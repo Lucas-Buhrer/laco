@@ -45,6 +45,7 @@ export function Filhos() {
         );
       })}
       <Link className="botao-sec bloco" to="/familia/filhos/adicionar">Adicionar outro filho</Link>
+      <Link className="botao-sec bloco" to="/familia/convite">Tenho um convite de outro responsável</Link>
     </>
   );
 }
