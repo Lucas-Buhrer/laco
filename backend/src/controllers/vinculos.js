@@ -94,6 +94,9 @@ function criarControladorVinculos(banco) {
         .prepare(`UPDATE vinculos SET status = 'APROVADO', ver_historico_anterior = ?, ver_horarios_outras_clinicas = ?,
                   respondido_em = ?, aprovado_em = ? WHERE id = ?`)
         .run(historico, horarios, agora, agora, v.id);
+      // Consultas marcadas pela Recepção enquanto o pedido estava pendente deixam de "aguardar" a família
+      banco.prepare('UPDATE consultas SET aguardando_aprovacao = 0 WHERE crianca_id = ? AND profissional_id = ?')
+        .run(v.crianca_id, v.profissional_id);
       registrar(req, 'APROVAR_VINCULO', { criancaId: v.crianca_id, recurso: 'vinculo', recursoId: v.id });
       avisar(v.profissional_id, `A família aprovou o seu acesso a ${v.crianca_nome}.`, '/clinica/criancas');
       avisarOutroResponsavel(v.crianca_id, req.usuario.id,

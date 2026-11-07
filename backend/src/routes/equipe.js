@@ -2,12 +2,14 @@ const express = require('express');
 const criarAutenticacao = require('../middlewares/autenticacao');
 const exigirPapel = require('../middlewares/papel');
 const criarControladorEquipe = require('../controllers/equipe');
+const criarControladorConsultas = require('../controllers/consultas');
 
 // Montado em /api/clinica. Equipe da própria clínica.
 function criarRotasEquipe(banco) {
   const rotas = express.Router();
   const c = criarControladorEquipe(banco);
   const soAdmin = exigirPapel('ADMIN_CLINICA');
+  const consultas = criarControladorConsultas(banco);
 
   rotas.use(criarAutenticacao(banco), exigirPapel('PROFISSIONAL', 'ADMIN_CLINICA', 'RECEPCAO'));
 
@@ -16,6 +18,9 @@ function criarRotasEquipe(banco) {
   rotas.post('/profissionais', soAdmin, c.criarProfissional);
   rotas.put('/profissionais/:id', soAdmin, c.editarProfissional);
   rotas.post('/profissionais/:id/desativar', soAdmin, c.desativarProfissional);
+
+  // Agenda completa da clínica, sem dados clínicos (a recepção e o ADM; o profissional usa /consultas)
+  rotas.get('/agenda', exigirPapel('ADMIN_CLINICA', 'RECEPCAO'), consultas.listar);
 
   rotas.get('/recepcao', soAdmin, c.listarRecepcao);
   rotas.post('/recepcao', soAdmin, c.criarRecepcao);

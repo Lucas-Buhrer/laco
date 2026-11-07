@@ -30,3 +30,7 @@
   height: 52px; padding: 0 12px; border: 1px solid var(--borda); border-radius: var(--raio);
   background: var(--branco); font-family: inherit; font-size: 17px; color: var(--texto);
 }
+
+.abas { display: flex; gap: 8px; margin-top: 16px; }
+.aba { flex: 1; min-height: 44px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--branco); font: inherit; font-weight: 600; cursor: pointer; }
+.aba.ativa { background: var(--verde-claro); border-color: var(--verde); }

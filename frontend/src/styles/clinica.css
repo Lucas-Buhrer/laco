@@ -34,3 +34,23 @@
 @media print {
   .menu-lateral, form, .titulo-lista, .linha-lista, .acoes-topo { display: none; }
 }
+
+/* Agenda e consultas */
+.legenda { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid transparent; }
+.cor-verde { background: #d7f0df; border-color: #8fd0a6; color: #12482a; }
+.cor-azul { background: #dcebfa; border-color: #9fc4e8; color: #123a63; }
+.cor-amarela { background: #fdf0c8; border-color: #e5c867; color: #5c4600; }
+.cor-vermelha { background: #fbe0da; border-color: #e3a593; color: #8a2a12; }
+.cor-realizada { background: #eef2ef; border-color: #c8d3cc; color: #3c4d44; }
+.cor-remarcada, .cor-cancelada, .cor-falta { background: #f1ece6; border-color: #d6c9bb; color: #5a4a3a; }
+.titulo-dia { margin-top: 28px; font-size: 20px; text-transform: capitalize; }
+.titulo-dia.hoje { color: var(--verde-forte); }
+.linha-consulta {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; margin-top: 8px;
+  padding: 12px 16px; border-radius: var(--raio); border: 1px solid; text-decoration: none; color: var(--texto);
+}
+.linha-consulta small { color: var(--texto-suave); }
+.linha-consulta em { font-style: normal; font-size: 14px; }
+.aviso-conflito { background: #fdf0c8; border-color: #e5c867; }
+@media (max-width: 700px) { .linha-consulta { grid-template-columns: 56px 1fr; } .linha-consulta em { grid-column: 2; } }

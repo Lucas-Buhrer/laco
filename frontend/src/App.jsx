@@ -16,6 +16,10 @@ import PreCadastros from './pages/clinica/PreCadastros.jsx';
 import CodigoDaFamilia from './pages/clinica/CodigoDaFamilia.jsx';
 import Criancas from './pages/clinica/Criancas.jsx';
 import Equipe from './pages/clinica/Equipe.jsx';
+import Agenda from './pages/clinica/Agenda.jsx';
+import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
+import Consulta from './pages/clinica/Consulta.jsx';
+import AgendaFamilia from './pages/familia/AgendaFamilia.jsx';
 import { HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
@@ -44,6 +48,11 @@ export default function App() {
               <Route path="pre-cadastros" element={<PreCadastros />} />
               <Route path="codigo-da-familia" element={<CodigoDaFamilia />} />
               <Route path="criancas" element={<Criancas />} />
+              <Route path="agenda" element={<Agenda />} />
+              <Route path="agenda/nova" element={<RotaProtegida papeis={['PROFISSIONAL', 'RECEPCAO']} entrarEm="/entrar" />}>
+                <Route index element={<NovaConsulta />} />
+              </Route>
+              <Route path="agenda/:id" element={<Consulta />} />
               <Route path="equipe" element={<RotaProtegida papeis={['ADMIN_CLINICA']} entrarEm="/entrar" />}>
                 <Route index element={<Equipe />} />
               </Route>
@@ -55,6 +64,7 @@ export default function App() {
           <Route element={<RotaProtegida papeis={['RESPONSAVEL']} entrarEm="/familia/entrar" />}>
             <Route path="/familia" element={<LayoutFamilia />}>
               <Route index element={<HojeFamilia />} />
+              <Route path="agenda" element={<AgendaFamilia />} />
               <Route path="filhos" element={<Filhos />} />
               <Route path="filhos/adicionar" element={<AdicionarFilho />} />
               <Route path="solicitacoes" element={<Solicitacoes />} />

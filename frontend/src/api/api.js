@@ -39,6 +39,7 @@ async function chamar(metodo, rota, corpo) {
     if (resposta.status === 401 && token) aoExpirar();
     const erro = new Error(json.erro || 'Algo deu errado. Tente de novo.');
     erro.status = resposta.status;
+    erro.conflito = json.conflito === true; // aviso de conflito de agenda (resposta genérica)
     throw erro;
   }
   return json.dados;
