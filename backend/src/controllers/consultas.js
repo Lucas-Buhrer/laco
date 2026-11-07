@@ -366,3 +366,5 @@ function criarControladorConsultas(banco) {
 }
 
 module.exports = criarControladorConsultas;
+module.exports.corDaConsulta = corDaConsulta;
+module.exports.diasAte = diasAte;

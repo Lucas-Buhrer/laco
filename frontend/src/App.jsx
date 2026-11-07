@@ -24,7 +24,8 @@ import Agenda from './pages/clinica/Agenda.jsx';
 import NovaConsulta from './pages/clinica/NovaConsulta.jsx';
 import Consulta from './pages/clinica/Consulta.jsx';
 import AgendaFamilia from './pages/familia/AgendaFamilia.jsx';
-import { HojeFamilia, EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
+import Hoje from './pages/familia/Hoje.jsx';
+import { EmConstrucao, SemPermissao } from './pages/Paineis.jsx';
 
 // Quem abre "/" vai para a sua área; quem não está logado, para o login da clínica
 function Inicio() {
@@ -69,7 +70,7 @@ export default function App() {
           {/* Área da família */}
           <Route element={<RotaProtegida papeis={['RESPONSAVEL']} entrarEm="/familia/entrar" />}>
             <Route path="/familia" element={<LayoutFamilia />}>
-              <Route index element={<HojeFamilia />} />
+              <Route index element={<Hoje />} />
               <Route path="agenda" element={<AgendaFamilia />} />
               <Route path="linha-do-tempo" element={<LinhaDoTempoFamilia />} />
               <Route path="atividades" element={<AtividadesFamilia />} />

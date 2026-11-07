@@ -38,7 +38,7 @@ Como Claude executa todas as áreas e o dono orquestra, as tarefas são organiza
 | Manhã 1 | T-30 | Consultas (inclusive pela Recepção) e **aviso de conflito entre clínicas** (escopo, verificação ao agendar, agenda do ADM/REC) | BE+FE | P0 | RF-40 a RF-45, RF-48, RF-49, RN-24 a RN-27, S-26 a S-28, S-31 ✅ |
 | | T-31 | Registro de sessão, adendos, linha do tempo, privacidade do registro | BE+FE | P0 | RF-50 a RF-54 ✅ |
 | Manhã 2 | T-32 | Atividades de casa e execuções (celular primeiro) | BE+FE | P0 | RF-60 a RF-63 ✅ |
-| | T-33 | Painéis dos dois perfis | BE+FE | P0 | RF-80, RF-81 |
+| | T-33 | Painéis dos dois perfis | BE+FE | P0 | RF-80, RF-81 ✅ |
 | Tarde 1 | T-34 | LGPD: painel de acessos, exportação, solicitações, política/termo | BE+FE | P0/P1 | RF-70 a RF-76 |
 | | T-35 | Notificações internas | BE+FE | P1 | RF-90 |
 | | T-36 | Conflito de horário, expiração de convite/vínculo, confirmação de presença (prazo de **1 dia antes**; depois, só contato com a clínica) | BE | P1 | RF-36, RF-44, RF-46 |
