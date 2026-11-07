@@ -1,0 +1,13 @@
+{
+  "name": "laco",
+  "private": true,
+  "version": "0.1.0",
+  "description": "LAÇO — software para clínicas de crianças com TEA",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "instalar": "npm install --prefix backend && npm install --prefix frontend",
+    "seed": "npm run seed --prefix backend",
+    "test": "npm test --prefix backend",
+    "limpeza": "npm run limpeza --prefix backend"
+  }
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Equipe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html,body{height:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:#12241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+a{color:inherit}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:12px;color:#4B5F55;font-weight:500;font-size:15px;text-decoration:none}
+.nav.on{background:#CDEBD6;color:#0F2E21;font-weight:700}
+.card{background:#fff;border:1px solid #DCE5DF;border-radius:20px;padding:24px 28px}
+.f{font-family:'Bricolage Grotesque','Figtree',sans-serif}
+.h1{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:40px;font-weight:600;letter-spacing:-.025em;line-height:1.05;margin:0}
+.h2{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:22px;font-weight:600;margin:0}
+.sub{margin:8px 0 0;font-size:16px;color:#4B5F55;line-height:1.5}
+.btn{height:48px;padding:0 22px;border:0;border-radius:12px;background:#7CCB9B;color:#0B261B;font-size:16px;font-weight:700;display:inline-flex;align-items:center;text-decoration:none}
+.btn2{height:48px;padding:0 20px;border:1px solid #B9C9BF;border-radius:12px;background:#fff;color:#12241C;font-size:15px;font-weight:600;display:inline-flex;align-items:center;text-decoration:none}
+.btnd{height:48px;padding:0 20px;border:1px solid #D9B8A8;border-radius:12px;background:#fff;color:#8A3B1E;font-size:15px;font-weight:600;display:inline-flex;align-items:center}
+.lbl{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}
+.inp{height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:0 16px;font-size:17px;color:#12241C}
+.ta{border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:14px 16px;font-size:16px;line-height:1.5;color:#12241C;resize:none}
+.pill{display:inline-block;padding:5px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.ok{background:#E4F4E9;color:#1F6B4A}.wa{background:#FCEFC9;color:#4A3500}.mu{background:#EEF1EF;color:#5E7066}
+.tr{display:grid;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #E6ECE8}
+.th{font-size:13px;font-weight:600;color:#5E7066;padding-bottom:8px}
+.mut{color:#5E7066}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid #B9C9BF;border-radius:10px;background:#fff;font-size:15px;font-weight:600}
+.chip.on{background:#A9DDBB;border-color:#A9DDBB;color:#0F2E21}
+.big{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:44px;font-weight:600;line-height:1}
+.kpi{background:#fff;border:1px solid #DCE5DF;border-radius:18px;padding:22px}
+.kpi p{margin:6px 0 0;font-size:15px;color:#4B5F55}
+.note{background:#E4F4E9;border-radius:18px;padding:18px 24px;color:#123B2B;font-size:14px;line-height:1.55}
+/* celular */
+.mc{background:#fff;border:1px solid #DCE5DF;border-radius:18px}
+.mt{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:32px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.mh{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:20px;font-weight:600}
+.mb{height:54px;border:0;border-radius:14px;background:#7CCB9B;color:#0B261B;font-size:17px;font-weight:700;width:100%}
+.mb2{height:50px;border:1px solid #B9C9BF;border-radius:14px;background:transparent;color:#12241C;font-size:16px;font-weight:600;width:100%}
+.mrow{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #E6ECE8}
+.mrow:last-child{border-bottom:0}
+</style>
+</helmet>
+<div style="display:flex;width:100%;height:100%;min-height:900px;background:#F3F6F4">
+<aside style="width:240px;flex-shrink:0;background:#FFFFFF;border-right:1px solid #DCE5DF;padding:28px 16px;display:flex;flex-direction:column;gap:4px">
+<span class="f" style="font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#123B2B;padding:0 12px 24px">laço</span>
+<a class="nav" href="D7-Admin.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Painel</a>
+<a class="nav on" href="D16-Equipe.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 5a3.5 3.5 0 0 1 0 7M18 14c2 .8 3 2.7 3 6"/></svg>Equipe</a>
+<a class="nav" href="D5A-PreCadastro.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="10" cy="8" r="3.5"/><path d="M4 20c0-3.5 2.7-6 6-6s6 2.5 6 6M19 8v6M16 11h6"/></svg>Pré-cadastros</a>
+<a class="nav" href="D18-AdmAgenda.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Agenda da clínica</a>
+<a class="nav" href="D19-Clinica.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 20V8l8-4 8 4v12M9 20v-6h6v6"/></svg>Clínica</a>
+<a class="nav" href="D13A-Conta.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Conta</a>
+<div style="margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-top:1px solid #E6ECE8"><span style="width:40px;height:40px;border-radius:50%;background:#CDEBD6;color:#123B2B;display:flex;align-items:center;justify-content:center;font-weight:700">R</span><div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">Renata</span><span style="font-size:12px;color:#5E7066">Administração · Aurora</span></div></div>
+</aside>
+<main style="flex:1;min-width:0;padding:40px 56px;display:flex;flex-direction:column;gap:28px;overflow:hidden">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px"><div><h1 class="h1">Equipe</h1><p class="sub">Código da clínica para o login: AURORA</p></div><div style="display:flex;gap:12px"><span class="btn2">Cadastrar recepção</span><span class="btn">Cadastrar profissional</span></div></div><div style="display:grid;grid-template-columns:1.7fr 1fr;gap:24px;align-items:start"><div class="card"><div class="tr th" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span>Nome</span><span>Especialidade / função</span><span>Crianças</span><span>Situação</span><span></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Carlos Lima</span><span style="font-size:15px;color:#4B5F55">Terapeuta ocupacional</span><span style="font-size:15px">9</span><span><span class="pill ok">Ativo</span></span><span style="display:flex;gap:8px"><a class="btnd" href="D17-Desativar.dc.html" style="height:40px;text-decoration:none">Desativar</a></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Ana Souza</span><span style="font-size:15px;color:#4B5F55">Fonoaudiólogo(a)</span><span style="font-size:15px">11</span><span><span class="pill ok">Ativo</span></span><span style="display:flex;gap:8px"><a class="btnd" href="D17-Desativar.dc.html" style="height:40px;text-decoration:none">Desativar</a></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Paulo Reis</span><span style="font-size:15px;color:#4B5F55">Psicólogo(a) ABA</span><span style="font-size:15px">7</span><span><span class="pill ok">Ativo</span></span><span style="display:flex;gap:8px"><a class="btnd" href="D17-Desativar.dc.html" style="height:40px;text-decoration:none">Desativar</a></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Marta Alves</span><span style="font-size:15px;color:#4B5F55">Neuropediatra</span><span style="font-size:15px">5</span><span><span class="pill wa">Senha temporária</span></span><span style="display:flex;gap:8px"><a class="btnd" href="D17-Desativar.dc.html" style="height:40px;text-decoration:none">Desativar</a></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Bia</span><span style="font-size:15px;color:#4B5F55">Recepção</span><span style="font-size:15px">—</span><span><span class="pill ok">Ativo</span></span><span style="display:flex;gap:8px"><a class="btnd" href="D17-Desativar.dc.html" style="height:40px;text-decoration:none">Desativar</a></span></div><div class="tr" style="grid-template-columns:1.6fr 1.6fr .7fr 1.4fr 1.3fr"><span style="font-size:16px;font-weight:600">Rafael Dias</span><span style="font-size:15px;color:#4B5F55">Fisioterapeuta</span><span style="font-size:15px">0</span><span><span class="pill mu">Desativado</span></span><span style="display:flex;gap:8px"><span class="btn2" style="height:40px">Editar</span></span></div></div><form class="card" style="display:flex;flex-direction:column;gap:16px"><h2 class="h2">Novo profissional</h2><label class="lbl">Nome<input class="inp" type="text" value="Marta Alves" ></label><label class="lbl">E-mail<input class="inp" type="text" value="marta@aurora.test" ></label><label class="lbl">Especialidade<select class="inp"><option>Terapeuta ocupacional</option><option>Fonoaudiólogo(a)</option><option>Psicólogo(a) ABA</option><option>Neuropediatra</option><option>Outro</option></select></label><label class="lbl">Registro profissional (conselho, número e UF)<input class="inp" type="text" value="CRM 123456/SP" ></label><div class="note" style="padding:14px 18px;border-radius:14px">A conta vale só para esta clínica. Geramos uma senha temporária para a primeira entrada.</div><button type="button" class="btn" style="justify-content:center;height:52px">Cadastrar</button></form></div>
+</main>
+</div>
+<div style="position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(18,36,28,.45);display:flex;align-items:center;justify-content:center" role="dialog" aria-modal="true" aria-label="Desativar profissional"><div style="width:560px;background:#fff;border-radius:22px;padding:32px 36px;display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 60px rgba(18,36,28,.25)"><h2 class="f" style="margin:0;font-size:28px;font-weight:600;letter-spacing:-.02em">Desativar Carlos Lima?</h2><p style="margin:0;font-size:16px;line-height:1.55;color:#4B5F55">Isto acontece na hora e não pode ser desfeito por aqui:</p><div style="display:flex;flex-direction:column;gap:10px;font-size:16px"><div style="display:flex;gap:12px;align-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>O acesso dele a 9 crianças é encerrado</div><div style="display:flex;gap:12px;align-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>4 consultas futuras são canceladas</div><div style="display:flex;gap:12px;align-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>9 famílias são avisadas</div></div><p style="margin:0;font-size:14px;line-height:1.5;color:#5E7066">Se ele voltar, a família precisa aprovar de novo.</p><div style="display:flex;gap:12px;margin-top:6px"><a class="btn2" href="D16-Equipe.dc.html" style="flex:1;justify-content:center;height:52px">Cancelar</a><span class="btnd" style="flex:1;justify-content:center;height:52px;background:#8A3B1E;border-color:#8A3B1E;color:#fff;font-weight:700">Desativar agora</span></div></div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

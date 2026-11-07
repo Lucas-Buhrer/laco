@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ativar conta — app dos pais</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:#12241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
+</style>
+</helmet>
+<div style="width:390px;height:844px;background:#F3F6F4;display:flex;flex-direction:column;overflow:hidden;padding:28px 24px 24px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#123B2B">laço</span>
+<span style="font-size:14px;color:#5E7066">Passo 1 de 3</span>
+</div>
+<div style="display:flex;gap:6px;margin-top:16px">
+<span style="flex:1;height:4px;border-radius:2px;background:#7CCB9B"></span>
+<span style="flex:1;height:4px;border-radius:2px;background:#DCE5DF"></span>
+<span style="flex:1;height:4px;border-radius:2px;background:#DCE5DF"></span>
+</div>
+<h1 style="margin:36px 0 0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-0.02em">Vamos ativar a sua conta</h1>
+<p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#4B5F55">A clínica entregou a você um código. Digite abaixo, junto com a data de nascimento da criança.</p>
+<form style="margin-top:28px;display:flex;flex-direction:column;gap:20px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">Código de ativação
+<input type="text" value="DAVI-4K7M-92QX" style="height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#FFFFFF;padding:0 16px;font-size:18px;letter-spacing:0.08em;color:#12241C">
+</label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">Data de nascimento da criança
+<input type="text" value="14/03/2019" style="height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#FFFFFF;padding:0 16px;font-size:18px;color:#12241C">
+</label>
+<div style="display:flex;gap:12px;align-items:flex-start;background:#E4F4E9;border-radius:14px;padding:14px 16px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F6B4A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>
+<p style="margin:0;font-size:14px;line-height:1.45;color:#123B2B">Ninguém da clínica verá os dados do seu filho até você aprovar cada profissional.</p>
+</div>
+<button type="button" style="height:54px;border:0;border-radius:14px;background:#7CCB9B;color:#0B261B;font-size:17px;font-weight:700;margin-top:4px">Continuar</button>
+</form>
+<p style="margin:auto 0 0;text-align:center;font-size:14px;color:#5E7066;line-height:1.5">Sem código? Peça à recepção da clínica.<br>Já tem conta? <b style="color:#1F6B4A">Entrar</b></p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+/* Cores provisórias do doc 06 */
+:root {
+  --azul: #4a7fb5;
+  --verde-agua: #5fb3a8;
+  --fundo: #f7fafc;
+  --texto: #1f2933;
+  --alerta: #c77d1a;
+  --erro: #b3382c;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+}
+
+main {
+  padding: 24px;
+}

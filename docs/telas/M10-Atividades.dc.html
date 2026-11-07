@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Atividades — app dos pais</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html,body{height:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:#12241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+a{color:inherit}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:12px;color:#4B5F55;font-weight:500;font-size:15px;text-decoration:none}
+.nav.on{background:#CDEBD6;color:#0F2E21;font-weight:700}
+.card{background:#fff;border:1px solid #DCE5DF;border-radius:20px;padding:24px 28px}
+.f{font-family:'Bricolage Grotesque','Figtree',sans-serif}
+.h1{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:40px;font-weight:600;letter-spacing:-.025em;line-height:1.05;margin:0}
+.h2{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:22px;font-weight:600;margin:0}
+.sub{margin:8px 0 0;font-size:16px;color:#4B5F55;line-height:1.5}
+.btn{height:48px;padding:0 22px;border:0;border-radius:12px;background:#7CCB9B;color:#0B261B;font-size:16px;font-weight:700;display:inline-flex;align-items:center;text-decoration:none}
+.btn2{height:48px;padding:0 20px;border:1px solid #B9C9BF;border-radius:12px;background:#fff;color:#12241C;font-size:15px;font-weight:600;display:inline-flex;align-items:center;text-decoration:none}
+.btnd{height:48px;padding:0 20px;border:1px solid #D9B8A8;border-radius:12px;background:#fff;color:#8A3B1E;font-size:15px;font-weight:600;display:inline-flex;align-items:center}
+.lbl{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}
+.inp{height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:0 16px;font-size:17px;color:#12241C}
+.ta{border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:14px 16px;font-size:16px;line-height:1.5;color:#12241C;resize:none}
+.pill{display:inline-block;padding:5px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.ok{background:#E4F4E9;color:#1F6B4A}.wa{background:#FCEFC9;color:#4A3500}.mu{background:#EEF1EF;color:#5E7066}
+.tr{display:grid;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #E6ECE8}
+.th{font-size:13px;font-weight:600;color:#5E7066;padding-bottom:8px}
+.mut{color:#5E7066}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid #B9C9BF;border-radius:10px;background:#fff;font-size:15px;font-weight:600}
+.chip.on{background:#A9DDBB;border-color:#A9DDBB;color:#0F2E21}
+.big{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:44px;font-weight:600;line-height:1}
+.kpi{background:#fff;border:1px solid #DCE5DF;border-radius:18px;padding:22px}
+.kpi p{margin:6px 0 0;font-size:15px;color:#4B5F55}
+.note{background:#E4F4E9;border-radius:18px;padding:18px 24px;color:#123B2B;font-size:14px;line-height:1.55}
+/* celular */
+.mc{background:#fff;border:1px solid #DCE5DF;border-radius:18px}
+.mt{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:32px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.mh{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:20px;font-weight:600}
+.mb{height:54px;border:0;border-radius:14px;background:#7CCB9B;color:#0B261B;font-size:17px;font-weight:700;width:100%}
+.mb2{height:50px;border:1px solid #B9C9BF;border-radius:14px;background:transparent;color:#12241C;font-size:16px;font-weight:600;width:100%}
+.mrow{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #E6ECE8}
+.mrow:last-child{border-bottom:0}
+</style>
+</helmet>
+<div style="width:390px;height:844px;background:#F3F6F4;display:flex;flex-direction:column;overflow:hidden"><div style="height:20px"></div><div style="flex:1;min-height:0;overflow:hidden;padding:20px 20px 0;display:flex;flex-direction:column"><h1 class="mt">Atividades</h1><div style="display:flex;gap:8px;margin-top:16px"><span class="chip on">Hoje</span><span class="chip">Todas</span><span class="chip">Theo</span></div><div class="mc" style="margin-top:16px;padding:16px"><div style="display:flex;gap:12px;align-items:center"><span style="width:32px;height:32px;border-radius:50%;border:2px solid #7FA38E;flex-shrink:0"></span><div><div style="font-size:16px;font-weight:600">Pedir objeto usando a figura</div><div style="font-size:13px;color:#5E7066">Theo · 1 de 3 feitas hoje</div></div></div><div style="margin-top:14px;font-size:14px;font-weight:600">Como foi?</div><div style="display:flex;gap:8px;margin-top:8px"><span style="flex:1;min-height:48px;border:1px solid #A9DDBB;border-radius:12px;background:#A9DDBB;color:#0F2E21;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;text-align:center;padding:0 4px">Foi bem</span><span style="flex:1;min-height:48px;border:1px solid #B9C9BF;border-radius:12px;background:#fff;color:#12241C;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;text-align:center;padding:0 4px">Mais ou menos</span><span style="flex:1;min-height:48px;border:1px solid #B9C9BF;border-radius:12px;background:#fff;color:#12241C;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;text-align:center;padding:0 4px">Foi difícil</span></div><textarea class="ta" rows="2" placeholder="Quer deixar uma observação?" style="width:100%;margin-top:12px;font-size:15px"></textarea><button class="mb" type="button" style="margin-top:12px;height:50px">Marcar como feita</button></div><div class="mc" style="margin-top:12px"><div class="mrow"><span style="width:32px;height:32px;border-radius:50%;border:2px solid #7FA38E;flex-shrink:0"></span><div style="flex:1"><div style="font-size:16px;font-weight:600">Rotina de escovar os dentes</div><div style="font-size:13px;color:#5E7066">Theo · à noite</div></div></div><div class="mrow"><span style="width:32px;height:32px;border-radius:50%;background:#A9DDBB;color:#0F2E21;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div style="flex:1"><div style="font-size:16px;font-weight:600;color:#5E7066">Brincar de trocar de vez</div><div style="font-size:13px;color:#5E7066">Feita às 17:40</div></div></div></div></div><nav aria-label="Principal" style="display:flex;background:#FFFFFF;border-top:1px solid #DCE5DF;padding:8px 8px 12px"><a href="Main.dc.html" style="flex:1;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#5E7066;min-height:52px;font-size:12px;font-weight:500"><span style="height:30px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>Hoje</a><a href="M9-Agenda.dc.html" style="flex:1;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#5E7066;min-height:52px;font-size:12px;font-weight:500"><span style="height:30px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span>Agenda</a><a href="M10-Atividades.dc.html" style="flex:1;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#0F2E21;min-height:52px;font-size:12px;font-weight:700"><span style="width:56px;border-radius:10px;background:#CDEBD6;height:30px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg></span>Atividades</a><a href="M4-Acessos.dc.html" style="flex:1;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#5E7066;min-height:52px;font-size:12px;font-weight:500"><span style="height:30px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></span>Acessos</a><a href="M18-Mais.dc.html" style="flex:1;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;color:#5E7066;min-height:52px;font-size:12px;font-weight:500"><span style="height:30px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg></span>Mais</a></nav></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

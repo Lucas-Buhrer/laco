@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Entrar · erro</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html,body{height:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:#12241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
+</style>
+</helmet>
+<div style="display:flex;width:100%;height:100%;min-height:900px;background:#F3F6F4">
+<div style="flex:1;background:#CDEBD6;padding:64px 80px;display:flex;flex-direction:column;justify-content:space-between">
+<span style="font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;color:#123B2B">laço</span>
+<div style="max-width:560px">
+<h1 style="margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:60px;line-height:1.05;font-weight:600;letter-spacing:-0.03em;color:#0F2E21">O cuidado da criança, com a família no centro.</h1>
+<p style="margin:24px 0 0;font-size:19px;line-height:1.55;color:#22493A">Cada profissional só vê o que os pais aprovaram. Toda consulta e todo acesso ficam registrados.</p>
+</div>
+<p style="margin:0;font-size:14px;color:#2F5F4A">Versão de demonstração · dados fictícios</p>
+</div>
+<div style="width:560px;background:#FFFFFF;padding:64px 80px;display:flex;flex-direction:column;justify-content:center">
+<h2 style="margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:32px;font-weight:600;letter-spacing:-0.02em">Entrar na clínica</h2>
+<p style="margin:8px 0 0;font-size:16px;color:#4B5F55">Equipe da clínica: profissionais e administração entram com e-mail; a recepção, com o código de usuário.</p>
+<div role="alert" style="margin-top:20px;display:flex;gap:12px;align-items:flex-start;background:#FBE4DD;border:1px solid #E3A593;color:#8A2A12;border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.5"/></svg><span><b>Código, usuário ou senha incorretos.</b> Confira os dados e tente de novo. Depois de 5 tentativas, o acesso fica bloqueado por 15 minutos.</span></div><form style="margin-top:20px;display:flex;flex-direction:column;gap:20px">
+<label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">Código da clínica
+<input type="text" value="AURORA" style="height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#FFFFFF;padding:0 16px;font-size:17px;color:#12241C"></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">E-mail ou código de usuário
+<input type="text" value="profissional@laco.test" style="height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#FFFFFF;padding:0 16px;font-size:17px;color:#12241C"></label>
+<label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">Senha
+<input type="password" value="••••••" style="height:52px;border-radius:12px;border:2px solid #C9532F;background:#FFFFFF;padding:0 16px;font-size:17px;color:#12241C"></label>
+<button type="button" style="height:54px;border:0;border-radius:14px;background:#7CCB9B;color:#0B261B;font-size:17px;font-weight:700;margin-top:4px">Entrar</button>
+</form>
+<div style="margin-top:32px;padding-top:24px;border-top:1px solid #E1E9E4;display:flex;align-items:center;justify-content:space-between;gap:16px">
+<span style="font-size:15px;color:#4B5F55">É pai, mãe ou responsável?</span>
+<button style="min-height:44px;padding:0 16px;border:1px solid #B9C9BF;border-radius:12px;background:transparent;color:#12241C;font-size:15px;font-weight:600">Abrir o app da família</button>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

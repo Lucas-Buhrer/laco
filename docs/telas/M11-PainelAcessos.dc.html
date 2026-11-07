@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Quem acessou — app dos pais</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html,body{height:100%}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:#12241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+a{color:inherit}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:12px;color:#4B5F55;font-weight:500;font-size:15px;text-decoration:none}
+.nav.on{background:#CDEBD6;color:#0F2E21;font-weight:700}
+.card{background:#fff;border:1px solid #DCE5DF;border-radius:20px;padding:24px 28px}
+.f{font-family:'Bricolage Grotesque','Figtree',sans-serif}
+.h1{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:40px;font-weight:600;letter-spacing:-.025em;line-height:1.05;margin:0}
+.h2{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:22px;font-weight:600;margin:0}
+.sub{margin:8px 0 0;font-size:16px;color:#4B5F55;line-height:1.5}
+.btn{height:48px;padding:0 22px;border:0;border-radius:12px;background:#7CCB9B;color:#0B261B;font-size:16px;font-weight:700;display:inline-flex;align-items:center;text-decoration:none}
+.btn2{height:48px;padding:0 20px;border:1px solid #B9C9BF;border-radius:12px;background:#fff;color:#12241C;font-size:15px;font-weight:600;display:inline-flex;align-items:center;text-decoration:none}
+.btnd{height:48px;padding:0 20px;border:1px solid #D9B8A8;border-radius:12px;background:#fff;color:#8A3B1E;font-size:15px;font-weight:600;display:inline-flex;align-items:center}
+.lbl{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}
+.inp{height:52px;border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:0 16px;font-size:17px;color:#12241C}
+.ta{border-radius:12px;border:1px solid #B9C9BF;background:#fff;padding:14px 16px;font-size:16px;line-height:1.5;color:#12241C;resize:none}
+.pill{display:inline-block;padding:5px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.ok{background:#E4F4E9;color:#1F6B4A}.wa{background:#FCEFC9;color:#4A3500}.mu{background:#EEF1EF;color:#5E7066}
+.tr{display:grid;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #E6ECE8}
+.th{font-size:13px;font-weight:600;color:#5E7066;padding-bottom:8px}
+.mut{color:#5E7066}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid #B9C9BF;border-radius:10px;background:#fff;font-size:15px;font-weight:600}
+.chip.on{background:#A9DDBB;border-color:#A9DDBB;color:#0F2E21}
+.big{font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:44px;font-weight:600;line-height:1}
+.kpi{background:#fff;border:1px solid #DCE5DF;border-radius:18px;padding:22px}
+.kpi p{margin:6px 0 0;font-size:15px;color:#4B5F55}
+.note{background:#E4F4E9;border-radius:18px;padding:18px 24px;color:#123B2B;font-size:14px;line-height:1.55}
+/* celular */
+.mc{background:#fff;border:1px solid #DCE5DF;border-radius:18px}
+.mt{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:32px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.mh{margin:0;font-family:'Bricolage Grotesque','Figtree',sans-serif;font-size:20px;font-weight:600}
+.mb{height:54px;border:0;border-radius:14px;background:#7CCB9B;color:#0B261B;font-size:17px;font-weight:700;width:100%}
+.mb2{height:50px;border:1px solid #B9C9BF;border-radius:14px;background:transparent;color:#12241C;font-size:16px;font-weight:600;width:100%}
+.mrow{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #E6ECE8}
+.mrow:last-child{border-bottom:0}
+</style>
+</helmet>
+<div style="width:390px;height:844px;background:#F3F6F4;display:flex;flex-direction:column;overflow:hidden"><div style="padding:12px 12px 0"><a href="M4-Acessos.dc.html" style="display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 8px;color:#12241C;text-decoration:none;font-size:16px;font-weight:600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M15 6l-6 6 6 6"/></svg>Voltar</a></div><div style="flex:1;min-height:0;overflow:hidden;padding:8px 20px 0;display:flex;flex-direction:column"><h1 class="mt">Quem acessou</h1><p style="margin:8px 0 0;font-size:15px;color:#4B5F55;line-height:1.45">Todo acesso aos dados do Theo fica registrado. Este histórico não pode ser apagado.</p><div style="display:flex;gap:8px;margin-top:16px"><span class="chip on">Todos</span><span class="chip">Carlos</span><span class="chip">Ana</span></div><div style="margin-top:6px"><div style="font-size:13px;font-weight:700;letter-spacing:.04em;color:#5E7066;margin-top:14px">HOJE</div><div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #E1E9E4"><span style="width:8px;height:8px;border-radius:50%;background:#4FAF7C;margin-top:8px;flex-shrink:0"></span><div style="flex:1"><div style="font-size:15px;font-weight:600">Carlos Lima abriu o histórico</div><div style="font-size:13px;color:#5E7066">14:12</div></div></div><div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #E1E9E4"><span style="width:8px;height:8px;border-radius:50%;background:#4FAF7C;margin-top:8px;flex-shrink:0"></span><div style="flex:1"><div style="font-size:15px;font-weight:600">Carlos Lima criou uma atividade</div><div style="font-size:13px;color:#5E7066">09:55</div></div></div><div style="font-size:13px;font-weight:700;letter-spacing:.04em;color:#5E7066;margin-top:14px">ONTEM</div><div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #E1E9E4"><span style="width:8px;height:8px;border-radius:50%;background:#4FAF7C;margin-top:8px;flex-shrink:0"></span><div style="flex:1"><div style="font-size:15px;font-weight:600">Carlos Lima registrou uma sessão</div><div style="font-size:13px;color:#5E7066">16:40</div></div></div><div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #E1E9E4"><span style="width:8px;height:8px;border-radius:50%;background:#C5D2CA;margin-top:8px;flex-shrink:0"></span><div style="flex:1"><div style="font-size:15px;font-weight:600">Thiago (pai) aprovou Carlos Lima</div><div style="font-size:13px;color:#5E7066">09:03</div></div></div></div></div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

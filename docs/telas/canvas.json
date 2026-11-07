@@ -1,0 +1,633 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-07T15:10:00Z"
+  },
+  "title": "LAÇO — Design das telas",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "D1-Login.dc.html": {
+      "x": 0,
+      "y": 130,
+      "w": 1440,
+      "h": 900,
+      "title": "Entrar na clínica",
+      "expand": "fill"
+    },
+    "D21-CadastroClinica.dc.html": {
+      "x": 1520,
+      "y": 130,
+      "w": 1440,
+      "h": 900,
+      "title": "Cadastrar clínica",
+      "expand": "fill"
+    },
+    "D22-Politica.dc.html": {
+      "x": 3040,
+      "y": 130,
+      "w": 1440,
+      "h": 900,
+      "title": "Política de privacidade",
+      "expand": "fill"
+    },
+    "M6-Login.dc.html": {
+      "x": 0,
+      "y": 1520,
+      "w": 390,
+      "h": 844,
+      "title": "R1 · Entrar"
+    },
+    "M0-Ativar.dc.html": {
+      "x": 470,
+      "y": 1520,
+      "w": 390,
+      "h": 844,
+      "title": "R2 · Ativar conta (passo 1)"
+    },
+    "M7-Termo.dc.html": {
+      "x": 940,
+      "y": 1520,
+      "w": 390,
+      "h": 844,
+      "title": "R3 · Termo (passo 2)"
+    },
+    "M8-CriarConta.dc.html": {
+      "x": 1410,
+      "y": 1520,
+      "w": 390,
+      "h": 844,
+      "title": "R4 · Criar conta (passo 3)"
+    },
+    "Main.dc.html": {
+      "x": 1880,
+      "y": 1520,
+      "w": 390,
+      "h": 844,
+      "title": "R5 · Hoje (um filho)"
+    },
+    "M1-HojeDois.dc.html": {
+      "x": 0,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R6 · Hoje (dois filhos)"
+    },
+    "M5-AdicionarFilho.dc.html": {
+      "x": 470,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R7 · Adicionar outro filho"
+    },
+    "M2-Aprovar.dc.html": {
+      "x": 940,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R8 · Aprovar acesso"
+    },
+    "M9-Agenda.dc.html": {
+      "x": 1410,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R9 · Agenda"
+    },
+    "M10-Atividades.dc.html": {
+      "x": 1880,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R10 · Atividades"
+    },
+    "M4-Acessos.dc.html": {
+      "x": 0,
+      "y": 3520,
+      "w": 390,
+      "h": 844,
+      "title": "R11 · Quem tem acesso"
+    },
+    "M11-PainelAcessos.dc.html": {
+      "x": 470,
+      "y": 3520,
+      "w": 390,
+      "h": 844,
+      "title": "R12 · Quem acessou"
+    },
+    "M12-ConvidarClinica.dc.html": {
+      "x": 940,
+      "y": 3520,
+      "w": 390,
+      "h": 844,
+      "title": "R13 · Convidar outra clínica"
+    },
+    "M13-Responsaveis.dc.html": {
+      "x": 1410,
+      "y": 3520,
+      "w": 390,
+      "h": 844,
+      "title": "R14 · Responsáveis"
+    },
+    "M3-Relatorio.dc.html": {
+      "x": 1880,
+      "y": 3520,
+      "w": 390,
+      "h": 844,
+      "title": "R15 · Relatório de evolução"
+    },
+    "M14-Filhos.dc.html": {
+      "x": 0,
+      "y": 4520,
+      "w": 390,
+      "h": 844,
+      "title": "R16 · Meus filhos"
+    },
+    "M15-PerfilFilho.dc.html": {
+      "x": 470,
+      "y": 4520,
+      "w": 390,
+      "h": 844,
+      "title": "R17 · Perfil do filho"
+    },
+    "M16-Privacidade.dc.html": {
+      "x": 940,
+      "y": 4520,
+      "w": 390,
+      "h": 844,
+      "title": "R18 · Privacidade e dados"
+    },
+    "M17-Avisos.dc.html": {
+      "x": 1410,
+      "y": 4520,
+      "w": 390,
+      "h": 844,
+      "title": "R19 · Avisos"
+    },
+    "M18-Mais.dc.html": {
+      "x": 1880,
+      "y": 4520,
+      "w": 390,
+      "h": 844,
+      "title": "R20 · Mais"
+    },
+    "D2-Painel.dc.html": {
+      "x": 0,
+      "y": 5810,
+      "w": 1440,
+      "h": 900,
+      "title": "P1 · Painel",
+      "expand": "fill"
+    },
+    "D8-Criancas.dc.html": {
+      "x": 1520,
+      "y": 5810,
+      "w": 1440,
+      "h": 900,
+      "title": "P2 · Crianças",
+      "expand": "fill"
+    },
+    "D3-Crianca.dc.html": {
+      "x": 3040,
+      "y": 5810,
+      "w": 1440,
+      "h": 900,
+      "title": "P3 · Perfil da criança",
+      "expand": "fill"
+    },
+    "D9-Registro.dc.html": {
+      "x": 0,
+      "y": 6910,
+      "w": 1440,
+      "h": 900,
+      "title": "P4 · Registro da sessão",
+      "expand": "fill"
+    },
+    "D10-Atividades.dc.html": {
+      "x": 1520,
+      "y": 6910,
+      "w": 1440,
+      "h": 900,
+      "title": "P5 · Atividades da criança",
+      "expand": "fill"
+    },
+    "D11-Parecer.dc.html": {
+      "x": 3040,
+      "y": 6910,
+      "w": 1440,
+      "h": 900,
+      "title": "P6 · Parecer",
+      "expand": "fill"
+    },
+    "D6-NovaConsulta.dc.html": {
+      "x": 0,
+      "y": 8010,
+      "w": 1440,
+      "h": 900,
+      "title": "P7 · Nova consulta (com aviso de conflito)",
+      "expand": "fill"
+    },
+    "D4-Agenda.dc.html": {
+      "x": 1520,
+      "y": 8010,
+      "w": 1440,
+      "h": 900,
+      "title": "P8 · Agenda",
+      "expand": "fill"
+    },
+    "D5P-PreCadastro.dc.html": {
+      "x": 3040,
+      "y": 8010,
+      "w": 1440,
+      "h": 900,
+      "title": "P9 · Pré-cadastros",
+      "expand": "fill"
+    },
+    "D12-Convite.dc.html": {
+      "x": 0,
+      "y": 9110,
+      "w": 1440,
+      "h": 900,
+      "title": "P10 · Código da família",
+      "expand": "fill"
+    },
+    "D13P-Conta.dc.html": {
+      "x": 1520,
+      "y": 9110,
+      "w": 1440,
+      "h": 900,
+      "title": "P11 · Conta",
+      "expand": "fill"
+    },
+    "D14-RecPainel.dc.html": {
+      "x": 0,
+      "y": 10500,
+      "w": 1440,
+      "h": 900,
+      "title": "C1 · Painel (com Código da família)",
+      "expand": "fill"
+    },
+    "D5-PreCadastro.dc.html": {
+      "x": 1520,
+      "y": 10500,
+      "w": 1440,
+      "h": 900,
+      "title": "C2 · Pré-cadastros",
+      "expand": "fill"
+    },
+    "D15-RecAgenda.dc.html": {
+      "x": 3040,
+      "y": 10500,
+      "w": 1440,
+      "h": 900,
+      "title": "C3 · Agenda",
+      "expand": "fill"
+    },
+    "D6R-NovaConsulta.dc.html": {
+      "x": 0,
+      "y": 11600,
+      "w": 1440,
+      "h": 900,
+      "title": "C4 · Nova consulta",
+      "expand": "fill"
+    },
+    "D7-Admin.dc.html": {
+      "x": 0,
+      "y": 12990,
+      "w": 1440,
+      "h": 900,
+      "title": "A1 · Painel",
+      "expand": "fill"
+    },
+    "D16-Equipe.dc.html": {
+      "x": 1520,
+      "y": 12990,
+      "w": 1440,
+      "h": 900,
+      "title": "A2 · Equipe",
+      "expand": "fill"
+    },
+    "D16R-NovaRecepcao.dc.html": {
+      "x": 3040,
+      "y": 12990,
+      "w": 1440,
+      "h": 900,
+      "title": "A3 · Nova recepção",
+      "expand": "fill"
+    },
+    "D17-Desativar.dc.html": {
+      "x": 0,
+      "y": 14090,
+      "w": 1440,
+      "h": 900,
+      "title": "A4 · Desativar profissional",
+      "expand": "fill"
+    },
+    "D5A-PreCadastro.dc.html": {
+      "x": 1520,
+      "y": 14090,
+      "w": 1440,
+      "h": 900,
+      "title": "A5 · Pré-cadastros",
+      "expand": "fill"
+    },
+    "D18-AdmAgenda.dc.html": {
+      "x": 3040,
+      "y": 14090,
+      "w": 1440,
+      "h": 900,
+      "title": "A6 · Agenda da clínica",
+      "expand": "fill"
+    },
+    "D19-Clinica.dc.html": {
+      "x": 0,
+      "y": 15190,
+      "w": 1440,
+      "h": 900,
+      "title": "A7 · Clínica",
+      "expand": "fill"
+    },
+    "D13A-Conta.dc.html": {
+      "x": 1520,
+      "y": 15190,
+      "w": 1440,
+      "h": 900,
+      "title": "A8 · Conta",
+      "expand": "fill"
+    },
+    "D15b-RecAgenda7.dc.html": {
+      "x": 1520,
+      "y": 11600,
+      "w": 1440,
+      "h": 900,
+      "title": "C3b · Agenda com 7 profissionais",
+      "expand": "fill"
+    },
+    "D4b-AgendaPassada.dc.html": {
+      "x": 3040,
+      "y": 9110,
+      "w": 1440,
+      "h": 900,
+      "title": "P8b · Agenda (dias que já passaram)",
+      "expand": "fill"
+    },
+    "M9b-AgendaAnteriores.dc.html": {
+      "x": 2350,
+      "y": 2520,
+      "w": 390,
+      "h": 844,
+      "title": "R9b · Agenda (anteriores)"
+    },
+    "D15c-RecAgendaHoje.dc.html": {
+      "x": 3040,
+      "y": 11600,
+      "w": 1440,
+      "h": 900,
+      "title": "C3c · Agenda de hoje (consultas que já passaram)",
+      "expand": "fill"
+    },
+    "D20-Consulta.dc.html": {
+      "x": 0,
+      "y": 16430,
+      "w": 1440,
+      "h": 900,
+      "title": "P12 · Consulta (ainda vai acontecer)",
+      "expand": "fill"
+    },
+    "D20b-ConsultaPassou.dc.html": {
+      "x": 1520,
+      "y": 16430,
+      "w": 1440,
+      "h": 900,
+      "title": "P13 · Consulta que já passou (como terminou?)",
+      "expand": "fill"
+    },
+    "D20c-Remarcar.dc.html": {
+      "x": 3040,
+      "y": 16430,
+      "w": 1440,
+      "h": 900,
+      "title": "P14 · Remarcar consulta",
+      "expand": "fill"
+    },
+    "D20d-Cancelar.dc.html": {
+      "x": 0,
+      "y": 17530,
+      "w": 1440,
+      "h": 900,
+      "title": "P15 · Cancelar consulta",
+      "expand": "fill"
+    },
+    "D23-Vazio.dc.html": {
+      "x": 1520,
+      "y": 17530,
+      "w": 1440,
+      "h": 900,
+      "title": "P16 · Sem crianças ainda",
+      "expand": "fill"
+    },
+    "D20r-ConsultaRec.dc.html": {
+      "x": 3040,
+      "y": 17530,
+      "w": 1440,
+      "h": 900,
+      "title": "C5 · Consulta (recepção)",
+      "expand": "fill"
+    },
+    "D1b-LoginErro.dc.html": {
+      "x": 0,
+      "y": 18630,
+      "w": 1440,
+      "h": 900,
+      "title": "E1 · Entrar com erro",
+      "expand": "fill"
+    },
+    "D24-NaoEncontrado.dc.html": {
+      "x": 1520,
+      "y": 18630,
+      "w": 1440,
+      "h": 900,
+      "title": "E2 · Página não encontrada",
+      "expand": "fill"
+    },
+    "M3b-RelatorioImpressao.dc.html": {
+      "x": 3040,
+      "y": 18630,
+      "w": 794,
+      "h": 1123,
+      "title": "R25 · Relatório para imprimir (A4)"
+    },
+    "M19-Consulta.dc.html": {
+      "x": 0,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "R21 · Consulta (confirmar presença)"
+    },
+    "M19b-PrazoEncerrado.dc.html": {
+      "x": 470,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "R22 · Consulta com prazo encerrado"
+    },
+    "M20-AgendaVazia.dc.html": {
+      "x": 940,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "R23 · Agenda vazia"
+    },
+    "M20b-AtividadesVazia.dc.html": {
+      "x": 1410,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "R24 · Atividades vazio"
+    },
+    "M21-SemConexao.dc.html": {
+      "x": 1880,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "E3 · Sem conexão"
+    },
+    "M6b-SessaoExpirada.dc.html": {
+      "x": 2350,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "E4 · Sessão terminou"
+    },
+    "M0b-CodigoInvalido.dc.html": {
+      "x": 2820,
+      "y": 19950,
+      "w": 390,
+      "h": 844,
+      "title": "E5 · Código inválido"
+    }
+  },
+  "order": [
+    "D1-Login.dc.html",
+    "D21-CadastroClinica.dc.html",
+    "D22-Politica.dc.html",
+    "M6-Login.dc.html",
+    "M0-Ativar.dc.html",
+    "M7-Termo.dc.html",
+    "M8-CriarConta.dc.html",
+    "Main.dc.html",
+    "M1-HojeDois.dc.html",
+    "M5-AdicionarFilho.dc.html",
+    "M2-Aprovar.dc.html",
+    "M9-Agenda.dc.html",
+    "M9b-AgendaAnteriores.dc.html",
+    "M10-Atividades.dc.html",
+    "M4-Acessos.dc.html",
+    "M11-PainelAcessos.dc.html",
+    "M12-ConvidarClinica.dc.html",
+    "M13-Responsaveis.dc.html",
+    "M3-Relatorio.dc.html",
+    "M14-Filhos.dc.html",
+    "M15-PerfilFilho.dc.html",
+    "M16-Privacidade.dc.html",
+    "M17-Avisos.dc.html",
+    "M18-Mais.dc.html",
+    "D2-Painel.dc.html",
+    "D8-Criancas.dc.html",
+    "D3-Crianca.dc.html",
+    "D9-Registro.dc.html",
+    "D10-Atividades.dc.html",
+    "D11-Parecer.dc.html",
+    "D6-NovaConsulta.dc.html",
+    "D4-Agenda.dc.html",
+    "D4b-AgendaPassada.dc.html",
+    "D5P-PreCadastro.dc.html",
+    "D12-Convite.dc.html",
+    "D13P-Conta.dc.html",
+    "D14-RecPainel.dc.html",
+    "D5-PreCadastro.dc.html",
+    "D15-RecAgenda.dc.html",
+    "D15b-RecAgenda7.dc.html",
+    "D15c-RecAgendaHoje.dc.html",
+    "D6R-NovaConsulta.dc.html",
+    "D7-Admin.dc.html",
+    "D16-Equipe.dc.html",
+    "D16R-NovaRecepcao.dc.html",
+    "D17-Desativar.dc.html",
+    "D5A-PreCadastro.dc.html",
+    "D18-AdmAgenda.dc.html",
+    "D19-Clinica.dc.html",
+    "D13A-Conta.dc.html",
+    "D20-Consulta.dc.html",
+    "D20b-ConsultaPassou.dc.html",
+    "D20c-Remarcar.dc.html",
+    "D20d-Cancelar.dc.html",
+    "D23-Vazio.dc.html",
+    "D20r-ConsultaRec.dc.html",
+    "D1b-LoginErro.dc.html",
+    "D24-NaoEncontrado.dc.html",
+    "M3b-RelatorioImpressao.dc.html",
+    "M19-Consulta.dc.html",
+    "M19b-PrazoEncerrado.dc.html",
+    "M20-AgendaVazia.dc.html",
+    "M20b-AtividadesVazia.dc.html",
+    "M21-SemConexao.dc.html",
+    "M6b-SessaoExpirada.dc.html",
+    "M0b-CodigoInvalido.dc.html"
+  ],
+  "notes": {
+    "n1": {
+      "x": 1620,
+      "y": 0,
+      "w": 420,
+      "fill": "green",
+      "text": "Direção visual\nVerde claro como cor principal; verde profundo para texto; amarelo suave só para avisos e pendências.\nLinhas finas, muito espaço, ícones de traço, nenhum emoji.\nTítulos em Bricolage Grotesque; texto em Figtree."
+    },
+    "t0": {
+      "x": 0,
+      "y": 0,
+      "text": "Entrada",
+      "kind": "title1",
+      "maxW": 4600
+    },
+    "t1": {
+      "x": 0,
+      "y": 1390,
+      "text": "Responsável · app no celular",
+      "kind": "title1",
+      "maxW": 4600
+    },
+    "t2": {
+      "x": 0,
+      "y": 5680,
+      "text": "Profissional · computador",
+      "kind": "title1",
+      "maxW": 4600
+    },
+    "t3": {
+      "x": 0,
+      "y": 10370,
+      "text": "Recepção · computador",
+      "kind": "title1",
+      "maxW": 4600
+    },
+    "t4": {
+      "x": 0,
+      "y": 12860,
+      "text": "Administração · computador",
+      "kind": "title1",
+      "maxW": 4600
+    },
+    "t5": {
+      "x": 0,
+      "y": 16300,
+      "text": "Ações, estados vazios e erros",
+      "kind": "title1",
+      "maxW": 4600
+    }
+  },
+  "designSystems": []
+}
