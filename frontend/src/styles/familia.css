@@ -143,3 +143,11 @@ a.cartao:hover, button.cartao:hover { border-color: #b9c9bf; box-shadow: 0 2px 1
 .confirma-revogar .acoes-topo { margin-top: 0; }
 .dois-botoes { display: flex; gap: 10px; margin-top: 24px; }
 .dois-botoes .botao-sec { flex: 1; min-height: 48px; border-radius: 14px; font-size: 14px; text-align: center; background: transparent; }
+
+/* ===== Agenda da família (desenhos M9 e M19) ===== */
+.faixa-hoje { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding: 10px 14px; background: #d3ebdc; border-radius: 12px; font-size: 14px; color: #123b2b; }
+.faixa-hoje b { font-size: 12px; letter-spacing: 0.04em; color: var(--verde-forte); }
+.agenda-familia .lista-cartao { margin-top: 12px; }
+.agenda-familia .bloco-dia { width: 52px; height: 52px; }
+.nota-prazo { margin: 14px 0 12px; }
+.pill.neutro { background: #f3f6f4; border: 1px solid #dce5df; color: #4b5f55; }
