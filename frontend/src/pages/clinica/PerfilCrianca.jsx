@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { api } from '../../api/api.js';
 import LinhaDoTempo from '../../components/LinhaDoTempo.jsx';
+import AtividadesClinica from '../../components/AtividadesClinica.jsx';
 
 function idade(nascimento) {
   const n = new Date(nascimento);
@@ -80,6 +81,8 @@ export default function PerfilCrianca() {
           </div>
         </form>
       )}
+
+      <AtividadesClinica criancaId={id} />
 
       <div className="caixa">
         <h2>Seu acesso</h2>
