@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import { classeCor, diaLongo, frase, hora } from '../../utils/consultas.js';
 import { nomeEspecialidade } from '../../utils/especialidades.js';
 
+const maius = (t) => t.charAt(0).toUpperCase() + t.slice(1);
 const MOTIVOS = ['Profissional indisponível', 'A pedido da família', 'Criança doente', 'Outro'];
 
 // Desenho: docs/telas/D20, D20r (recepção), D20c (remarcar) e D20d (cancelar).
@@ -61,7 +62,7 @@ export default function Consulta() {
     <>
       <Link to="/clinica/agenda" className="voltar">Voltar para a agenda</Link>
       <h1>Consulta de {c.crianca_nome}</h1>
-      <p className="subtitulo">{diaLongo(c.inicio)} · {hora(c.inicio)} · {c.duracao_min} min</p>
+      <p className="subtitulo">{maius(diaLongo(c.inicio))} · {hora(c.inicio)} · {c.duracao_min} min</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
@@ -71,7 +72,7 @@ export default function Consulta() {
           <dl className="pares">
             <div><dt>Criança</dt><dd>{c.crianca_nome}</dd></div>
             <div><dt>Profissional</dt><dd>{c.profissional_nome}<br /><small className="suave">{nomeEspecialidade(c)}</small></dd></div>
-            <div><dt>Quando</dt><dd>{diaLongo(c.inicio)}, {hora(c.inicio)}</dd></div>
+            <div><dt>Horário</dt><dd>{hora(c.inicio)} às {hora(new Date(new Date(c.inicio).getTime() + c.duracao_min * 60000))}</dd></div>
             <div><dt>Tipo</dt><dd>{c.tipo || '—'}</dd></div>
             <div className="inteira"><dt>Situação</dt><dd><span className={`chip ${classeCor(c)}`}>{frase(c)}</span></dd></div>
             {c.contatos.length > 0 && (
@@ -106,6 +107,25 @@ export default function Consulta() {
             </div>
             {ehProf && <p className="nota">Realizada e falta ficam disponíveis depois do horário da consulta.</p>}
             {!ehProf && <p className="nota">Marcar como realizada ou como falta é feito pelo profissional que atendeu.</p>}
+          </div>
+        )}
+
+        {!podeMexer && usuario.papel !== 'ADMIN_CLINICA' && (
+          <div className="caixa">
+            <h2>{ehProf ? 'Sessão' : 'Consulta encerrada'}</h2>
+            {ehProf ? (
+              <>
+                <p className="nota">
+                  {c.status === 'REALIZADA' ? 'Esta consulta foi realizada. O registro da sessão fica na linha do tempo da criança.' : 'Esta consulta não aconteceu e não pode mais ser alterada.'}
+                </p>
+                <div className="botoes-coluna">
+                  <Link className="botao-sec" to={`/clinica/criancas/${c.crianca_id}`}>Ver a criança e a linha do tempo</Link>
+                  {c.status === 'REALIZADA' && <Link className="botao" to={`/clinica/criancas/${c.crianca_id}/registro`}>Registrar sessão</Link>}
+                </div>
+              </>
+            ) : (
+              <p className="nota">Esta consulta já tem uma situação final e não pode ser alterada. Marcar como realizada ou como falta é feito pelo profissional que atendeu.</p>
+            )}
           </div>
         )}
       </div>
