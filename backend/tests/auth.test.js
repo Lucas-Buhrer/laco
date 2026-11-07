@@ -110,6 +110,14 @@ test('S-07: sem token, token adulterado e token expirado dão 401', async () => 
   api.fechar();
 });
 
+test('token forjado com o segredo do .env.example antigo é recusado', async () => {
+  const api = iniciar();
+  assert.notStrictEqual(ambiente.segredoJwt, 'troque-este-segredo');
+  const forjado = jwt.sign({ id: 3 }, 'troque-este-segredo', { expiresIn: '8h' });
+  assert.strictEqual((await api.chamar('GET', '/api/auth/me', null, forjado)).status, 401);
+  api.fechar();
+});
+
 test('S-11/S-29: profissional desativado perde o acesso na hora, com o token antigo', async () => {
   const api = iniciar();
   const l = await loginEquipe(api, 'AURORA', 'carlos@laco.test');
