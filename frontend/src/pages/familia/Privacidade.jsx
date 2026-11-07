@@ -57,7 +57,7 @@ export default function Privacidade() {
 
   return (
     <>
-      <Link to="/familia/mais" className="voltar">‹ Voltar</Link>
+      <Link to="/familia/mais" className="voltar">Voltar</Link>
       <h1>Privacidade e dados</h1>
       <p className="subtitulo">Você decide o que acontece com os dados {filho ? `de ${filho.nome}` : 'do seu filho'}.</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

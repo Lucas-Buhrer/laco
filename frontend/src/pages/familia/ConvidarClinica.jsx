@@ -39,7 +39,7 @@ export default function ConvidarClinica() {
 
   return (
     <>
-      <Link to="/familia/acessos" className="voltar">‹ Voltar</Link>
+      <Link to="/familia/acessos" className="voltar">Voltar</Link>
       <h1>Convidar outra clínica</h1>
       <p className="subtitulo">Gere um código e entregue ao profissional. Ele pede o acesso e você decide se aprova.</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

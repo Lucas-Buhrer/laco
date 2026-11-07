@@ -41,7 +41,7 @@ export default function Avisos() {
 
   return (
     <>
-      {ehFamilia && <Link to="/familia/mais" className="voltar">‹ Mais</Link>}
+      {ehFamilia && <Link to="/familia/mais" className="voltar">Mais</Link>}
       <h1>Avisos</h1>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {dados && dados.nao_lidas > 0 && <button className="botao-sec" onClick={lerTodas}>Marcar todos como lidos</button>}

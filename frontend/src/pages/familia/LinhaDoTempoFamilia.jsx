@@ -21,7 +21,7 @@ export default function LinhaDoTempoFamilia() {
 
   return (
     <>
-      <Link to="/familia/mais" className="voltar">‹ Mais</Link>
+      <Link to="/familia/mais" className="voltar">Mais</Link>
       <h1>Linha do tempo</h1>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {filhos && filhos.length > 1 && (

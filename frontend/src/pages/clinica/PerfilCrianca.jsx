@@ -45,7 +45,7 @@ export default function PerfilCrianca() {
 
   return (
     <>
-      <Link to="/clinica/criancas" className="voltar">‹ Crianças</Link>
+      <Link to="/clinica/criancas" className="voltar">Crianças</Link>
       <div className="cabeca-perfil">
         <span className="inicial">{crianca.nome[0]}</span>
         <div>

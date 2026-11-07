@@ -31,7 +31,7 @@ export default function Relatorio() {
   return (
     <div className="relatorio">
       <div className="nao-imprimir">
-        <Link to="/familia/mais" className="voltar">‹ Mais</Link>
+        <Link to="/familia/mais" className="voltar">Mais</Link>
         <h1>Relatório de evolução</h1>
         {erro && <p className="aviso-erro" role="alert">{erro}</p>}
         {filhos && filhos.length > 1 && (

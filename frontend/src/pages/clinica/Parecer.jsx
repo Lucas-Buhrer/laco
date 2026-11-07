@@ -34,7 +34,7 @@ export default function Parecer() {
 
   return (
     <>
-      <Link to={`/clinica/criancas/${id}`} className="voltar">‹ Voltar</Link>
+      <Link to={`/clinica/criancas/${id}`} className="voltar">Voltar</Link>
       <h1>Parecer do período</h1>
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

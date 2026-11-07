@@ -74,7 +74,7 @@ export function AdicionarFilho() {
 
   return (
     <>
-      <Link to="/familia/filhos" className="voltar">‹ Voltar</Link>
+      <Link to="/familia/filhos" className="voltar">Voltar</Link>
       <h1>Adicionar outro filho</h1>
       <p className="subtitulo">A clínica pré-cadastra a criança e entrega um código a você. Digite abaixo. Você continua com a mesma conta.</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

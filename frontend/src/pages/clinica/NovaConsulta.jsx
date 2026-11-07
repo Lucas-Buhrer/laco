@@ -59,7 +59,7 @@ export default function NovaConsulta() {
 
   return (
     <>
-      <Link to="/clinica/agenda" className="voltar">‹ Voltar para a agenda</Link>
+      <Link to="/clinica/agenda" className="voltar">Voltar para a agenda</Link>
       <h1>Nova consulta</h1>
       {ehRecepcao && <p className="subtitulo">Agendando pela recepção: só crianças com acesso aprovado ou pedido em andamento com o profissional escolhido.</p>}
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

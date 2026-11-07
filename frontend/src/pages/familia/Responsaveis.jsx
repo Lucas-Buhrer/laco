@@ -65,7 +65,7 @@ export default function Responsaveis() {
 
   return (
     <>
-      <Link to="/familia/mais" className="voltar">‹ Mais</Link>
+      <Link to="/familia/mais" className="voltar">Mais</Link>
       <h1>Responsáveis</h1>
       <p className="subtitulo">{nomeFilho} · até 2 responsáveis, com o mesmo poder.</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

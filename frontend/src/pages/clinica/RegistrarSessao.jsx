@@ -44,7 +44,7 @@ export default function RegistrarSessao() {
 
   return (
     <>
-      <Link to={`/clinica/criancas/${id}`} className="voltar">‹ Cancelar</Link>
+      <Link to={`/clinica/criancas/${id}`} className="voltar">Cancelar</Link>
       <h1>Registro da sessão</h1>
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

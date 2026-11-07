@@ -31,7 +31,7 @@ export default function QuemAcessou() {
 
   return (
     <>
-      <Link to="/familia/acessos" className="voltar">‹ Voltar</Link>
+      <Link to="/familia/acessos" className="voltar">Voltar</Link>
       <h1>Quem acessou</h1>
       <p className="subtitulo">Todo acesso aos dados do seu filho fica registrado. Este histórico não pode ser apagado.</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}

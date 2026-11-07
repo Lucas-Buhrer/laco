@@ -50,7 +50,7 @@ export default function ConsultaFamilia() {
 
   return (
     <div>
-      <Link to="/familia/agenda" className="voltar">‹ Voltar</Link>
+      <Link to="/familia/agenda" className="voltar">Voltar</Link>
       <h1>Consulta {c.crianca_nome.endsWith('a') ? 'da' : 'do'} {c.crianca_nome}</h1>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}

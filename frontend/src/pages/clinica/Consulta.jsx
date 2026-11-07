@@ -59,7 +59,7 @@ export default function Consulta() {
 
   return (
     <>
-      <Link to="/clinica/agenda" className="voltar">‹ Voltar para a agenda</Link>
+      <Link to="/clinica/agenda" className="voltar">Voltar para a agenda</Link>
       <h1>Consulta de {c.crianca_nome}</h1>
       <p className="subtitulo">{diaLongo(c.inicio)} · {hora(c.inicio)} · {c.duracao_min} min</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
