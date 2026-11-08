@@ -61,7 +61,7 @@ export default function PerfilCrianca() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
-      <div className="pagina-duas">
+      <div className="pagina-duas perfil-duas">
         <section>
           <div className="abas abas-perfil" role="tablist">
             <button role="tab" aria-selected={aba === 'LINHA'} className={aba === 'LINHA' ? 'aba ativa' : 'aba'} onClick={() => setAba('LINHA')}>Linha do tempo</button>

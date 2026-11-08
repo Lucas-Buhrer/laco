@@ -452,3 +452,13 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 .abas-perfil { max-width: none; display: flex; gap: 8px; }
 .abas-perfil .aba { flex: 0 0 auto; min-height: 40px; padding: 0 18px; font-size: 15px; }
 .pagina-duas > div > .caixa { position: sticky; top: 16px; }
+/* Perfil: colunas mais juntas, filtros discretos alinhados com as abas */
+.perfil-duas { grid-template-columns: minmax(0, 760px) 360px; justify-content: start; gap: 32px; }
+@media (max-width: 1000px) { .perfil-duas { grid-template-columns: 1fr; } }
+.perfil-duas .tl-filtros { margin: 16px 0 0; gap: 6px; }
+.perfil-duas .tl-filtros .aba { min-height: 32px; padding: 0 12px; font-size: 13px; background: transparent; border-color: transparent; color: #4b5f55; }
+.perfil-duas .tl-filtros .aba.ativa { background: #e4efe8; border-color: #e4efe8; color: #1f4a35; font-weight: 700; }
+.perfil-duas .tl-resumo-humor { margin-left: 0; margin-top: 12px; align-items: center; }
+.perfil-duas .tl-mes, .perfil-duas .tl-item { margin-left: 0; }
+.perfil-duas .tl-item::before { left: -14px; display: none; }
+.perfil-duas .tl-ponto { display: none; }
