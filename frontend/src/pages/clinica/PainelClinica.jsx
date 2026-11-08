@@ -21,12 +21,12 @@ const diasDesde = (iso) => Math.max(0, Math.floor((Date.now() - new Date(iso).ge
 
 // Selo curto da situação da consulta (desenho D2: "Realizada", "Confirmada"…)
 function seloDaConsulta(c) {
-  if (c.status === 'REALIZADA') return ['Realizada', 'pill ok'];
+  if (c.status === 'REALIZADA') return ['Realizada', 'pill neutro'];
   if (c.status === 'FALTA') return ['Faltou', 'pill falta'];
   if (c.status === 'CANCELADA') return ['Cancelada', 'pill mu'];
   if (c.status === 'REMARCADA') return ['Remarcada', 'pill mu'];
   if (c.aguardando_aprovacao) return ['Aguardando a família', 'pill wa'];
-  if (c.cor === 'VERDE') return ['Confirmada', 'pill neutro'];
+  if (c.cor === 'VERDE') return ['Confirmada', 'pill ok'];
   if (c.cor === 'VERMELHA') return ['Falta 1 dia: ligar', 'pill perigo'];
   return ['Sem confirmação', 'pill wa'];
 }
@@ -73,9 +73,9 @@ export default function PainelClinica() {
     <div className="painel">
       <div className="painel-cab">
         <div>
-          {papel === 'RECEPCAO' ? <h1>{titulo}</h1> : <p className="etiqueta-topo">{linhaTopo}</p>}
-          {papel !== 'RECEPCAO' && <h1 className="grande">{titulo}</h1>}
-          {papel === 'RECEPCAO' && <p className="subtitulo">{dataDeHoje()}</p>}
+          {/* Mesmo cabeçalho para os três papéis: linha curta em cima, título grande embaixo */}
+          <p className="etiqueta-topo">{linhaTopo}</p>
+          <h1 className="grande">{titulo}</h1>
         </div>
         <Link className="botao" to={botao[1]}>{botao[0]}</Link>
       </div>
@@ -100,10 +100,10 @@ function PainelProfissional({ p, pre, meuId, proximas }) {
         <Kpi numero={p.criancas_aprovadas} texto="crianças com acesso aprovado" />
         <Kpi numero={p.pedidos_pendentes.length + aguardandoAtivacao.length} texto="aguardando aprovação dos pais" aviso />
       </div>
-      <div className="painel-duas" style={{ gridTemplateColumns: '1.5fr 1fr' }}>
+      <div className="painel-duas" style={{ gridTemplateColumns: '1.5fr 1fr', alignItems: 'start' }}>
         <section className="secao">
           <h2>Agenda de hoje</h2>
-          {p.consultas_hoje.length === 0 && <p className="vazio">Nenhuma consulta hoje.</p>}
+          {p.consultas_hoje.length === 0 && <ProximaConsulta proximas={proximas} />}
           {p.consultas_hoje.map((c) => {
             const [texto, classe] = seloDaConsulta(c);
             return (
@@ -149,6 +149,22 @@ function PainelProfissional({ p, pre, meuId, proximas }) {
           );
         })}
       </section>
+    </>
+  );
+}
+
+// Dia sem consultas: em vez de um cartão vazio, mostra a próxima
+function ProximaConsulta({ proximas }) {
+  const c = proximas.find((x) => x.status === 'AGENDADA');
+  if (!c) return <p className="vazio">Nenhuma consulta hoje.</p>;
+  return (
+    <>
+      <p className="vazio">Nenhuma consulta hoje. A próxima é:</p>
+      <Link to={`/clinica/agenda/${c.id}`} className="linha-painel">
+        <span className="hora" style={{ width: 90 }}>{diaMini(c.inicio)}</span>
+        <span className="hora">{hora(c.inicio)}</span>
+        <span className="nome"><strong>{c.crianca_nome}</strong><small>{c.tipo || 'Consulta'} · {c.duracao_min} min</small></span>
+      </Link>
     </>
   );
 }
@@ -264,7 +280,7 @@ function PainelRecepcao({ p, pre, equipe, recarregar }) {
 
       <div className="kpis tres">
         <Kpi numero={semAtivar.length} texto="aguardando ativação" />
-        <Kpi numero={inativos.length} texto={inativos.length ? `inativo${inativos.length > 1 ? 's' : ''}, será excluído em ${menorPrazo} dias` : 'inativos'} aviso />
+        <Kpi numero={inativos.length} texto={inativos.length ? (inativos.length > 1 ? `inativos, o primeiro será excluído em ${menorPrazo} dias` : `inativo, será excluído em ${menorPrazo} dias`) : 'inativos'} aviso />
         <Kpi numero={p.consultas_hoje.length} texto={p.consultas_hoje.length === 1 ? 'consulta hoje' : 'consultas hoje'} />
       </div>
 

@@ -15,7 +15,7 @@ export default function GradeHoraria({ colunas, eventos }) {
   const alturaColuna = linhas.length * ALTURA_HORA;
 
   return (
-    <div className="grade" style={{ gridTemplateColumns: `72px repeat(${colunas.length}, minmax(${colunas.length > 6 ? 150 : 120}px, 1fr))` }}>
+    <div className="grade" style={{ gridTemplateColumns: `72px repeat(${colunas.length}, minmax(${colunas.length > 6 ? 128 : 120}px, 1fr))` }}>
       <div className="grade-cab" />
       {colunas.map((c) => (
         <div key={c.id} className={`grade-cab ${c.hoje ? 'hoje' : ''}`}>

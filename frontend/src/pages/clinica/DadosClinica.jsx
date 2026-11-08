@@ -53,51 +53,59 @@ export default function DadosClinica() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {aviso && <p className="aviso-info" role="status">{aviso}</p>}
 
-      <form className="caixa estreita grade-form" onSubmit={salvar}>
-        <h2>Dados da clínica</h2>
-        <label className="campo">Nome da clínica<input value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} required /></label>
-        <label className="campo">CNPJ (opcional)<input value={f.cnpj} onChange={(e) => setF({ ...f, cnpj: e.target.value })} /></label>
-        <label className="campo">E-mail de contato<input type="email" value={f.email_contato} onChange={(e) => setF({ ...f, email_contato: e.target.value })} /></label>
-        <p className="nota">Código da clínica (para o login da equipe): <strong>{c.codigo_acesso}</strong>. Ele não muda por aqui.</p>
-        <button className="botao">Salvar</button>
-      </form>
-
-      <h2 className="titulo-lista">Administradores</h2>
-      {senha && (
-        <div className="caixa codigo-caixa" role="status">
-          <p className="etiqueta">Senha temporária de {senha.para}</p>
-          <p className="codigo-grande">{senha.texto}</p>
-          <p className="nota">Anote agora: esta senha não aparece de novo.</p>
-          <div className="acoes-topo">
-            <button className="botao-sec" onClick={() => navigator.clipboard?.writeText(senha.texto)}>Copiar</button>
-            <button className="botao-sec" onClick={() => setSenha(null)}>Já anotei</button>
-          </div>
-        </div>
-      )}
-      {c.administradores.map((a) => (
-        <div key={a.id} className="linha-lista">
-          <div>
-            <strong>{a.nome}{a.voce && ' (você)'}</strong>
-            <p className="detalhe">{a.email}</p>
-          </div>
-          <span className={`chip ${a.ativo ? 'cor-verde' : 'cor-realizada'}`}>{a.ativo ? 'Ativo' : 'Desativado'}</span>
-        </div>
-      ))}
-
-      {novo ? (
-        <form className="caixa estreita grade-form" onSubmit={adicionar}>
-          <h2>Novo administrador</h2>
-          <label className="campo">Nome<input value={novo.nome} onChange={(e) => setNovo({ ...novo, nome: e.target.value })} required /></label>
-          <label className="campo">E-mail<input type="email" value={novo.email} onChange={(e) => setNovo({ ...novo, email: e.target.value })} required /></label>
-          <p className="nota">A conta vale só para esta clínica e não acessa dados clínicos das crianças. Geramos uma senha temporária.</p>
-          <div className="acoes-topo">
-            <button className="botao">Adicionar</button>
-            <button type="button" className="botao-sec" onClick={() => setNovo(null)}>Cancelar</button>
-          </div>
+      {/* Duas colunas do mesmo tamanho: dados à esquerda, administradores à direita */}
+      <div className="pagina-duas colunas-iguais">
+        <form className="caixa grade-form" onSubmit={salvar}>
+          <h2 className="span2">Dados da clínica</h2>
+          <label className="campo">Nome da clínica<input value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} required /></label>
+          <label className="campo">CNPJ (opcional)<input value={f.cnpj} onChange={(e) => setF({ ...f, cnpj: e.target.value })} /></label>
+          <label className="campo span2">E-mail de contato<input type="email" value={f.email_contato} onChange={(e) => setF({ ...f, email_contato: e.target.value })} /></label>
+          <p className="nota span2">Código da clínica (para o login da equipe): <strong>{c.codigo_acesso}</strong>. Ele não muda por aqui.</p>
+          <div className="acoes-direita span2"><button className="botao">Salvar</button></div>
         </form>
-      ) : (
-        <div className="acoes-topo"><button className="botao-sec" onClick={() => setNovo({ nome: '', email: '' })}>Adicionar administrador</button></div>
-      )}
+
+        <section className="caixa">
+          <div className="secao-topo">
+            <h2>Administradores</h2>
+            {!novo && <button className="botao-sec pequeno" onClick={() => setNovo({ nome: '', email: '' })}>Adicionar administrador</button>}
+          </div>
+          {senha && (
+            <div className="codigo-caixa" role="status">
+              <p className="etiqueta">Senha temporária de {senha.para}</p>
+              <p className="codigo-grande">{senha.texto}</p>
+              <p className="nota">Anote agora: esta senha não aparece de novo.</p>
+              <div className="acoes-topo">
+                <button className="botao-sec" onClick={() => navigator.clipboard?.writeText(senha.texto)}>Copiar</button>
+                <button className="botao-sec" onClick={() => setSenha(null)}>Já anotei</button>
+              </div>
+            </div>
+          )}
+          <div className="lista-pre">
+            {c.administradores.map((a) => (
+              <div key={a.id} className="linha-pre">
+                <span className="avatar-mini">{a.nome[0]}</span>
+                <div className="texto-linha">
+                  <strong>{a.nome}{a.voce && ' (você)'}</strong>
+                  <small>{a.email}</small>
+                </div>
+                <span className={a.ativo ? 'pill ok' : 'pill mu'}>{a.ativo ? 'Ativo' : 'Desativado'}</span>
+              </div>
+            ))}
+          </div>
+          {novo && (
+            <form className="grade-form form-novo-admin" onSubmit={adicionar}>
+              <h3 className="span2">Novo administrador</h3>
+              <label className="campo">Nome<input value={novo.nome} onChange={(e) => setNovo({ ...novo, nome: e.target.value })} required /></label>
+              <label className="campo">E-mail<input type="email" value={novo.email} onChange={(e) => setNovo({ ...novo, email: e.target.value })} required /></label>
+              <p className="nota span2">A conta vale só para esta clínica e não acessa dados clínicos das crianças. Geramos uma senha temporária.</p>
+              <div className="acoes-direita span2">
+                <button type="button" className="botao-sec" onClick={() => setNovo(null)}>Cancelar</button>
+                <button className="botao">Adicionar</button>
+              </div>
+            </form>
+          )}
+        </section>
+      </div>
     </>
   );
 }

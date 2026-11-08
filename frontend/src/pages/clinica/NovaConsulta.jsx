@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../../api/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
-import { nomeEspecialidade } from '../../utils/especialidades.js';
+import { nomeEspecialidade, nomeDaArea } from '../../utils/especialidades.js';
 import { hojeISO, hora, classeCor } from '../../utils/consultas.js';
 
 const DURACOES = [30, 50, 60];
@@ -18,6 +18,7 @@ export default function NovaConsulta() {
   const [data, setData] = useState('');
   const [horario, setHorario] = useState('');
   const [duracao, setDuracao] = useState(50);
+  const [outra, setOutra] = useState(false);
   const [tipo, setTipo] = useState('');
   const [doDia, setDoDia] = useState(null); // consultas do profissional no dia escolhido
   const [erro, setErro] = useState('');
@@ -48,7 +49,7 @@ export default function NovaConsulta() {
         profissional_id: op.profissional_id,
         inicio: `${data}T${horario}`,
         duracao_min: Number(duracao),
-        tipo,
+        tipo: tipo.trim() || nomeDaArea(op), // sem tipo digitado, vale a área do profissional
         confirmar_conflito: confirmarConflito,
       });
       navegar(`/clinica/agenda/${r.id}`);
@@ -106,15 +107,19 @@ export default function NovaConsulta() {
               <span className="titulo-grupo-campo">Duração</span>
               <div className="etiquetas-opcao">
                 {DURACOES.map((d) => (
-                  <button key={d} type="button" className={`chip-opcao ${Number(duracao) === d ? 'on' : ''}`} aria-pressed={Number(duracao) === d} onClick={() => setDuracao(d)}>{d} min</button>
+                  <button key={d} type="button" className={`chip-opcao ${!outra && Number(duracao) === d ? 'on' : ''}`} aria-pressed={!outra && Number(duracao) === d} onClick={() => { setOutra(false); setDuracao(d); }}>{d} min</button>
                 ))}
+                <button type="button" className={`chip-opcao ${outra ? 'on' : ''}`} aria-pressed={outra} onClick={() => setOutra(true)}>Outra</button>
               </div>
             </div>
-            <label className="campo">Outra duração (minutos)
-              <input type="number" min={10} max={240} step={5} value={duracao} onChange={(e) => setDuracao(e.target.value)} required />
-            </label>
+            {/* O campo livre só aparece quando a pessoa escolhe "Outra" */}
+            {outra ? (
+              <label className="campo">Duração em minutos
+                <input type="number" min={10} max={240} step={5} value={duracao} onChange={(e) => setDuracao(e.target.value)} required autoFocus />
+              </label>
+            ) : <span />}
             <label className="campo span2">Tipo de atendimento
-              <input value={tipo} onChange={(e) => setTipo(e.target.value)} placeholder={op ? nomeEspecialidade(op) : ''} />
+              <input value={tipo} onChange={(e) => setTipo(e.target.value)} placeholder={op ? nomeDaArea(op) : ''} />
             </label>
             {op && op.status === 'PENDENTE' && (
               <p className="nota">A consulta fica “Aguardando aprovação da família”. O aviso de conflito só aparece depois da aprovação.</p>

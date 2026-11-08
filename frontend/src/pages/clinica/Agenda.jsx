@@ -32,6 +32,7 @@ export default function Agenda() {
   const [lista, setLista] = useState(null);
   const [profissionais, setProfissionais] = useState([]);
   const [crianca, setCrianca] = useState(''); // filtro "Todas as crianças" (profissional)
+  const [prof, setProf] = useState(''); // filtro "Todos os profissionais" (administração)
   const [erro, setErro] = useState('');
 
   const segunda = segundaDaSemana(dia);
@@ -68,6 +69,8 @@ export default function Agenda() {
 
   // ================= Administração: tabela (D18) =================
   if (papel === 'ADMIN_CLINICA') {
+    const filtradasAdm = (lista || []).filter((c) => !prof || String(c.profissional_id) === prof);
+    const diasAdm = [...new Set(filtradasAdm.map((c) => c.inicio.slice(0, 10)))];
     return (
       <>
         <div className="topo-agenda">
@@ -83,13 +86,19 @@ export default function Agenda() {
         </div>
         {erro && <p className="aviso-erro" role="alert">{erro}</p>}
         {!lista && !erro && <p className="carregando">Carregando…</p>}
-        {lista && lista.length === 0 && <p className="vazio">Nenhuma consulta neste período.</p>}
         {lista && lista.length > 0 && (
-          <div className="cartao tabela-agenda">
-            <div className="linha-tab cab"><span>Dia</span><span>Horário</span><span>Criança</span><span>Profissional</span><span>Tipo</span><span>Situação</span></div>
-            {lista.map((c) => (
-              <Link key={c.id} to={`/clinica/agenda/${c.id}`} className={`linha-tab ${c.inicio.slice(0, 10) === hoje ? 'hoje' : ''}`}>
-                <b>{diaMini(c.inicio)}{c.inicio.slice(0, 10) === hoje && ' · hoje'}</b>
+          <select className="filtro-criancas filtro-prof" aria-label="Filtrar por profissional" value={prof} onChange={(e) => setProf(e.target.value)}>
+            <option value="">Todos os profissionais</option>
+            {[...new Map(lista.map((c) => [String(c.profissional_id), c.profissional_nome])).entries()].map(([id, nome]) => <option key={id} value={id}>{nome}</option>)}
+          </select>
+        )}
+        {lista && filtradasAdm.length === 0 && <p className="vazio">Nenhuma consulta neste período.</p>}
+        {/* Uma tabela por dia, com o dia no título: mais fácil de achar do que uma lista corrida */}
+        {diasAdm.map((d) => (
+          <section key={d} className="cartao tabela-agenda">
+            <h2 className={`titulo-dia ${d === hoje ? 'hoje' : ''}`}>{diaPorExtenso(d)}{d === hoje && ' · hoje'} <small>{filtradasAdm.filter((c) => c.inicio.slice(0, 10) === d).length} consultas</small></h2>
+            {filtradasAdm.filter((c) => c.inicio.slice(0, 10) === d).map((c) => (
+              <Link key={c.id} to={`/clinica/agenda/${c.id}`} className="linha-tab">
                 <span>{hora(c.inicio)}</span>
                 <span className="forte">{c.crianca_nome}</span>
                 <span className="suave">{c.profissional_nome}</span>
@@ -97,8 +106,8 @@ export default function Agenda() {
                 <span className={`pilula ${classeCor(c)}`}>{frase(c)}</span>
               </Link>
             ))}
-          </div>
-        )}
+          </section>
+        ))}
       </>
     );
   }
@@ -121,11 +130,7 @@ export default function Agenda() {
             <p className="etiqueta-topo">{diaPorExtenso(dia)}{dia === hoje && ' (hoje)'} · uma coluna por profissional, atendimentos ao mesmo tempo</p>
             <h1>Agenda</h1>
           </div>
-          <div className="acoes-topo sem-margem">
-            <button className="icone" aria-label="Dia anterior" onClick={() => setDia(somarDias(dia, -1))}>‹</button>
-            <button className="icone" aria-label="Próximo dia" onClick={() => setDia(somarDias(dia, 1))}>›</button>
-            {botaoNova}
-          </div>
+          <div className="acoes-topo sem-margem">{botaoNova}</div>
         </div>
         {erro && <p className="aviso-erro" role="alert">{erro}</p>}
         <div className="linha-ferramentas">{barraMes}<LegendaAgenda /></div>
@@ -145,10 +150,15 @@ export default function Agenda() {
         </div>
 
         {!lista && !erro && <p className="carregando">Carregando…</p>}
-        {lista && colunas.length > 0 && (
-          <div className="grade-rolagem"><GradeHoraria colunas={colunas.map((c) => ({ ...c, hoje: dia === hoje }))} eventos={eventos} /></div>
+        {lista && doDia.length > 0 && (
+          <div className="grade-rolagem"><GradeHoraria colunas={colunas} eventos={eventos} /></div>
         )}
-        {lista && doDia.length === 0 && <p className="vazio">Nenhuma consulta neste dia.</p>}
+        {lista && doDia.length === 0 && (
+          <div className="vazio-grande">
+            <h2>Nenhuma consulta neste dia</h2>
+            <p>Escolha outro dia acima ou marque uma nova consulta.</p>
+          </div>
+        )}
       </>
     );
   }

@@ -41,7 +41,7 @@ export default function Conta() {
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
       {ok && <p className="aviso-info" role="status">Senha alterada. Use a nova na próxima vez que entrar.</p>}
 
-      <div className="pagina-duas" style={{ gridTemplateColumns: 'minmax(320px, 520px) minmax(280px, 1fr)' }}>
+      <div className="pagina-duas colunas-iguais">
         <form className="caixa" onSubmit={salvar}>
           <h2>Trocar a senha</h2>
           <label className="campo">Senha atual
@@ -54,7 +54,7 @@ export default function Conta() {
             <input type={tipo} value={f.repetir} onChange={mudar('repetir')} minLength={8} required autoComplete="new-password" />
           </label>
           <label className="marcar"><input type="checkbox" checked={ver} onChange={(e) => setVer(e.target.checked)} />Mostrar as senhas enquanto digito</label>
-          <button className="botao" disabled={enviando}>{enviando ? 'Salvando…' : 'Salvar nova senha'}</button>
+          <div className="acoes-direita"><button className="botao" disabled={enviando}>{enviando ? 'Salvando…' : 'Salvar nova senha'}</button></div>
         </form>
 
         <div className="caixa">

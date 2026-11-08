@@ -75,7 +75,7 @@ export default function Criancas() {
               <span>{c.ultima_sessao ? diaRelativo(c.ultima_sessao) : '—'}</span>
               <span>{c.proxima_consulta ? diaRelativo(c.proxima_consulta) : 'Sem consulta marcada'}</span>
               <span><i className={c.ver_historico_anterior ? 'pill ok' : 'pill mu'}>{c.ver_historico_anterior ? 'Sim' : 'Não'}</i></span>
-              <Link className="botao-sec pequeno" to={`/clinica/criancas/${c.id}/registro`}>Registrar sessão</Link>
+              <Link className="link-pequeno link-registrar" to={`/clinica/criancas/${c.id}/registro`}>+ Registrar sessão</Link>
             </div>
           ))}
         </div>

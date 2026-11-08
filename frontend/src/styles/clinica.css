@@ -474,3 +474,38 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 @media (max-width: 1000px) { .registro-largo { grid-template-columns: 1fr; } }
 
 .mostrar-mais { width: 100%; margin-top: 12px; }
+
+/* ===== Revisão de layout (rodada 2) ===== */
+/* Crianças: última coluna com largura fixa para o cabeçalho alinhar com as linhas */
+.linha-criancas { grid-template-columns: 1.6fr 0.8fr 1.2fr 1.4fr 1fr 150px; }
+.link-registrar { margin: 0; text-align: right; text-decoration: none; white-space: nowrap; }
+@media (max-width: 1000px) { .linha-criancas { grid-template-columns: 1fr 1fr; } .link-registrar { text-align: left; } }
+/* Painel admin: números da equipe na cor normal de texto */
+.linha-equipe span { color: var(--texto); }
+.linha-equipe.cab span { color: #5e7066; }
+/* Agenda do profissional: setas fora da grade (antes ficavam por cima da borda) */
+.grade-com-setas { padding: 0 56px; }
+.seta-esq { left: 0; }
+.seta-dir { right: 0; }
+@media (max-width: 900px) { .grade-com-setas { padding: 0; } }
+/* Recepção: quadros dos dias mais baixos */
+.dia-chip { height: auto; min-height: 0; justify-content: center; gap: 2px; padding: 8px 0; }
+.dia-chip .ponto { flex: 0 0 7px; height: 7px; margin-top: 2px; }
+.dias-semana + .vazio-grande, .linha-ferramentas ~ .vazio-grande { margin-top: 16px; }
+/* Administração: uma tabela por dia */
+.filtro-prof { margin-top: 20px; }
+.tabela-agenda + .tabela-agenda { margin-top: 16px; }
+.titulo-dia { text-transform: none; display: flex; align-items: baseline; gap: 10px; margin: 12px 0 4px; font-size: 18px; }
+.titulo-dia small { text-transform: none; font-size: 13px; font-weight: 500; color: #5e7066; }
+.titulo-dia.hoje { color: var(--verde-forte); }
+.tabela-agenda .linha-tab { grid-template-columns: 0.7fr 1.2fr 1.4fr 1.6fr 1.6fr; }
+/* Padrões gerais: colunas iguais e botão de salvar à direita */
+.pagina-duas.colunas-iguais { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 1000px) { .pagina-duas.colunas-iguais { grid-template-columns: 1fr; } }
+.acoes-direita { display: flex; justify-content: flex-end; gap: 12px; }
+.secao-topo .botao-sec.pequeno { align-self: center; }
+.form-novo-admin { margin-top: 20px; padding-top: 16px; border-top: 1px solid #eef2ef; }
+.form-novo-admin h3 { margin: 0; font-size: 17px; }
+.codigo-caixa .codigo-grande { margin: 4px 0; }
+/* Avisos ocupam a largura toda, como as outras telas */
+.avisos { max-width: none; }

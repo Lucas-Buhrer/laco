@@ -42,7 +42,7 @@ export default function Parecer() {
 
   // Quando o limite do acesso faz vários atalhos caírem na mesma data, sobra só "Desde a aprovação"
   const atalhos = [];
-  for (const [nome, dias] of [['Último mês', 30], ['Últimos 3 meses', 90]]) {
+  for (const [nome, dias] of [['Última semana', 7], ['Últimas 2 semanas', 14], ['Último mês', 30], ['Últimos 3 meses', 90]]) {
     const inicio = somarDias(hoje, -dias);
     if (!corte || inicio > corte) atalhos.push([nome, inicio]);
   }

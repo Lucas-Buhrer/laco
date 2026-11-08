@@ -24,3 +24,16 @@ export function nomeEspecialidade(linha) {
   if (linha.especialidade === 'OUTRO') return linha.especialidade_outro || 'Outro';
   return ESPECIALIDADES[linha.especialidade] || '';
 }
+
+// Nome da ÁREA do atendimento ("Fonoaudiologia"), usado como tipo padrão da consulta
+const AREAS = {
+  PSICOLOGO: 'Psicologia', PSICOLOGO_ABA: 'Psicologia ABA', PSIQUIATRA_INFANTIL: 'Psiquiatria infantil',
+  NEUROPEDIATRA: 'Neuropediatria', PEDIATRA_DESENVOLVIMENTO: 'Pediatria do desenvolvimento', PSICOPEDAGOGO: 'Psicopedagogia',
+  FISIOTERAPEUTA: 'Fisioterapia', TERAPEUTA_OCUPACIONAL: 'Terapia ocupacional', FONOAUDIOLOGO: 'Fonoaudiologia',
+  NUTRICIONISTA: 'Nutrição', DENTISTA_ESPECIAL: 'Odontologia', MUSICOTERAPEUTA: 'Musicoterapia',
+  PSICOMOTRICISTA: 'Psicomotricidade', ACOMPANHANTE_TERAPEUTICO: 'Acompanhamento terapêutico',
+  MEDIADOR_ESCOLAR: 'Mediação escolar', ASSISTENTE_SOCIAL: 'Serviço social',
+};
+export function nomeDaArea(linha) {
+  return AREAS[linha.especialidade] || nomeEspecialidade(linha);
+}

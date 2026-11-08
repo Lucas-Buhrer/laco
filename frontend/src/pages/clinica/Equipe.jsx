@@ -170,38 +170,38 @@ export default function Equipe() {
         </div>
       )}
 
-      <table className="tabela">
+      <table className="tabela tabela-equipe">
         <thead><tr><th>Nome</th><th>Especialidade / função</th><th>Crianças</th><th>Situação</th><th></th></tr></thead>
         <tbody>
           {profs && profs.map((p) => (
             <tr key={`p${p.id}`}>
-              <td>{p.nome}</td>
+              <td><span className="nome-crianca"><span className="avatar-mini">{p.nome.replace(/^(Dra?.|Dr.)s+/i, '')[0]}</span><strong>{p.nome}</strong></span></td>
               <td>{nomeEspecialidade(p)}</td>
               <td>{p.criancas}</td>
               <td>{!p.ativo ? <span className="pill mu">Desativado</span> : p.senha_temporaria ? <span className="pill wa">Senha temporária</span> : <span className="pill ok">Ativo</span>}</td>
               <td className="acoes-linha">
                 {p.ativo ? (
                   <>
-                    <button className="botao-sec" onClick={() => editar(p)}>Editar</button>
-                    <button className="botao-sec" onClick={() => setDesativando(p)}>Desativar</button>
+                    <button className="botao-sec pequeno" onClick={() => editar(p)}>Editar</button>
+                    <button className="botao-sec pequeno" onClick={() => setDesativando(p)}>Desativar</button>
                   </>
                 ) : (
-                  <button className="botao-sec" onClick={() => reativar(p)}>Reativar</button>
+                  <button className="botao-sec pequeno" onClick={() => reativar(p)}>Reativar</button>
                 )}
               </td>
             </tr>
           ))}
           {recs.map((r) => (
             <tr key={`r${r.id}`}>
-              <td>{r.nome}</td>
+              <td><span className="nome-crianca"><span className="avatar-mini">{r.nome[0]}</span><strong>{r.nome}</strong></span></td>
               <td>Recepção · usuário: {r.codigo_usuario}</td>
               <td>—</td>
               <td>{!r.ativo ? <span className="pill mu">Desativada</span> : r.senha_temporaria ? <span className="pill wa">Senha temporária</span> : <span className="pill ok">Ativa</span>}</td>
               <td className="acoes-linha">
                 {r.ativo ? (
                   <>
-                    <button className="botao-sec" onClick={() => redefinir(r)}>Redefinir senha</button>
-                    <button className="botao-sec" onClick={() => desativarRec(r)}>Desativar</button>
+                    <button className="botao-sec pequeno" onClick={() => redefinir(r)}>Redefinir senha</button>
+                    <button className="botao-sec pequeno" onClick={() => desativarRec(r)}>Desativar</button>
                   </>
                 ) : null}
               </td>
