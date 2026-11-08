@@ -469,3 +469,6 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 .perfil-duas { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .perfil-duas .tl { max-width: none; }
 @media (max-width: 1000px) { .perfil-duas { grid-template-columns: 1fr; } }
+/* Registrar sessão e Parecer: largura toda, duas colunas iguais */
+.registro-largo { max-width: none; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 1000px) { .registro-largo { grid-template-columns: 1fr; } }

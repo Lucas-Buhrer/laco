@@ -74,7 +74,7 @@ export default function Parecer() {
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 
-      <form className="registro-form" onSubmit={(e) => { e.preventDefault(); setConfirmando(true); }}>
+      <form className="registro-form registro-largo" onSubmit={(e) => { e.preventDefault(); setConfirmando(true); }}>
         <div className="caixa">
           <div className="grupo-campo">
             <span className="titulo-grupo-campo">Período</span>

@@ -83,7 +83,7 @@ export default function RegistrarSessao() {
       <p className="subtitulo">{crianca.nome}</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 
-      <form className="registro-form" onSubmit={salvar}>
+      <form className="registro-form registro-largo" onSubmit={salvar}>
         <div className="caixa">
           <label className="campo">Consulta desta sessão
             <select value={consultaId} onChange={(e) => setConsultaId(e.target.value)}>
