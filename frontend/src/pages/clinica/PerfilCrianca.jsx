@@ -85,20 +85,6 @@ export default function PerfilCrianca() {
         </section>
 
         <div>
-          {adendo && (
-            <form className="caixa" onSubmit={enviarAdendo}>
-              <h2>Adendo ao registro</h2>
-              <p className="nota">O registro original não muda. O adendo aparece logo abaixo dele, com a data.</p>
-              <label className="campo">Texto do adendo
-                <textarea rows={4} value={adendo.texto} onChange={(e) => setAdendo({ ...adendo, texto: e.target.value })} required />
-              </label>
-              <div className="acoes-topo">
-                <button className="botao">Salvar adendo</button>
-                <button type="button" className="botao-sec" onClick={() => setAdendo(null)}>Cancelar</button>
-              </div>
-            </form>
-          )}
-
           <div className="caixa">
             <h2>Seu acesso</h2>
             {crianca.escopo && (
@@ -113,6 +99,21 @@ export default function PerfilCrianca() {
           </div>
         </div>
       </div>
+      {adendo && (
+        <div className="modal-fundo" onClick={() => setAdendo(null)} onKeyDown={(e) => e.key === 'Escape' && setAdendo(null)}>
+          <form className="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-adendo" onClick={(e) => e.stopPropagation()} onSubmit={enviarAdendo}>
+            <h2 id="titulo-adendo">Adendo ao registro</h2>
+            <p className="nota">O registro original não muda. O adendo aparece logo abaixo dele, com a data.</p>
+            <label className="campo">Texto do adendo
+              <textarea rows={5} autoFocus value={adendo.texto} onChange={(e) => setAdendo({ ...adendo, texto: e.target.value })} required />
+            </label>
+            <div className="modal-acoes">
+              <button type="button" className="botao-sec" onClick={() => setAdendo(null)}>Cancelar</button>
+              <button className="botao">Salvar adendo</button>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 }
