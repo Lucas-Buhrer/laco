@@ -472,3 +472,5 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 /* Registrar sessão e Parecer: largura toda, duas colunas iguais */
 .registro-largo { max-width: none; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 @media (max-width: 1000px) { .registro-largo { grid-template-columns: 1fr; } }
+
+.mostrar-mais { width: 100%; margin-top: 12px; }

@@ -17,6 +17,7 @@ export default function PreCadastros() {
   const [novo, setNovo] = useState(null); // { nome, codigo, valido_ate }
   const [aba, setAba] = useState('PENDENTES');
   const [busca, setBusca] = useState('');
+  const [limite, setLimite] = useState(8); // a lista mostra poucas linhas e abre mais sob pedido
   const [erro, setErro] = useState('');
   const [enviando, setEnviando] = useState(false);
 
@@ -146,12 +147,12 @@ export default function PreCadastros() {
             <h2>Cadastros da clínica</h2>
             <div className="abas" role="tablist">
               {[['PENDENTES', 'Em andamento'], ['INATIVOS', 'Inativos'], ['ATIVAS', 'Já ativas']].map(([chave, nome]) => (
-                <button key={chave} role="tab" aria-selected={aba === chave} className={aba === chave ? 'aba ativa' : 'aba'} onClick={() => setAba(chave)}>
+                <button key={chave} role="tab" aria-selected={aba === chave} className={aba === chave ? 'aba ativa' : 'aba'} onClick={() => { setAba(chave); setLimite(8); }}>
                   {nome} <small>({grupos[chave].length})</small>
                 </button>
               ))}
             </div>
-            <input className="busca" type="search" placeholder="Buscar pelo nome" aria-label="Buscar pelo nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
+            <input className="busca" type="search" placeholder="Buscar pelo nome" aria-label="Buscar pelo nome" value={busca} onChange={(e) => { setBusca(e.target.value); setLimite(8); }} />
 
             {lista && visiveis.length === 0 && (
               <p className="vazio">
@@ -159,7 +160,7 @@ export default function PreCadastros() {
               </p>
             )}
             <div className="lista-pre">
-              {visiveis.map((c) => (
+              {visiveis.slice(0, limite).map((c) => (
                 <div key={c.id} className="linha-pre">
                   <span className="avatar-mini">{c.nome[0]}</span>
                   <div className="texto-linha">
@@ -178,6 +179,11 @@ export default function PreCadastros() {
                 </div>
               ))}
             </div>
+            {visiveis.length > limite && (
+              <button type="button" className="botao-sec mostrar-mais" onClick={() => setLimite(limite + 8)}>
+                Mostrar mais ({visiveis.length - limite} restantes)
+              </button>
+            )}
           </div>
         </div>
       </div>
