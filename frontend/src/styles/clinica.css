@@ -465,3 +465,7 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 /* "Seu acesso" começa na altura do resumo de humor (abas 24+40, filtros 16+32, humor 12) */
 .perfil-duas > div > .caixa { margin-top: 124px; }
 @media (max-width: 1000px) { .perfil-duas > div > .caixa { margin-top: 0; } }
+/* Perfil ocupa a largura toda: duas colunas iguais */
+.perfil-duas { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.perfil-duas .tl { max-width: none; }
+@media (max-width: 1000px) { .perfil-duas { grid-template-columns: 1fr; } }
