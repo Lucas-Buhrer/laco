@@ -25,6 +25,7 @@ function seloDaConsulta(c) {
   if (c.status === 'FALTA') return ['Faltou', 'pill falta'];
   if (c.status === 'CANCELADA') return ['Cancelada', 'pill mu'];
   if (c.status === 'REMARCADA') return ['Remarcada', 'pill mu'];
+  if (c.cor === 'PASSOU') return ['Falta registrar', 'pill falta'];
   if (c.aguardando_aprovacao) return ['Aguardando a família', 'pill wa'];
   if (c.cor === 'VERDE') return ['Confirmada', 'pill ok'];
   if (c.cor === 'VERMELHA') return ['Falta 1 dia: ligar', 'pill perigo'];

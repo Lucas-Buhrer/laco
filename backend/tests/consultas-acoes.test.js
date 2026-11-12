@@ -62,7 +62,8 @@ test('RF-42: só o profissional marca realizada/falta, e só depois do horário'
   const bia = await clinica(api, 'AURORA', 'recepcao');
   const adm = await clinica(api, 'AURORA', 'admin@laco.test');
   const passou = consultaQueJaPassou(api);
-  const futura = api.banco.prepare("SELECT id FROM consultas WHERE status = 'AGENDADA' ORDER BY inicio DESC").get().id;
+  // Consulta futura do próprio Carlos (outra pessoa daria 404, não 409)
+  const futura = api.banco.prepare("SELECT id FROM consultas WHERE status = 'AGENDADA' AND profissional_id = (SELECT id FROM usuarios WHERE email = 'carlos@laco.test') ORDER BY inicio DESC").get().id;
 
   assert.strictEqual((await api.chamar('POST', `/api/consultas/${futura}/realizada`, {}, carlos)).status, 409); // ainda não chegou a hora
   assert.strictEqual((await api.chamar('POST', `/api/consultas/${passou}/realizada`, {}, bia)).status, 403);

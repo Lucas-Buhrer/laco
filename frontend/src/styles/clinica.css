@@ -509,3 +509,7 @@ div.linha-criancas:not(.cab):hover { background: #f6faf7; margin: 0 -12px; paddi
 .codigo-caixa .codigo-grande { margin: 4px 0; }
 /* Avisos ocupam a largura toda, como as outras telas */
 .avisos { max-width: none; }
+
+/* Consulta cujo horário passou sem ninguém marcar realizada ou falta */
+.cor-passou { background: repeating-linear-gradient(135deg, #f3f5f4 0 6px, #e7ece9 6px 12px); border-color: #9aa8a0; border-style: solid; color: #2f3d36; }
+a.ev.cor-passou, .amostra.cor-passou { border-style: solid; }

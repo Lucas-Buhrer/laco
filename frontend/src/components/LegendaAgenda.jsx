@@ -4,6 +4,7 @@ const ITENS = [
   ['cor-amarela', 'Sem confirmação'],
   ['cor-vermelha', 'Falta 1 dia: ligar'],
   ['cor-azul', 'Restam X dias'],
+  ['cor-passou', 'Passou, falta registrar'],
 ];
 const FINAIS = [
   ['cor-realizada', 'Realizada'],

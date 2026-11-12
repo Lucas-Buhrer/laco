@@ -42,6 +42,8 @@ function prazoConfirmacao(inicio) {
 // Cor da agenda calculada na leitura (doc 05, 4.3c)
 function corDaConsulta(c) {
   if (c.status !== 'AGENDADA') return null;
+  // Horário já passou e ninguém marcou realizada/falta: a consulta NÃO muda sozinha (RN), só a cor avisa
+  if (new Date(c.inicio) < new Date()) return 'PASSOU';
   if (c.presenca_confirmada) return 'VERDE';
   const dias = diasAte(c.inicio);
   if (dias >= 4) return 'AZUL';

@@ -24,6 +24,7 @@ export function frase(c) {
   if (c.status === 'CANCELADA') return 'Cancelada';
   if (c.status === 'FALTA') return 'Faltou';
   if (c.status === 'REMARCADA') return c.remarcada_para ? `Remarcada para ${diaMini(c.remarcada_para)}` : 'Remarcada';
+  if (c.cor === 'PASSOU') return 'Falta registrar';
   if (c.aguardando_aprovacao) return 'Aguardando aprovação da família';
   if (c.cor === 'VERDE') return c.confirmada_por === 'CONTATO' ? 'Confirmada por contato' : 'Confirmada pelos responsáveis';
   if (c.cor === 'VERMELHA') return 'Falta 1 dia: ligar para os responsáveis';
