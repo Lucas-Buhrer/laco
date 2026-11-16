@@ -111,7 +111,7 @@ Perfis: **RESP** (responsável), **PROF** (profissional), **ADM** (administrador
 | RF-71 | Log automático de todo acesso a dados da criança | Sistema | P0 |
 | RF-72 | Painel "Quem acessou os dados da minha criança" | RESP | P0 |
 | RF-73 | Exportar todos os dados da criança | RESP | P1 |
-| RF-74 | Solicitar exclusão/anonimização dos dados | RESP | P1 |
+| RF-74 | Excluir o cadastro do filho (apaga na hora, com confirmação) | RESP | P1 |
 | RF-75 | Revogar consentimento (encerra todos os vínculos) | RESP | P1 |
 | RF-76 | Página pública de Política de Privacidade | Todos | P0 |
 

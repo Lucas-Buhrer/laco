@@ -251,7 +251,7 @@ CREATE TABLE notificacoes (
 -- Sem dados pessoais (RN-33)
 CREATE TABLE log_exclusoes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo TEXT NOT NULL CHECK (tipo IN ('PRE_CADASTRO_NAO_ATIVADO')),
+  tipo TEXT NOT NULL CHECK (tipo IN ('PRE_CADASTRO_NAO_ATIVADO','EXCLUSAO_PELA_FAMILIA')),
   protocolo TEXT NOT NULL,
   motivo TEXT NOT NULL,
   excluido_em TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))

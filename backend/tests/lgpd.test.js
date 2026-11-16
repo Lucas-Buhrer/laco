@@ -85,18 +85,45 @@ test('RF-75: revogar o consentimento encerra todos os acessos, e o profissional 
   api.fechar();
 });
 
-test('RF-74: pedir exclusão gera protocolo, aparece na lista e não apaga nada sozinho', async () => {
+test('RF-74: o responsável exclui o cadastro na hora; nada da criança sobra e fica só o protocolo sem nome', async () => {
   const api = iniciar();
   const familia = await mae(api);
-  const r = await api.chamar('POST', '/api/lgpd/solicitacoes', { tipo: 'EXCLUSAO', crianca_id: theo(api), confirmar: true }, familia);
-  assert.strictEqual(r.status, 201);
-  const lista = await api.chamar('GET', '/api/lgpd/solicitacoes', null, familia);
-  assert.strictEqual(lista.corpo.dados[0].status, 'REGISTRADA');
-  assert.ok(api.banco.prepare("SELECT 1 FROM criancas WHERE nome = 'Theo'").get());
+  const id = theo(api);
+  // segundo responsável (para ver o aviso) e quem precisa ser avisado
+  const pai = api.banco.prepare("INSERT INTO usuarios (papel, nome, email, senha_hash) VALUES ('RESPONSAVEL', 'Paulo Alves', 'pai@laco.test', 'x')").run().lastInsertRowid;
+  api.banco.prepare("INSERT INTO responsaveis_crianca (crianca_id, responsavel_id, parentesco) VALUES (?, ?, 'PAI')").run(id, pai);
+  const carlos = api.banco.prepare("SELECT id FROM usuarios WHERE email = 'carlos@laco.test'").get().id;
+  const admin = api.banco.prepare("SELECT id FROM usuarios WHERE email = 'admin@laco.test'").get().id;
+  const davi = api.banco.prepare("SELECT id FROM criancas WHERE nome = 'Davi'").get().id;
+
+  // sem confirmar, ou com o nome errado: não apaga
+  assert.strictEqual((await api.chamar('POST', '/api/lgpd/excluir-crianca', { crianca_id: id, nome_confirmacao: 'Theo' }, familia)).status, 400);
+  assert.strictEqual((await api.chamar('POST', '/api/lgpd/excluir-crianca', { crianca_id: id, confirmar: true, nome_confirmacao: 'Teo' }, familia)).status, 400);
   // criança de outra família e papel errado
-  const outro = api.banco.prepare("SELECT id FROM criancas WHERE nome = 'Davi'").get().id;
-  assert.strictEqual((await api.chamar('POST', '/api/lgpd/solicitacoes', { tipo: 'EXCLUSAO', crianca_id: outro, confirmar: true }, familia)).status, 404);
+  assert.strictEqual((await api.chamar('POST', '/api/lgpd/excluir-crianca', { crianca_id: davi, confirmar: true, nome_confirmacao: 'Davi' }, familia)).status, 404);
   const prof = await clinica(api, 'AURORA', 'carlos@laco.test');
-  assert.strictEqual((await api.chamar('POST', '/api/lgpd/solicitacoes', { tipo: 'EXCLUSAO', crianca_id: theo(api), confirmar: true }, prof)).status, 403);
+  assert.strictEqual((await api.chamar('POST', '/api/lgpd/excluir-crianca', { crianca_id: id, confirmar: true, nome_confirmacao: 'Theo' }, prof)).status, 403);
+  assert.ok(api.banco.prepare('SELECT 1 FROM criancas WHERE id = ?').get(id));
+
+  const r = await api.chamar('POST', '/api/lgpd/excluir-crianca', { crianca_id: id, confirmar: true, nome_confirmacao: ' theo ' }, familia);
+  assert.strictEqual(r.status, 200);
+  assert.match(r.corpo.dados.protocolo, /^EXC-/);
+  for (const tabela of ['criancas', 'consultas', 'registros_sessao', 'pareceres', 'atividades', 'vinculos', 'responsaveis_crianca', 'solicitacoes_lgpd', 'log_acesso']) {
+    const coluna = tabela === 'criancas' ? 'id' : 'crianca_id';
+    assert.strictEqual(api.banco.prepare(`SELECT COUNT(*) n FROM ${tabela} WHERE ${coluna} = ?`).get(id).n, 0, tabela);
+  }
+  const log = api.banco.prepare("SELECT * FROM log_exclusoes WHERE tipo = 'EXCLUSAO_PELA_FAMILIA'").get();
+  assert.strictEqual(log.protocolo, r.corpo.dados.protocolo);
+  assert.ok(!JSON.stringify(log).includes('Theo'));
+  // avisos dentro do app: outro responsável, profissional e administração
+  const avisou = (u) => api.banco.prepare("SELECT 1 FROM notificacoes WHERE usuario_id = ? AND texto LIKE '%excluiu o cadastro de Theo%'").get(u);
+  assert.ok(avisou(pai) && avisou(carlos) && avisou(admin));
+  // outra criança da clínica continua lá
+  assert.ok(api.banco.prepare('SELECT 1 FROM criancas WHERE id = ?').get(davi));
+  // o profissional perde a criança
+  assert.strictEqual((await api.chamar('GET', `/api/criancas/${id}`, null, prof)).status, 404);
+  // "pedir exclusão" como pedido pendente não existe mais
+  assert.strictEqual((await api.chamar('POST', '/api/lgpd/solicitacoes', { tipo: 'EXCLUSAO', crianca_id: davi, confirmar: true }, familia)).status, 400);
   api.fechar();
 });
+

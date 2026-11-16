@@ -31,7 +31,7 @@ Prioridade de testes: **segurança do vínculo > LGPD > regras clínicas > inter
 | F-14 | Criar atividade e registrar execução | Profissional vê a adesão |
 | F-15 | ADM cadastra e desativa profissional | Profissional desativado não loga |
 | F-16 | Exportar dados da criança | Contém dados, registros compartilhados, atividades, vínculos |
-| F-17 | Solicitar exclusão | Protocolo gerado |
+| F-17 | Excluir o cadastro do filho (digitando o nome) | Tudo da criança é apagado na hora; fica só protocolo sem nome; profissionais, clínica e outro responsável avisados no app |
 | F-18 | Responsável gera convite de compartilhamento e profissional de outra clínica o usa | Solicitação PENDENTE; nenhum dado visível |
 | F-19 | Reemitir código de ativação | Código antigo deixa de funcionar |
 | F-20 | ADM cadastra profissional; login com código da clínica + e-mail + senha | Funciona; código errado → 401 |
@@ -128,7 +128,7 @@ Prioridade de testes: **segurança do vínculo > LGPD > regras clínicas > inter
 6. Responsável no celular (360px): ver Hoje, marcar atividade, confirmar consulta (J4).
 7. Responsável: painel de acessos mostra os acessos do profissional.
 8. Responsável: revogar → profissional atualiza a tela e perde acesso (J5).
-9. Exportar dados e solicitar exclusão (J6).
+9. Exportar dados e excluir o cadastro do filho (J6).
 10. Navegar só com teclado nas telas de login e aprovação.
 11. ADM desativa um profissional → conferir vínculos encerrados e o aviso à família (J8); repetir a entrada do mesmo e-mail em outra clínica e exigir nova aprovação.
 12. Aviso de conflito: agendar o Theo na quinta 14h, ver o aviso genérico, desligar o escopo e conferir que o aviso some (J9).

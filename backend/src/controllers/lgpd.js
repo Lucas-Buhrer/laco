@@ -5,7 +5,28 @@ const { agoraIso } = require('../utils/datas');
 const criarAuditoria = require('../middlewares/auditoria');
 const criarAvisos = require('../utils/avisos');
 
-const TIPOS_PEDIDO = ['EXCLUSAO', 'REVOGACAO'];
+// A exclusão não é mais um pedido: o responsável exclui na hora (rota excluirCrianca)
+const TIPOS_PEDIDO = ['REVOGACAO'];
+
+// Ordem importa: primeiro o que aponta para registros/atividades/consultas, por último a criança
+const APAGAR_DA_CRIANCA = [
+  'DELETE FROM execucoes_atividade WHERE atividade_id IN (SELECT id FROM atividades WHERE crianca_id = ?)',
+  'DELETE FROM adendos_registro WHERE registro_id IN (SELECT id FROM registros_sessao WHERE crianca_id = ?)',
+  'DELETE FROM registros_sessao WHERE crianca_id = ?',
+  'DELETE FROM pareceres WHERE crianca_id = ?',
+  'DELETE FROM atividades WHERE crianca_id = ?',
+  'DELETE FROM consultas WHERE crianca_id = ?',
+  'DELETE FROM vinculos WHERE crianca_id = ?',
+  'DELETE FROM convites_compartilhamento WHERE crianca_id = ?',
+  'DELETE FROM convites_responsavel WHERE crianca_id = ?',
+  'DELETE FROM codigos_ativacao WHERE crianca_id = ?',
+  'DELETE FROM pre_cadastro_profissionais WHERE crianca_id = ?',
+  'DELETE FROM solicitacoes_lgpd WHERE crianca_id = ?',
+  'DELETE FROM log_acesso WHERE crianca_id = ?',
+  'DELETE FROM responsaveis_crianca WHERE crianca_id = ?',
+  'DELETE FROM criancas WHERE id = ?',
+];
+const mesmoNome = (a, b) => String(a || '').trim().toLocaleLowerCase('pt-BR') === String(b || '').trim().toLocaleLowerCase('pt-BR');
 
 // Ações do log em português simples, para o painel dos pais
 const ACOES = {
@@ -178,6 +199,42 @@ function criarControladorLgpd(banco) {
     res.status(201).json({ dados: { protocolo: codigo, tipo } });
   }
 
+  // POST /lgpd/excluir-crianca — o responsável apaga a criança e tudo dela, na hora.
+  // Sobra só protocolo, data e motivo em log_exclusoes (sem nome). Avisa antes de apagar.
+  function excluirCrianca(req, res) {
+    const criancaId = req.body?.crianca_id;
+    const crianca = banco
+      .prepare('SELECT c.id, c.nome, c.clinica_origem_id FROM responsaveis_crianca r JOIN criancas c ON c.id = r.crianca_id WHERE r.crianca_id = ? AND r.responsavel_id = ? AND r.saiu_em IS NULL')
+      .get(criancaId, req.usuario.id);
+    if (!crianca) return res.status(404).json({ erro: 'Não encontrado.' });
+    if (req.body?.confirmar !== true) return res.status(400).json({ erro: 'Confirme a exclusão para continuar.' });
+    if (!mesmoNome(req.body?.nome_confirmacao, crianca.nome)) return res.status(400).json({ erro: 'Digite o nome da criança igual ao cadastro para confirmar.' });
+
+    const agora = agoraIso();
+    const codigo = `EXC-${agora.slice(0, 10).replace(/-/g, '')}-${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
+    banco.transaction(() => {
+      // Quem precisa saber: profissionais com acesso (ou pedido), administração das clínicas envolvidas e o outro responsável
+      const profissionais = banco
+        .prepare("SELECT DISTINCT profissional_id AS id FROM vinculos WHERE crianca_id = ? AND status IN ('APROVADO','PENDENTE')")
+        .all(crianca.id);
+      for (const p of profissionais) avisar(p.id, `A família excluiu o cadastro de ${crianca.nome}. Os dados dela não estão mais no LAÇO.`);
+      const admins = banco
+        .prepare(
+          `SELECT DISTINCT u.id FROM usuarios u WHERE u.papel = 'ADMIN_CLINICA' AND u.ativo = 1 AND u.clinica_id IN (
+             SELECT ? UNION SELECT clinica_id FROM consultas WHERE crianca_id = ?
+             UNION SELECT pu.clinica_id FROM vinculos v JOIN usuarios pu ON pu.id = v.profissional_id WHERE v.crianca_id = ?)`
+        )
+        .all(crianca.clinica_origem_id, crianca.id, crianca.id);
+      for (const a of admins) avisar(a.id, `A família excluiu o cadastro de ${crianca.nome}. As consultas e registros dela foram apagados.`);
+      avisarOutroResponsavel(crianca.id, req.usuario.id, `${req.usuario.nome} excluiu o cadastro de ${crianca.nome}. Os dados foram apagados.`);
+
+      for (const sql of APAGAR_DA_CRIANCA) banco.prepare(sql).run(crianca.id);
+      banco.prepare("INSERT INTO log_exclusoes (tipo, protocolo, motivo, excluido_em) VALUES ('EXCLUSAO_PELA_FAMILIA', ?, ?, ?)")
+        .run(codigo, 'Excluído por um responsável no app', agora);
+    })();
+    res.json({ dados: { protocolo: codigo } });
+  }
+
   // GET /lgpd/solicitacoes
   function listarSolicitacoes(req, res) {
     const linhas = banco
@@ -189,7 +246,7 @@ function criarControladorLgpd(banco) {
     res.json({ dados: linhas });
   }
 
-  return { acessos, exportar, solicitar, listarSolicitacoes };
+  return { acessos, exportar, solicitar, excluirCrianca, listarSolicitacoes };
 }
 
 module.exports = criarControladorLgpd;

@@ -11,6 +11,7 @@ function criarRotasLgpd(banco) {
   rotas.use(criarAutenticacao(banco), exigirPapel('RESPONSAVEL'));
   rotas.post('/solicitacoes', c.solicitar);
   rotas.get('/solicitacoes', c.listarSolicitacoes);
+  rotas.post('/excluir-crianca', c.excluirCrianca);
 
   return rotas;
 }
