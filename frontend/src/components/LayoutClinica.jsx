@@ -32,7 +32,7 @@ export default function LayoutClinica() {
     <div className="layout-clinica">
       <a className="pular" href="#conteudo">Ir para o conteúdo</a>
       <aside className="menu-lateral">
-        <span className="logo">laço</span>
+        <img className="logo" src="/laco-logo.svg" alt="laço" />
         <nav>
           {MENUS[usuario.papel].map(([caminho, nome, icone]) => (
             <NavLink key={nome} to={`/clinica/${caminho}`} end={caminho === ''} className="item-menu">

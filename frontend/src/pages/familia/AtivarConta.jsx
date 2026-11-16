@@ -44,7 +44,7 @@ export default function AtivarConta() {
 
   return (
     <div className="tela-login-familia">
-      <span className="logo">laço</span>
+      <img className="logo" src="/laco-logo.svg" alt="laço" />
       <p className="passo">Passo {passo} de 3</p>
       {erro && <p className="aviso-erro" role="alert">{erro}</p>}
 

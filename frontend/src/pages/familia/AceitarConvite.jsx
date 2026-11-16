@@ -35,7 +35,7 @@ export default function AceitarConvite() {
 
   return (
     <div className={logado ? 'conteudo-familia' : 'tela-login-familia'}>
-      {!logado && <span className="logo">laço</span>}
+      {!logado && <img className="logo" src="/laco-logo.svg" alt="laço" />}
       {logado && <Link to="/familia/filhos" className="voltar">Voltar</Link>}
       <h1 className="titulo-passo">Convite de outro responsável</h1>
       <p className="subtitulo">Digite o código que o outro responsável gerou e a data de nascimento da criança.</p>

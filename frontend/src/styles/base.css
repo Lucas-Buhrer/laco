@@ -110,3 +110,6 @@ img, table { max-width: 100%; }
 .campo input:focus, .campo select:focus, textarea:focus { border-color: var(--verde-forte); box-shadow: 0 0 0 3px rgba(31, 107, 74, 0.15); outline: none; }
 a { color: var(--verde-forte); }
 a:hover { color: var(--verde-escuro); }
+
+/* Logo é imagem (arte/laco-logo.svg): só controlamos a altura */
+img.logo { display: block; height: 44px; width: auto; align-self: flex-start; }

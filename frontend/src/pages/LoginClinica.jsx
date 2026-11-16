@@ -61,7 +61,7 @@ export default function LoginClinica() {
   return (
     <div className="tela-login">
       <section className="login-lado">
-        <span className="logo">laço</span>
+        <img className="logo" src="/laco-logo.svg" alt="laço" />
         <div>
           <h1>O cuidado da criança, com a família no centro.</h1>
           <p>Cada profissional só vê o que os pais aprovaram. Toda consulta e todo acesso ficam registrados.</p>

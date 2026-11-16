@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Politica() {
   return (
     <main className="pagina-publica">
-      <span className="logo">laço</span>
+      <img className="logo" src="/laco-logo.svg" alt="laço" />
       <h1>Política de privacidade</h1>
       <p className="subtitulo">Linguagem simples. Esta é a versão de demonstração; o texto definitivo passará por revisão jurídica.</p>
 

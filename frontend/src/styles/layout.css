@@ -6,7 +6,7 @@
   /* Fixo na tela: não estica com o conteúdo e rola sozinho se o menu for maior que a janela */
   position: sticky; top: 0; align-self: flex-start; height: 100vh; overflow-y: auto;
 }
-.menu-lateral .logo { padding: 0 12px 24px; color: var(--verde-escuro); }
+.menu-lateral .logo { height: 56px; margin: -8px 0 12px -4px; }
 .menu-lateral nav { display: flex; flex-direction: column; gap: 4px; }
 .item-menu {
   display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 0 12px;
@@ -47,7 +47,7 @@
 @media (max-width: 800px) {
   .layout-clinica { flex-direction: column; }
   .menu-lateral { width: 100%; border-right: 0; border-bottom: 1px solid #dce5df; position: static; height: auto; align-self: stretch; padding: 16px; }
-  .menu-lateral .logo { padding-bottom: 8px; }
+  .menu-lateral .logo { margin-bottom: 8px; }
   .menu-lateral nav { flex-direction: row; flex-wrap: wrap; }
   .item-menu { width: auto; }
   .menu-rodape { margin-top: 8px; }

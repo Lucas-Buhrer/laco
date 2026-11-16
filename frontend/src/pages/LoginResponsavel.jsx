@@ -32,7 +32,7 @@ export default function LoginResponsavel() {
 
   return (
     <div className="tela-login-familia">
-      <span className="logo">laço</span>
+      <img className="logo" src="/laco-logo.svg" alt="laço" />
       <h1>Que bom ver você de novo</h1>
       <p className="subtitulo">Entre para acompanhar as consultas e as atividades de casa.</p>
 
